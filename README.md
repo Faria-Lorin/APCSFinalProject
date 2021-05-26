@@ -16,3 +16,4 @@ _Ella_
 
 
 _Faria_
+05/25- Today I worked on adding an end location for the maze generated in the Maze class. I modified the generate method Ella added and used some of my own code from the MazeGenerator assignment to add more helper methods to generate the maze. I made it so that the end location is at the end of the longest route that is carved from the start location.
