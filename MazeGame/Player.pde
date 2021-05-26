@@ -20,20 +20,23 @@ public class Player {
   void move(){
     //println(maze.getChar(playerX, playerY));
     //println(maze.getChar(playerX + 1, playerY));
-    if (keyPressed == true && keyCode == UP){
+    if (keyPressed == true && keyCode == UP ){
+      if (maze.getChar(playerR - 1, playerC) != '#')
         playerR--;
       keyPressed = false;
     }
     if (keyPressed == true && keyCode == DOWN){
+      if (maze.getChar(playerR + 1 , playerC) != '#')
         playerR++;
       keyPressed = false;
     }
     if (keyPressed == true && keyCode == LEFT){
+      if (maze.getChar(playerR, playerC - 1) != '#')
         playerC--;
       keyPressed = false;
     }
     if (keyPressed == true && keyCode == RIGHT){
-      
+      if (maze.getChar(playerR, playerC + 1) != '#')
         playerC++;
       keyPressed = false;
     }
