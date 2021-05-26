@@ -13,9 +13,10 @@ void setup() {
   }
   maze = new Maze(m);
   player = new Player(maze);
-  maze.display();
-  println(Arrays.deepToString(m));
+  println(maze);
 }
 void draw(){
+  maze.display();
+  player.move();
   player.display();
 }
