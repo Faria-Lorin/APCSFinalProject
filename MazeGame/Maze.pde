@@ -154,7 +154,7 @@ public class Maze {
           endXCor=x+0.4*scalex;
           endYCor=y+0.9*scaley;
         }
-        else { 
+        else if (maze[i][j] == ' ') { 
           stroke(255);
           fill(255); 
           rect(x,y,scalex,scaley);
@@ -167,15 +167,15 @@ public class Maze {
   
   int[] getStart(){
     int[] start=new int[2];
-    start[0]=startC;
-    start[1]=startR;
+    start[0]=startR;
+    start[1]=startC;
     return start;
   }
   
   int[] getEnd(){
     int[] end=new int[2];
-    end[0]=endC;
-    end[1]=endR;
+    end[0]=endR;
+    end[1]=endC;
     return end;
   }
   
