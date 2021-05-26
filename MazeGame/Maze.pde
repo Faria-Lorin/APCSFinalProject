@@ -131,7 +131,7 @@ public class Maze {
   }
   
   void display(){
-    fill(0);
+    
     int scalex=width/maze.length;
     int scaley=height/maze[0].length;
     int y=0;
@@ -139,7 +139,11 @@ public class Maze {
       int x=0;
       for (int j=0;j<maze[i].length; j++){
         textSize((scalex+scaley)/2);
-        if (maze[i][j]=='#') rect(x,y,scalex,scaley);
+        if (maze[i][j]=='#'){
+          stroke(0);
+          fill(0);
+          rect(x,y,scalex,scaley);
+        }
         else if (maze[i][j]=='S') {
           text('S', x+0.4*scalex, y+0.9*scaley);
           startXCor=x+0.4*scalex;
@@ -150,24 +154,33 @@ public class Maze {
           endXCor=x+0.4*scalex;
           endYCor=y+0.9*scaley;
         }
+        else { 
+          stroke(255);
+          fill(255); 
+          rect(x,y,scalex,scaley);
+        }
         x+=scalex;
       }
       y+=scaley;
     }
   }
   
-  float[] getStart(){
-    float[] start=new float[2];
+  int[] getStart(){
+    int[] start=new int[2];
     start[0]=startC;
     start[1]=startR;
     return start;
   }
   
-  float[] getEnd(){
-    float[] end=new float[2];
+  int[] getEnd(){
+    int[] end=new int[2];
     end[0]=endC;
     end[1]=endR;
     return end;
+  }
+  
+  char getChar(int r, int c){
+    return maze[r][c];
   }
   
   int scaleX(){
