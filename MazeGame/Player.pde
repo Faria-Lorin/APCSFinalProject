@@ -1,35 +1,40 @@
 import java.util.*;
 public class Player {
-  float playerXcor, playerYcor;
+  int playerR, playerC;
   Maze maze;
   Player(Maze m /*, ArrayList<Enemy*/){
     maze = m;
-    float[] start = maze.getStart();
-    playerXcor = start[0];
-    playerYcor = start[1];
+    int[] start = maze.getStart();
+    playerR = start[0];
+    playerC = start[1];
+    println(playerR);
+    println(playerC);
+    println(maze.getChar(playerR, playerC));
   }
   
   void display(){
-    fill(255,0,0);
-    rect((maze.scaleX()) * playerXcor + maze.scaleX()/4 ,maze.scaleY() * playerYcor + maze.scaleY()/4, maze.scaleX()/2, maze.scaleY()/2);
-    move();
+    fill(random(255),random(255),random(255));
+    rect((maze.scaleX()) * playerC + maze.scaleX()/4 ,maze.scaleY() * playerR + maze.scaleY()/4, maze.scaleX()/2, maze.scaleY()/2);
   }
   
   void move(){
+    //println(maze.getChar(playerX, playerY));
+    //println(maze.getChar(playerX + 1, playerY));
     if (keyPressed == true && keyCode == UP){
-      playerYcor--;
+        playerR--;
       keyPressed = false;
     }
     if (keyPressed == true && keyCode == DOWN){
-      playerYcor++;
+        playerR++;
       keyPressed = false;
     }
     if (keyPressed == true && keyCode == LEFT){
-      playerXcor--;
+        playerC--;
       keyPressed = false;
     }
     if (keyPressed == true && keyCode == RIGHT){
-      playerXcor++;
+      
+        playerC++;
       keyPressed = false;
     }
   }
