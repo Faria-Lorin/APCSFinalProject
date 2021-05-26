@@ -12,6 +12,26 @@ public class Player {
   void display(){
     fill(255,0,0);
     rect((maze.scaleX()) * playerXcor + maze.scaleX()/4 ,maze.scaleY() * playerYcor + maze.scaleY()/4, maze.scaleX()/2, maze.scaleY()/2);
+    move();
+  }
+  
+  void move(){
+    if (keyPressed == true && keyCode == UP){
+      playerYcor--;
+      keyPressed = false;
+    }
+    if (keyPressed == true && keyCode == DOWN){
+      playerYcor++;
+      keyPressed = false;
+    }
+    if (keyPressed == true && keyCode == LEFT){
+      playerXcor--;
+      keyPressed = false;
+    }
+    if (keyPressed == true && keyCode == RIGHT){
+      playerXcor++;
+      keyPressed = false;
+    }
   }
   
 }
