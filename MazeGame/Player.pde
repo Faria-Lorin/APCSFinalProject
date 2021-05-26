@@ -1,15 +1,14 @@
 import java.util.*;
 public class Player {
   int playerR, playerC;
+  int lives;
   Maze maze;
   Player(Maze m /*, ArrayList<Enemy*/){
     maze = m;
     int[] start = maze.getStart();
     playerR = start[0];
     playerC = start[1];
-    println(playerR);
-    println(playerC);
-    println(maze.getChar(playerR, playerC));
+    lives = 3;
   }
   
   void display(){
@@ -18,9 +17,7 @@ public class Player {
   }
   
   void move(){
-    //println(maze.getChar(playerX, playerY));
-    //println(maze.getChar(playerX + 1, playerY));
-    if (keyPressed == true && keyCode == UP ){
+    if (keyPressed == true && keyCode == UP){
       if (maze.getChar(playerR - 1, playerC) != '#')
         playerR--;
       keyPressed = false;
@@ -40,6 +37,14 @@ public class Player {
         playerC++;
       keyPressed = false;
     }
+  }
+  
+  int getR(){
+    return playerR;
+  }
+  
+  int getC(){
+    return playerC;
   }
   
 }
