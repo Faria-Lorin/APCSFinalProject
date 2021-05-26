@@ -1,0 +1,180 @@
+import java.util.*;
+public class Maze {
+  char[][] maze;
+  int currentR,currentC, startR, startC, steps, endR, endC, max;
+  ArrayList<Character> directions = new ArrayList<Character>();
+  int startX, startY, endX, endY;
+  float startXCor, startYCor, endXCor, endYCor;
+
+  Maze(char[][] m){
+    maze=m;
+    int startrow=(int)(Math.random()*(maze.length-2))+1;
+    int startcol=(int)(Math.random()*(maze[0].length-2))+1;
+    startR = startrow;
+    startC = startcol;
+    generate(maze, maze.length, maze[0].length, startrow, startcol);
+  }
+  
+  boolean openDirection(){
+    ArrayList<Character> list = new ArrayList<Character>();
+    if (maze[currentR][currentC] == '#'){
+      if (check(currentR, currentC) <= 1){
+        maze[currentR][currentC] = ' ';
+      }
+      else return false;
+    }
+    if (maze[currentR][currentC] == ' '){
+      if (currentR+1 < maze.length-1 && maze[currentR+1][currentC] == '#' && check(currentR+1, currentC) <= 1){//checks if south is open
+        list.add('s');
+      }
+      if (currentR-1 > 0 && maze[currentR-1][currentC] == '#' && check(currentR-1, currentC) <= 1){//checks if north is open
+        list.add('n');
+      }
+      if (currentC-1 > 0 && maze[currentR][currentC-1] == '#' && check(currentR, currentC-1) <= 1){//checks if west is open
+        list.add('w');
+      }
+      if (currentC+1 < maze[0].length-1 && maze[currentR][currentC+1] == '#' && check(currentR, currentC+1) <= 1){//checks if east is open
+        list.add('e');
+      }
+    }
+
+      if (list.size() > 0){
+        int random = (int)(Math.random() * list.size());
+        char a = list.get(random); 
+        if (a == 's'){
+          currentR = currentR+1;
+          directions.add('s');
+          return true;
+        }
+        else if (a == 'n'){
+          currentR = currentR-1;
+          directions.add('n');
+          return true;
+        }
+        else if (a == 'w'){
+          currentC = currentC-1;
+          directions.add('w');
+          return true;
+        }
+        else if (a == 'e'){
+          currentC = currentC+1;
+          directions.add('e');
+          return true;
+        }
+      }
+      return false;
+    }
+
+  boolean back(){
+    if (directions.size() > 0 ){
+      char last = directions.remove(directions.size()-1);
+      if (last == 'n'){//checks if south has string
+        currentR = currentR+1;
+        return true;
+      }
+      else if (last == 's'){//checks if north has string
+        currentR = currentR-1;
+        return true;
+      }
+      else if (last == 'e'){//checks if west has string
+        currentC = currentC-1;
+        return true;
+      }
+      else if (last == 'w'){//checks if east has string
+        currentC = currentC+1;
+        return true;
+      }
+    }
+    return false;
+  }
+
+  int check(int r, int c){
+    int count = 0;
+    if (r+1 < maze.length-1 && maze[r+1][c] == ' ') count++;
+    if (r-1 > 0 && maze[r-1][c] == ' ') count++;
+    if (c-1 > 0 && maze[r][c-1] == ' ') count++;
+    if (c+1 < maze[0].length-1 && maze[r][c+1] == ' ') count++;
+    return count;
+  }
+
+  void generate(char[][] maze, int rows, int cols, int startrow, int startcol){
+    currentR = startrow;
+    currentC = startcol;
+    if(openDirection()){
+      steps++;
+      generate(maze, rows, cols, currentR, currentC);
+    }
+    else if (back()){
+      if (steps > max){
+        max = steps;
+        endR = startrow;
+        endC = startcol;
+      }
+      steps--;
+      generate(maze, rows, cols, currentR, currentC);
+    }
+    else {
+      maze[startR][startC] = 'S';
+      maze[endR][endC] = 'E';
+    }
+  }
+  
+  String toString(){
+    String ans="";
+    for (int i=0; i<maze.length; i++){
+      for (int j=0; j<maze[i].length; j++){
+        ans+=maze[i][j];
+      }
+      if (i!=maze.length-1) ans+="\n";
+    }
+    return ans;
+  }
+  
+  void display(){
+    fill(0);
+    int scalex=width/maze.length;
+    int scaley=height/maze[0].length;
+    int y=0;
+    for (int i=0; i<maze.length; i++){
+      int x=0;
+      for (int j=0;j<maze[i].length; j++){
+        textSize((scalex+scaley)/2);
+        if (maze[i][j]=='#') rect(x,y,scalex,scaley);
+        else if (maze[i][j]=='S') {
+          text('S', x+0.4*scalex, y+0.9*scaley);
+          startXCor=x+0.4*scalex;
+          startYCor=y+0.9*scaley;
+        }
+        else if (maze[i][j]=='E') {
+          text('E', x+0.4*scalex, y+0.9*scaley);
+          endXCor=x+0.4*scalex;
+          endYCor=y+0.9*scaley;
+        }
+        x+=scalex;
+      }
+      y+=scaley;
+    }
+  }
+  
+  float[] getStart(){
+    float[] start=new float[2];
+    start[0]=startC;
+    start[1]=startR;
+    return start;
+  }
+  
+  float[] getEnd(){
+    float[] end=new float[2];
+    end[0]=endC;
+    end[1]=endR;
+    return end;
+  }
+  
+  int scaleX(){
+    return width/maze.length;
+  }
+  
+  int scaleY(){
+    return height/maze[0].length;
+  }
+}
