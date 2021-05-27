@@ -10,5 +10,5 @@ public class Enemy {
      EnemyR = R;
      EnemyC = C;
    }
-}
+  }
 }
