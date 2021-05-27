@@ -66,7 +66,10 @@ void end(){
 
 void playAgain(){
   if ((mouseX>=width/2-width/3 && mouseX<=width/2+width/3) && (mouseY>=height/2-height/12 && mouseY<=height/2+height)){
-    println("starting again");
+    end=false;
+    setup();
+    draw();
+    print("check");
   }
 }
 
