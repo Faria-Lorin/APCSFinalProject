@@ -2,6 +2,7 @@ import java.util.*;
 public class Player {
   int playerR, playerC;
   int lives;
+  color c;
   Maze maze;
   Player(Maze m /*, ArrayList<Enemy*/){
     maze = m;
@@ -9,10 +10,11 @@ public class Player {
     playerR = start[0];
     playerC = start[1];
     lives = 3;
+    c=color(random(255),random(255),random(255));
   }
   
   void display(){
-    fill(random(255),random(255),random(255));
+    fill(c);
     rect((maze.scaleX()) * playerC + maze.scaleX()/4 ,maze.scaleY() * playerR + maze.scaleY()/4, maze.scaleX()/2, maze.scaleY()/2);
   }
   

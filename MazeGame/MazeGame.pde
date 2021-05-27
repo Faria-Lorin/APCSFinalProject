@@ -13,7 +13,7 @@ void setup() {
   }
   maze = new Maze(m);
   player = new Player(maze);
-  println(maze);
+  //println(maze);
 }
 void draw(){
   maze.display();
