@@ -7,7 +7,7 @@ boolean end, livesgone, win;
 void setup() {
   size(600, 600);
   background(255);
-  int n = 4;
+  int n = 30;
   char[][] m=new char[n][n];
   for (int i=0; i<m.length; i++) {
     for (int j=0; j<m[0].length; j++) {
@@ -19,7 +19,7 @@ void setup() {
   maze = new Maze(m);
   player = new Player(maze);
   
-  int monsterLim = n/5;
+  int monsterLim = n/3;
   if (monsterLim == 0) monsterLim++;
   for (int i = 0; i < monsterLim; i++){
     enemyList.add(new Enemy(maze, n));
@@ -32,6 +32,9 @@ void draw(){
     maze.display();
     player.move();
     player.display();
+    for(Enemy e : enemyList){
+      e.display();
+    }
   }
   else {
     background(#E5FFFD);
