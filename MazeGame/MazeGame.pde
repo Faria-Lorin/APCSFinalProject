@@ -3,12 +3,11 @@ Maze maze;
 Player player;
 ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
 boolean end, livesgone, win;
->>>>>>> e8cecaac33a0ccfffb77dc63a321a853136ab6ca
 
 void setup() {
   size(600, 600);
   background(255);
-  int n = 10;
+  int n = 4;
   char[][] m=new char[n][n];
   for (int i=0; i<m.length; i++) {
     for (int j=0; j<m[0].length; j++) {
@@ -35,7 +34,7 @@ void draw(){
     player.display();
   }
   else {
-    background(255);
+    background(#E5FFFD);
     if (livesgone){
       text("No More Lives--Game Over", width/5, height/3);
     }
@@ -44,7 +43,7 @@ void draw(){
     }
     
     rectMode(CENTER);
-    fill(100);
+    fill(#FFC271);
     rect(width/2, height/2, width/3, height/12, 20);
     rectMode(CORNER);
     
