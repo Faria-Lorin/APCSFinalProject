@@ -2,7 +2,8 @@ import java.util.*;
 Maze maze;
 Player player;
 ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
-boolean end;
+boolean end, livesgone, win;
+>>>>>>> e8cecaac33a0ccfffb77dc63a321a853136ab6ca
 
 void setup() {
   size(600, 600);
@@ -35,10 +36,18 @@ void draw(){
   }
   else {
     background(255);
-    //text("Game Over", 100, 100);
+    if (livesgone){
+      text("No More Lives--Game Over", width/5, height/3);
+    }
+    else if (win){
+      text("You Win! Great Job!", width/3.5, height/3);
+    }
+    
     rectMode(CENTER);
     fill(100);
     rect(width/2, height/2, width/3, height/12, 20);
+    rectMode(CORNER);
+    
     textSize(height/20);
     fill(0);
     text("Play Again", width/2-width/8.5, height/2+height/48);
@@ -47,11 +56,11 @@ void draw(){
 
 void end(){
   if (player.getLives()==0){
-    println("No More Lives--Game Over");
+    livesgone=true;
     end=true;
   }
   else if (player.getR()==maze.getEnd()[0] && player.getC()==maze.getEnd()[1]){
-    println("You Win! Great Job!");
+    win=true;
     end=true;
   }
 }
