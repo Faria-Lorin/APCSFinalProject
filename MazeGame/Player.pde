@@ -15,7 +15,7 @@ public class Player {
   
   void display(){
     fill(c);
-    rect((maze.scaleX()) * playerC + maze.scaleX()/4 ,maze.scaleY() * playerR + maze.scaleY()/4, maze.scaleX()/2, maze.scaleY()/2);
+    rect((maze.scaleX()) * playerC + maze.scaleX()/6 ,maze.scaleY() * playerR + maze.scaleY()/4.75, maze.scaleX()/1.5, maze.scaleY()/1.5);
   }
   
   void move(){
