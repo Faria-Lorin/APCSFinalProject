@@ -168,18 +168,16 @@ public class Maze {
     }
   }
   
-  int[] getStart(){
-    int[] start=new int[2];
-    start[0]=startR;
-    start[1]=startC;
-    return start;
+  int getStart(int xy){
+    if (xy == 0) return startR;
+    if (xy == 1) return startC;
+    else return 0;
   }
   
-  int[] getEnd(){
-    int[] end=new int[2];
-    end[0]=endR;
-    end[1]=endC;
-    return end;
+  int getEnd(int xy){
+    if (xy == 0) return endR;
+    if (xy == 1) return endC;
+    else return 0;
   }
   
   char getChar(int r, int c){

@@ -6,9 +6,8 @@ public class Player {
   Maze maze;
   Player(Maze m /*, ArrayList<Enemy*/){
     maze = m;
-    int[] start = maze.getStart();
-    playerR = start[0];
-    playerC = start[1];
+    playerR = maze.getStart(0);
+    playerC = maze.getStart(1);
     lives = 3;
     c=color(random(255),random(255),random(255));
   }
