@@ -131,37 +131,40 @@ public class Maze {
   }
   
   void display(){
-    
-    int scalex=width/maze.length;
-    int scaley=height/maze[0].length;
     int y=0;
     for (int i=0; i<maze.length; i++){
       int x=0;
       for (int j=0;j<maze[i].length; j++){
-        textSize((scalex+scaley)/2);
+        textSize((scaleX()+scaleY())/2);
         if (maze[i][j]=='#'){
           stroke(0);
           fill(0);
-          rect(x,y,scalex,scaley);
+          rect(x,y,scaleX(),scaleY());
         }
         else if (maze[i][j]=='S') {
-          text('S', x+0.4*scalex, y+0.9*scaley);
-          startXCor=x+0.4*scalex;
-          startYCor=y+0.9*scaley;
+          fill(color(#89FF89));
+          rect(x,y,scaleX(), scaleY());
+          fill(0);
+          text('S', x+0.3*scaleX(), y+0.9*scaleY());
+          startXCor=x+0.3*scaleX();
+          startYCor=y+0.9*scaleY();
         }
         else if (maze[i][j]=='E') {
-          text('E', x+0.4*scalex, y+0.9*scaley);
-          endXCor=x+0.4*scalex;
-          endYCor=y+0.9*scaley;
+          fill(color(#EB89FF));
+          rect(x,y,scaleX(), scaleY());
+          fill(0);
+          text('E', x+0.3*scaleX(), y+0.9*scaleY());
+          endXCor=x+0.3*scaleX();
+          endYCor=y+0.9*scaleY();
         }
         else if (maze[i][j] == ' ') { 
           stroke(255);
           fill(255); 
-          rect(x,y,scalex,scaley);
+          rect(x,y,scaleX(),scaleY());
         }
-        x+=scalex;
+        x+=scaleX();
       }
-      y+=scaley;
+      y+=scaleY();
     }
   }
   
