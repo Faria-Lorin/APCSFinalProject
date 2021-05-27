@@ -1,20 +1,29 @@
 import java.util.*;
 Maze maze;
 Player player;
+ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
 boolean end;
 
 void setup() {
   size(600, 600);
   background(255);
-  char[][] m=new char[10][10];
+  int n = 10;
+  char[][] m=new char[n][n];
   for (int i=0; i<m.length; i++) {
     for (int j=0; j<m[0].length; j++) {
       m[i][j]='#';
     }
   }
+
   maze = new Maze(m);
   player = new Player(maze);
-  //println(maze);
+  
+  int monsterLim = n/5;
+  if (monsterLim == 0) monsterLim++;
+  for (int i = 0; i < monsterLim; i++){
+    enemyList.add(new Enemy(maze, n));
+  } 
+  //println(enemyList);
 }
 void draw(){
   end();
