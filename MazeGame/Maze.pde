@@ -186,11 +186,11 @@ public class Maze {
     return maze[r][c];
   }
   
-  int scaleX(){
+  float scaleX(){
     return width/maze.length;
   }
   
-  int scaleY(){
+  float scaleY(){
     return height/maze[0].length;
   }
 }
