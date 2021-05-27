@@ -58,7 +58,7 @@ void end(){
     livesgone=true;
     end=true;
   }
-  else if (player.getR()==maze.getEnd()[0] && player.getC()==maze.getEnd()[1]){
+  else if (player.getR()==maze.getEnd(0) && player.getC()==maze.getEnd(1)){
     win=true;
     end=true;
   }
