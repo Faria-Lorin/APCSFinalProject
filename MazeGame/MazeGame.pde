@@ -13,6 +13,7 @@ void setup() {
     for (int j=0; j<m[0].length; j++) {
       m[i][j]='#';
     }
+   
   }
 
   maze = new Maze(m);
@@ -31,6 +32,16 @@ void draw(){
     maze.display();
     player.move();
     player.display();
+  }
+  else {
+    background(255);
+    //text("Game Over", 100, 100);
+    rectMode(CENTER);
+    fill(100);
+    rect(width/2, height/2, width/3, height/12, 20);
+    textSize(height/20);
+    fill(0);
+    text("Play Again", width/2-width/8.5, height/2+height/48);
   }
 }
 
