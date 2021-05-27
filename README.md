@@ -22,4 +22,13 @@ _Faria_
 
 _Faria_
 
-05/26 - Today I worked on creating and updating the Player class. I made a constructor, display method, and move method for the player so that the player can move through the maze and solve it. I updated the MazeGame class so that it has a draw method that displays the player and maze. I updates the getStart and getEnd methods for the Maze class so that it returns the row and column coordinates of the start and end for the player to use in the player class. I also added a method that returns the scaling values for the maze so that it can be used to scale the players and enemies so they correctly fit on maze displayed in the sketch.
+05/26 - Today I worked on creating and updating the Player class. I made a constructor, display method, and move method for the player so that the player can move through the maze and solve it. I updated the MazeGame class so that it has a draw method that displays the player and maze. I updated the getStart and getEnd methods for the Maze class so that it returns the row and column coordinates of the start and end for the player to use in the player class. I also added a method that returns the scaling values for the maze so that it can be used to scale the players and enemies so they correctly fit on maze displayed in the sketch.
+
+_Ella_
+
+05/27 -
+
+
+_Faria_
+
+05/27 - I worked on creating and updating the Enemy class. I created the constructor which sets a location for the enemy away from the start, a display method, and a move method that allows the enemy to move in random directions through the maze. I also updated the main sketch file so that several enemies are created and stored in an ArrayList during setup and enemy move and enemy display are called in the draw method and the player is drawn/displayed after the enemies.
