@@ -1,6 +1,6 @@
 import java.util.*;
 public class Enemy {
-  int enemyR, enemyC;
+  int enemyR, enemyC, t;
   boolean created, moved;
   int[] directions = new int[]{0, 1, 2, 3};
   Maze maze;
@@ -17,32 +17,38 @@ public class Enemy {
     }
   }
   void display() {
-    fill(110, 33, 176);
+    stroke(128,0,255);
+    strokeWeight(4);
+    fill(110, 33, 176, 100);
     rect((maze.scaleX()) * enemyC + maze.scaleX()/6, maze.scaleY() * enemyR + maze.scaleY()/4.75, maze.scaleX()/1.5, maze.scaleY()/1.5);
     if (moved == true) moved = false;
   }
   void move() {
-    while (moved == false) {
-      int n = (int)random(4);
-      n = directions[n];
-      if (n == 0) {
-        if (maze.getChar(enemyR - 1, enemyC) != '#') {
-          enemyR -= 1;
+    if (t == 20) {
+      while (moved == false) {
+        int n = (int)random(4);
+        n = directions[n];
+        if (n == 0) {
+          if (maze.getChar(enemyR - 1, enemyC) != '#') {
+            enemyR -= 1;
+          }
+        } else if (n == 1) {
+          if (maze.getChar(enemyR + 1, enemyC) != '#') {
+            enemyR += 1 ;
+          }
+        } else if (n == 2) {
+          if (maze.getChar(enemyR, enemyC - 1) != '#') {
+            enemyC -= 1;
+          }
+        } else if (n == 3) {
+          if (maze.getChar(enemyR, enemyC + 1) != '#') {
+            enemyC += 1;
+          }
         }
-      } else if (n == 1) {
-        if (maze.getChar(enemyR + 1, enemyC) != '#') {
-          enemyR += 1 ;
-        }
-      } else if (n == 2) {
-        if (maze.getChar(enemyR, enemyC - 1) != '#') {
-          enemyC -= 1;
-        }
-      } else if (n == 3) {
-        if (maze.getChar(enemyR, enemyC + 1) != '#') {
-          enemyC += 1;
-        }
+        moved = true;
       }
-      moved = true;
-    }
+      t = 0;
+    } 
+    else t++;
   }
 }
