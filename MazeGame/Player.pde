@@ -49,4 +49,8 @@ public class Player {
     return playerC;
   }
   
+  int getLives(){
+    return lives;
+  }
+  
 }
