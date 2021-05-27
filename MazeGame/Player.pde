@@ -9,7 +9,11 @@ public class Player {
     playerR = maze.getStart(0);
     playerC = maze.getStart(1);
     lives = 3;
-    c=color(random(255),random(255),random(255));
+    c = color(random(255),random(255),random(255));
+    while (c == color(0) || c == color(255) || c == color(110, 33, 176)){
+      c = color(random(255),random(255),random(255));
+   }
+    
   }
   
   void display(){
