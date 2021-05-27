@@ -7,7 +7,7 @@ boolean end, livesgone, win;
 void setup() {
   size(600, 600);
   background(255);
-  int n = 30;
+  int n = 10;
   char[][] m=new char[n][n];
   for (int i=0; i<m.length; i++) {
     for (int j=0; j<m[0].length; j++) {
@@ -77,5 +77,5 @@ void playAgain(){
 }
 
 void mousePressed(){
-  playAgain();
+  if (end) playAgain();
 }
