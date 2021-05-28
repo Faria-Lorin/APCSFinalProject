@@ -13,70 +13,67 @@ void setup() {
     for (int j=0; j<m[0].length; j++) {
       m[i][j]='#';
     }
-   
   }
 
   maze = new Maze(m);
   player = new Player(maze);
-  
+
   int monsterLim = n/3;
   if (monsterLim == 0) monsterLim++;
-  for (int i = 0; i < monsterLim; i++){
+  for (int i = 0; i < monsterLim; i++) {
     enemyList.add(new Enemy(maze, n));
   } 
   //println(enemyList);
 }
-void draw(){
+void draw() {
   end();
-  if (end==false){
+  if (end==false) {
     maze.display();
-    for(Enemy e : enemyList){
+    for (Enemy e : enemyList) {
       e.move();
       e.display();
     }
     player.move();
     player.display();
-  }
-  else {
+  } else {
     background(#E5FFFD);
-    if (livesgone){
+    if (livesgone) {
       text("No More Lives--Game Over", width/5, height/3);
-    }
-    else if (win){
+    } else if (win) {
       text("You Win! Great Job!", width/3.5, height/3);
     }
-    
+
     rectMode(CENTER);
     fill(#FFC271);
     rect(width/2, height/2, width/3, height/12, 20);
     rectMode(CORNER);
-    
+
     textSize(height/20);
     fill(0);
     text("Play Again", width/2-width/8.5, height/2+height/48);
   }
 }
 
-void end(){
-  if (player.getLives()==0){
+void end() {
+  if (player.getLives()==0) {
     livesgone=true;
     end=true;
-  }
-  else if (player.getR()==maze.getEnd(0) && player.getC()==maze.getEnd(1)){
+  } else if (player.getR()==maze.getEnd(0) && player.getC()==maze.getEnd(1)) {
     win=true;
     end=true;
   }
 }
 
-void playAgain(){
-  if ((mouseX>=width/2-width/3 && mouseX<=width/2+width/3) && (mouseY>=height/2-height/12 && mouseY<=height/2+height)){
+void playAgain() {
+  if ((mouseX>=width/2-width/3 && mouseX<=width/2+width/3) && (mouseY>=height/2-height/12 && mouseY<=height/2+height)) {
     end=false;
+    enemyList.clear();
     setup();
     draw();
     print("check");
   }
 }
 
-void mousePressed(){
+void mousePressed() {
   if (end) playAgain();
 }
