@@ -69,7 +69,6 @@ void playAgain() {
     end=false;
     enemyList.clear();
     setup();
-    draw();
     print("check");
   }
 }
