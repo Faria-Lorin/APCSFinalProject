@@ -17,6 +17,8 @@ public class Player {
   }
   
   void display(){
+    stroke(0);
+    strokeWeight(2);
     fill(c);
     rect((maze.scaleX()) * playerC + maze.scaleX()/6 ,maze.scaleY() * playerR + maze.scaleY()/4.75, maze.scaleX()/1.5, maze.scaleY()/1.5);
   }
