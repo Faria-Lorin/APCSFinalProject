@@ -30,11 +30,12 @@ void draw(){
   end();
   if (end==false){
     maze.display();
-    player.move();
-    player.display();
     for(Enemy e : enemyList){
+      e.move();
       e.display();
     }
+    player.move();
+    player.display();
   }
   else {
     background(#E5FFFD);
