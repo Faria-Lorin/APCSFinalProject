@@ -17,7 +17,7 @@ public class Enemy {
     }
   }
   void display() {
-    stroke(128,0,255);
+    stroke(128, 0, 255);
     strokeWeight(4);
     fill(110, 33, 176, 100);
     rect((maze.scaleX()) * enemyC + maze.scaleX()/6, maze.scaleY() * enemyR + maze.scaleY()/4.75, maze.scaleX()/1.5, maze.scaleY()/1.5);
@@ -48,7 +48,14 @@ public class Enemy {
         moved = true;
       }
       t = 0;
-    } 
-    else t++;
+    } else t++;
+  }
+
+  int getR() {
+    return enemyR;
+  }
+
+  int getC() {
+    return enemyC;
   }
 }
