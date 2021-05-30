@@ -38,7 +38,12 @@ public class Player {
         fill(c);
         ellipse(maze.scaleX() * shootC + maze.scaleX()/2, maze.scaleY() * shootR + maze.scaleY()/2, maze.scaleX()/6, maze.scaleY()/6);
       }
-    } else n = 0;
+    } else {
+      n = 0;
+      shootR = playerR;
+      shootC = playerC;
+      shootDirection = lastDirection;
+    }
 
     //eyes
     stroke(0);
@@ -81,12 +86,7 @@ public class Player {
     }
   }
   void shoot() {
-    if (n == 0) {
-      shootDirection = lastDirection;
-      shootR = playerR;
-      shootC = playerC;
-    }
-
+    
     //moving bullet --> t = making movement display slower;
     if (t == 5) {
       //if (keyPressed == true && key == 32){
