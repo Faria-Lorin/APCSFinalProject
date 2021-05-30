@@ -22,9 +22,8 @@ public class Player {
 
   void display() {
     stroke(0);
-    strokeWeight(2);
+    strokeWeight(1);
     fill(c);
-    stroke(c);
     float Xcor = maze.scaleX() * playerC + maze.scaleX()/6;
     float Ycor = maze.scaleY() * playerR + maze.scaleY()/4.75;
     rect(Xcor, Ycor, maze.scaleX()/1.5, maze.scaleY()/1.5);
