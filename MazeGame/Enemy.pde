@@ -27,11 +27,11 @@ public class Enemy {
     stroke(0);
     strokeWeight(1);
     fill(255, 234, 34);
-    arc(Xcor + 10, Ycor + 13 , maze.scaleX()/6 , maze.scaleX()/6, 0, PI+QUARTER_PI, CHORD);
-    arc(Xcor + 30, Ycor + 13 , maze.scaleX()/6 , maze.scaleX()/6, 0, PI, CHORD);
+    arc(Xcor + maze.scaleX()/6, Ycor + maze.scaleY()/4 , maze.scaleX()/6 , maze.scaleX()/6, 0, PI+QUARTER_PI, CHORD);
+    arc(Xcor + maze.scaleX()/2, Ycor + maze.scaleY()/4  , maze.scaleX()/6 , maze.scaleX()/6, 0, PI, CHORD);
     //mouth
     fill(0);
-    line(Xcor + 15, Ycor + 30, Xcor + 25, Ycor + 30);
+    line(Xcor + maze.scaleX()/2.5, Ycor + maze.scaleY()/2, Xcor + maze.scaleX()/3.5, Ycor + maze.scaleY()/2);
     
     if (moved == true) moved = false;
   }
