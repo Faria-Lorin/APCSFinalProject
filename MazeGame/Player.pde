@@ -44,7 +44,15 @@ public class Player {
       shootC = playerC;
       shootDirection = lastDirection;
     }
-
+    
+    //lives display
+    stroke(255,0,0);
+    strokeWeight(100/size);
+      for (int i = 2; i < lives+2; i++){
+      line(maze.scaleX() * (i) + maze.scaleX()/3, maze.scaleY() * (size-1) + maze.scaleY()/3, maze.scaleX() * (i) + maze.scaleX()/2 , maze.scaleY() * (size-1) + maze.scaleY()/1.5);
+      line(maze.scaleX() * (i) + maze.scaleX()/2, maze.scaleY() * (size-1) + maze.scaleY()/1.5,  maze.scaleX() * (i) + maze.scaleX()/1.5, maze.scaleY() * (size-1) + maze.scaleY()/3);
+    }
+    
     //eyes
     stroke(0);
     strokeWeight(1);
@@ -57,6 +65,8 @@ public class Player {
     
     //mouth
     arc(Xcor + maze.scaleX()/2.7, Ycor + maze.scaleY()/2.4, maze.scaleX()/4, maze.scaleY()/4, 0, PI/1.1, CHORD);
+  
+
   }
 
   void move() {
@@ -89,7 +99,6 @@ public class Player {
     
     //moving bullet --> t = making movement display slower;
     if (t == 5) {
-      //if (keyPressed == true && key == 32){
       if (shootDirection == 'n') {
         if (maze.getChar(shootR - 1, shootC) != '#')
           shootR--;
@@ -108,8 +117,7 @@ public class Player {
       if (shootDirection == 'e') {
         if (maze.getChar(shootR, shootC + 1) != '#')
           shootC++;   
-        else shoot = false;         
-        //  }
+        else shoot = false;
       }
       t = 0;
       n++;
