@@ -115,13 +115,22 @@ public class Player {
       n++;
     } else t++;
   }
-
+  
+  //get methods
   int getR() {
     return playerR;
   }
 
   int getC() {
     return playerC;
+  }
+  
+  int getShootR() {
+    return shootR;
+  }
+
+  int getShootC() {
+    return shootC;
   }
 
   int getLives() {
