@@ -26,8 +26,11 @@ void setup() {
   //println(enemyList);
 }
 void draw() {
+  //check to see if the game has ended
   end();
+  //if the game isn't over
   if (end==false) {
+    //if the game has already started, then display the maze, enemies, and player
     if (started) {
       maze.display();
       for (Enemy e : enemyList) {
@@ -37,6 +40,7 @@ void draw() {
       player.move();
       player.display();
     }
+    //if the game hasn't started yet, display the start page
     else{
       background(#E5F0FF);
       //name
@@ -46,36 +50,45 @@ void draw() {
       text("Monster", width/2, height/2.75);
       text("Maze", width/2, height/2);
       textAlign(LEFT);
+      
       //start button
+        //actual button
       rectMode(CENTER);
       fill(#FFC271);
       rect(width/2, height/1.5, width/3, height/12, 20);
       rectMode(CORNER);
-
+        //text
       textSize(height/20);
       fill(0);
       text("Start", width/2-width/17, height/1.5+height/48);
     }
     
-  } else {
+  }
+  //if the game has ended, display the end screen
+  else {
     background(#E5FFFD);
+    //if game ended because player ran out of lives
     if (livesgone) {
       text("No More Lives--Game Over", width/5, height/3);
-    } else if (win) {
+    } 
+    //if game ended because player completed the maze
+    else if (win) {
       text("You Win! Great Job!", width/3.5, height/3);
     }
-
+    //play again button
+      //actual button
     rectMode(CENTER);
     fill(#FFC271);
     rect(width/2, height/2, width/3, height/12, 20);
     rectMode(CORNER);
-
+      //text
     textSize(height/20);
     fill(0);
     text("Play Again", width/2-width/8.5, height/2+height/48);
   }
 }
 
+//the game ends when a player loses all their lives or completes the maze
 void end() {
   if (player.getLives()==0) {
     livesgone=true;
@@ -88,16 +101,17 @@ void end() {
   }
 }
 
+//when the Play Again button is pressed, we reset everything
 void playAgain() {
   if ((mouseX>=width/2-width/3 && mouseX<=width/2+width/3) && (mouseY>=height/2-height/12 && mouseY<=height/2+height/12)) {
     end=false;
     started=false;
     enemyList.clear();
     setup();
-    draw();
   }
 }
 
+//when the Start button is pressed, started is set to true, which causes the maze to be drawn
 void startGame() {
   if ((mouseX>=width/2-width/3 && mouseX<=width/2+width/3) && (mouseY>=height/1.5-height/12 && mouseY<=height/1.5+height/12)) {
     started=true;
