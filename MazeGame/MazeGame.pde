@@ -35,6 +35,14 @@ void draw() {
     }
     player.move();
     player.display();
+    rectMode(CENTER);
+    fill(#FFC271);
+    rect(width/2, height/2, width/3, height/12, 20);
+    rectMode(CORNER);
+
+    textSize(height/20);
+    fill(0);
+    text("Start", width/2-width/17, height/2+height/48);
   } else {
     background(#E5FFFD);
     if (livesgone) {
