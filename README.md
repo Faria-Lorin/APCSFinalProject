@@ -17,6 +17,7 @@ _Ella_
 
 05/27 - Today I worked on adding some nice-looking features to the Maze and Player Class, and worked on ending and restarting the game. For the Player, I fixed the color so that it wouldn't be flashing and constantly changing, and I changed the size, because I found that at the current scale, it was very difficult to see the player in a large maze. For the Maze, I added colored backgrounds to the S and E spots so that they would be easier to find among the black and white maze. Most of my work today was on ending and restarting the game. I ended the game when the player won or lost all their lives and created an end screen with a working "Play Again" button that allows you to play a brand new game (generates a brand new maze).
 
+05/29 - I created the start screen for the game and commented the code in the main sketch. For the start screen, I created a start button that creates the maze, modified the end the playAgain() method to return to the start screen when the player tries to play a new game, and added the title of the game. I also went through all the code in the main sketch (MazeGame) and added some comments to make the code more understandable in places where there was a lot of code that might not have made sense.
 
 
 _Faria_
