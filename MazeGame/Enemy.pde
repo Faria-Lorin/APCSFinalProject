@@ -20,7 +20,19 @@ public class Enemy {
     stroke(128, 0, 255);
     strokeWeight(4);
     fill(110, 33, 176, 100);
-    rect((maze.scaleX()) * enemyC + maze.scaleX()/6, maze.scaleY() * enemyR + maze.scaleY()/4.75, maze.scaleX()/1.5, maze.scaleY()/1.5);
+    float Xcor = maze.scaleX() * enemyC + maze.scaleX()/6;
+    float Ycor = maze.scaleY() * enemyR + maze.scaleY()/4.75;
+    rect(Xcor, Ycor, maze.scaleX()/1.5, maze.scaleY()/1.5);
+    //eyes
+    stroke(0);
+    strokeWeight(1);
+    fill(255, 234, 34);
+    arc(Xcor + 10, Ycor + 13 , maze.scaleX()/6 , maze.scaleX()/6, 0, PI+QUARTER_PI, CHORD);
+    arc(Xcor + 30, Ycor + 13 , maze.scaleX()/6 , maze.scaleX()/6, 0, PI, CHORD);
+    //mouth
+    fill(0);
+    line(Xcor + 15, maze.scaleY() * enemyR + maze.scaleY()/4.75 + 30, Xcor + 25, maze.scaleY() * enemyR + maze.scaleY()/4.75 + 30);
+    
     if (moved == true) moved = false;
   }
   void move() {
