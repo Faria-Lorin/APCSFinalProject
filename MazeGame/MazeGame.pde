@@ -38,7 +38,7 @@ void draw() {
       player.display();
     }
     else{
-      background(#E5FFFD);
+      background(#E5F0FF);
       //name
       textSize(height/7);
       fill(110, 33, 176);
