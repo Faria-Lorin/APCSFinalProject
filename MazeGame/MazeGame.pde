@@ -28,7 +28,7 @@ void setup() {
 void draw() {
   end();
   if (end==false) {
-    if (started) {
+    if (getStarted()) {
       maze.display();
       for (Enemy e : enemyList) {
         e.move();
@@ -40,7 +40,7 @@ void draw() {
     else{
       rectMode(CENTER);
       fill(#FFC271);
-      rect(width/2, height/2, width/3, height/12, 20);
+      rect(width/2, 10, width/3, height/12, 20);
       rectMode(CORNER);
 
       textSize(height/20);
@@ -80,8 +80,9 @@ void end() {
 }
 
 void playAgain() {
-  if ((mouseX>=width/2-width/3 && mouseX<=width/2+width/3) && (mouseY>=height/2-height/12 && mouseY<=height/2+height)) {
+  if ((mouseX>=width/2-width/3 && mouseX<=width/2+width/3) && (mouseY>=height/2-height/12 && mouseY<=height/2+height/12)) {
     end=false;
+    started=false;
     enemyList.clear();
     setup();
     draw();
@@ -89,9 +90,13 @@ void playAgain() {
 }
 
 void startGame() {
-  if ((mouseX>=width/2-width/3 && mouseX<=width/2+width/3) && (mouseY>=height/2-height/12 && mouseY<=height/2+height)) {
+  if ((mouseX>=width/2-width/3 && mouseX<=width/2+width/3) && (mouseY>=10-height/12 && mouseY<=10+height/12)) {
     started=true;
   }
+}
+
+boolean getStarted(){
+  return started;
 }
 
 void mousePressed() {
