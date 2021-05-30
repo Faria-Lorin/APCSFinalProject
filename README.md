@@ -28,3 +28,6 @@ _Faria_
 
 
 05/27 - I worked on creating and updating the Enemy class. I created the constructor which sets a location for the enemy away from the start, a display method, and a move method that allows the enemy to move in random directions through the maze. I also updated the main sketch file so that several enemies are created and stored in an ArrayList during setup and enemy move and enemy display are called in the draw method and the player is drawn/displayed after the enemies.
+
+
+05/29 - I added to the display methods in the Enemy class and Player class, giving the enemies and players different facial characteristics to help distinguish them from each other and also make them look better. I used the scaling values from the maze so that the facial features are scaled with the rest of the body for both the Enemies and the Player.
