@@ -2,7 +2,7 @@ import java.util.*;
 Maze maze;
 Player player;
 ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
-boolean end, livesgone, win;
+boolean end, livesgone, win, started;
 
 void setup() {
   size(600, 600);
@@ -28,21 +28,26 @@ void setup() {
 void draw() {
   end();
   if (end==false) {
-    maze.display();
-    for (Enemy e : enemyList) {
-      e.move();
-      e.display();
+    if (started) {
+      maze.display();
+      for (Enemy e : enemyList) {
+        e.move();
+        e.display();
+      }
+      player.move();
+      player.display();
     }
-    player.move();
-    player.display();
-    rectMode(CENTER);
-    fill(#FFC271);
-    rect(width/2, height/2, width/3, height/12, 20);
-    rectMode(CORNER);
+    else{
+      rectMode(CENTER);
+      fill(#FFC271);
+      rect(width/2, height/2, width/3, height/12, 20);
+      rectMode(CORNER);
 
-    textSize(height/20);
-    fill(0);
-    text("Start", width/2-width/17, height/2+height/48);
+      textSize(height/20);
+      fill(0);
+      text("Start", width/2-width/17, height/2+height/48);
+    }
+    
   } else {
     background(#E5FFFD);
     if (livesgone) {
@@ -66,9 +71,11 @@ void end() {
   if (player.getLives()==0) {
     livesgone=true;
     end=true;
+    started=false;
   } else if (player.getR()==maze.getEnd(0) && player.getC()==maze.getEnd(1)) {
     win=true;
     end=true;
+    started=false;
   }
 }
 
@@ -77,10 +84,17 @@ void playAgain() {
     end=false;
     enemyList.clear();
     setup();
-    print("check");
+    draw();
+  }
+}
+
+void startGame() {
+  if ((mouseX>=width/2-width/3 && mouseX<=width/2+width/3) && (mouseY>=height/2-height/12 && mouseY<=height/2+height)) {
+    started=true;
   }
 }
 
 void mousePressed() {
   if (end) playAgain();
+  startGame();
 }
