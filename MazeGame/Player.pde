@@ -7,6 +7,7 @@ public class Player {
   boolean shoot;
   color c;
   Maze maze;
+  
   Player(Maze m, ArrayList<Enemy> e, int n) {
     maze = m;
     playerR = maze.getStart(0);
@@ -24,14 +25,11 @@ public class Player {
     strokeWeight(2);
     fill(c);
     stroke(c);
-
-
-
-
     float Xcor = maze.scaleX() * playerC + maze.scaleX()/6;
     float Ycor = maze.scaleY() * playerR + maze.scaleY()/4.75;
     rect(Xcor, Ycor, maze.scaleX()/1.5, maze.scaleY()/1.5);
-
+    
+    //bullet
     if (keyPressed == true && key == 32) {
       shoot = true;
       if (n < size && shoot == true) {
@@ -52,6 +50,7 @@ public class Player {
     fill(0);
     ellipse(Xcor + maze.scaleX()/5.5, Ycor + maze.scaleY()/3.6, maze.scaleX()/20, maze.scaleY()/20);
     ellipse(Xcor + maze.scaleX()/2.0, Ycor + maze.scaleY()/3.6, maze.scaleX()/20, maze.scaleY()/20);
+    
     //mouth
     arc(Xcor + maze.scaleX()/2.7, Ycor + maze.scaleY()/2.4, maze.scaleX()/4, maze.scaleY()/4, 0, PI/1.1, CHORD);
   }
