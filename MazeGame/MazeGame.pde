@@ -16,15 +16,16 @@ void setup() {
   }
 
   maze = new Maze(m);
-  player = new Player(maze);
 
   int monsterLim = n/3;
   if (monsterLim == 0) monsterLim++;
   for (int i = 0; i < monsterLim; i++) {
     enemyList.add(new Enemy(maze, n));
   } 
-  //println(enemyList);
+
+  player = new Player(maze, enemyList, n);
 }
+
 void draw() {
   //check to see if the game has ended
   end();
@@ -36,6 +37,7 @@ void draw() {
       for (Enemy e : enemyList) {
         e.move();
         e.display();
+        e.die(player.getShootR(), player.getShootC());
       }
       player.move();
       player.display();
