@@ -1,7 +1,7 @@
 import java.util.*;
 public class Enemy {
   int enemyR, enemyC, t;
-  boolean created, moved;
+  boolean created, moved, dead;
   int[] directions = new int[]{0, 1, 2, 3};
   Maze maze;
   Enemy(Maze m, int n) {
@@ -16,24 +16,27 @@ public class Enemy {
       }
     }
   }
+  
   void display() {
-    stroke(128, 0, 255);
-    strokeWeight(4);
-    fill(110, 33, 176, 100);
-    float Xcor = maze.scaleX() * enemyC + maze.scaleX()/6;
-    float Ycor = maze.scaleY() * enemyR + maze.scaleY()/4.75;
-    rect(Xcor, Ycor, maze.scaleX()/1.5, maze.scaleY()/1.5);
-    //eyes
-    stroke(0);
-    strokeWeight(1);
-    fill(255, 234, 34);
-    arc(Xcor + maze.scaleX()/6, Ycor + maze.scaleY()/4 , maze.scaleX()/6 , maze.scaleX()/6, 0, PI+QUARTER_PI, CHORD);
-    arc(Xcor + maze.scaleX()/2, Ycor + maze.scaleY()/4  , maze.scaleX()/6 , maze.scaleX()/6, 0, PI, CHORD);
-    //mouth
-    fill(0);
-    line(Xcor + maze.scaleX()/2.5, Ycor + maze.scaleY()/2, Xcor + maze.scaleX()/3.5, Ycor + maze.scaleY()/2);
-    
-    if (moved == true) moved = false;
+    if (!dead){
+      stroke(128, 0, 255);
+      strokeWeight(4);
+      fill(110, 33, 176, 100);
+      float Xcor = maze.scaleX() * enemyC + maze.scaleX()/6;
+      float Ycor = maze.scaleY() * enemyR + maze.scaleY()/4.75;
+      rect(Xcor, Ycor, maze.scaleX()/1.5, maze.scaleY()/1.5);
+      //eyes
+      stroke(0);
+      strokeWeight(1);
+      fill(255, 234, 34);
+      arc(Xcor + maze.scaleX()/6, Ycor + maze.scaleY()/4 , maze.scaleX()/6 , maze.scaleX()/6, 0, PI+QUARTER_PI, CHORD);
+      arc(Xcor + maze.scaleX()/2, Ycor + maze.scaleY()/4  , maze.scaleX()/6 , maze.scaleX()/6, 0, PI, CHORD);
+      //mouth
+      fill(0);
+      line(Xcor + maze.scaleX()/2.5, Ycor + maze.scaleY()/2, Xcor + maze.scaleX()/3.5, Ycor + maze.scaleY()/2);
+      
+      if (moved == true) moved = false;
+    }
   }
   void move() {
     if (t == 20) {
@@ -62,7 +65,23 @@ public class Enemy {
       t = 0;
     } else t++;
   }
-
+  
+  void die(int r, int c){
+    if (!dead){
+      if ( c == enemyC && r == enemyR){
+        moved = true;
+        stroke(255,0,0);
+        strokeWeight(4);
+        fill(255, 0, 0);
+        float Xcor = maze.scaleX() * enemyC + maze.scaleX()/6;
+        float Ycor = maze.scaleY() * enemyR + maze.scaleY()/4.75;
+        rect(Xcor, Ycor, maze.scaleX()/1.5, maze.scaleY()/1.5);
+        enemyR = 0;
+        enemyC = 0;
+        dead = true;
+      }
+    }
+  }
   int getR() {
     return enemyR;
   }
