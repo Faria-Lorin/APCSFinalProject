@@ -38,6 +38,15 @@ void draw() {
       player.display();
     }
     else{
+      background(#E5FFFD);
+      //name
+      textSize(height/7);
+      fill(110, 33, 176);
+      textAlign(CENTER);
+      text("Monster", width/2, height/2.75);
+      text("Maze", width/2, height/2);
+      textAlign(LEFT);
+      //start button
       rectMode(CENTER);
       fill(#FFC271);
       rect(width/2, height/1.5, width/3, height/12, 20);
