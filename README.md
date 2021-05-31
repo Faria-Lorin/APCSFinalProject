@@ -32,3 +32,6 @@ _Faria_
 
 
 05/29 - I added to the display methods in the Enemy class and Player class, giving the enemies and players different facial characteristics to help distinguish them from each other and also make them look better. I used the scaling values from the maze so that the facial features are scaled with the rest of the body for both the Enemies and the Player.
+
+
+05/30 - I created a shoot method for player that allows the user to shoot at an enemy in the direction that the player previous moved by holding the spacebar: the longer you hold the spacebar, the farther the bullet goes. The bullet can not go past the walls. I added to the display method to display the bullets as circles. I also added a die method for enemies, so that if the bullet hits them, the enemies are deemed dead and they are no longer displayed, and enemy move can no longer be be used to move the enemy. When the enemy dies, a red rectangle is shown for a second, showing the death.
