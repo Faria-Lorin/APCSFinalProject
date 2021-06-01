@@ -19,6 +19,8 @@ _Ella_
 
 05/29 - I created the start screen for the game and commented the code in the main sketch. For the start screen, I created a start button that creates the maze, modified the end the playAgain() method to return to the start screen when the player tries to play a new game, and added the title of the game. I also went through all the code in the main sketch (MazeGame) and added some comments to make the code more understandable in places where there was a lot of code that might not have made sense.
 
+06/01 - I created the die method for Player, simplified the die method for Enemy, completely updated the UML diagram and the prototype document to account for all the changes we made and goals we achieved, imported and scaled an image of a heart to represent the lives (make it look better than just the lines), and removed extra variables that we weren't using. I also merged the player branch with main, deleted the ella and player branches, and created the demo branch. Faria and I also discussed what we would say during our presentation.
+
 
 _Faria_
 
