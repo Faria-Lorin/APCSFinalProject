@@ -74,6 +74,8 @@ public class Enemy {
       }
     }
   }
+  
+  //get methods
   int getR() {
     return enemyR;
   }

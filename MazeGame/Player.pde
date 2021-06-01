@@ -49,8 +49,12 @@ public class Player {
     stroke(255,0,0);
     strokeWeight(100/size);
       for (int i = 2; i < lives+2; i++){
-      line(maze.scaleX() * (i) + maze.scaleX()/3, maze.scaleY() * (size-1) + maze.scaleY()/3, maze.scaleX() * (i) + maze.scaleX()/2 , maze.scaleY() * (size-1) + maze.scaleY()/1.5);
-      line(maze.scaleX() * (i) + maze.scaleX()/2, maze.scaleY() * (size-1) + maze.scaleY()/1.5,  maze.scaleX() * (i) + maze.scaleX()/1.5, maze.scaleY() * (size-1) + maze.scaleY()/3);
+      PShape heart=loadShape("heart2.svg");
+      heart.disableStyle();
+      heart.setFill(color(#FA0B03));
+      heart.enableStyle();
+      heart.scale(1/((float) size));
+      shape(heart, maze.scaleX() * (i) + maze.scaleX()/3, maze.scaleY() * (size-1) + maze.scaleY()/7);
     }
     
     //eyes
