@@ -7,7 +7,7 @@ public class Player {
   boolean shoot;
   color c;
   Maze maze;
-  
+
   Player(Maze m, int n) {
     maze = m;
     playerR = maze.getStart(0);
@@ -27,7 +27,7 @@ public class Player {
     float Xcor = maze.scaleX() * playerC + maze.scaleX()/6;
     float Ycor = maze.scaleY() * playerR + maze.scaleY()/4.75;
     rect(Xcor, Ycor, maze.scaleX()/1.5, maze.scaleY()/1.5);
-    
+
     //bullet
     if (keyPressed == true && key == 32) {
       shoot = true;
@@ -37,6 +37,9 @@ public class Player {
         stroke(c);
         fill(c);
         ellipse(maze.scaleX() * shootC + maze.scaleX()/2, maze.scaleY() * shootR + maze.scaleY()/2, maze.scaleX()/6, maze.scaleY()/6);
+      } else {
+        shootR = playerR;
+        shootC = playerC;
       }
     } else {
       n = 0;
@@ -44,11 +47,9 @@ public class Player {
       shootC = playerC;
       shootDirection = lastDirection;
     }
-    
+
     //lives display
-    stroke(255,0,0);
-    strokeWeight(100/size);
-      for (int i = 2; i < lives+2; i++){
+    for (int i = 2; i < lives+2; i++) {
       PShape heart=loadShape("heart2.svg");
       heart.disableStyle();
       heart.setFill(color(#FA0B03));
@@ -56,7 +57,7 @@ public class Player {
       heart.scale(1/((float) size));
       shape(heart, maze.scaleX() * (i) + maze.scaleX()/3, maze.scaleY() * (size-1) + maze.scaleY()/7);
     }
-    
+
     //eyes
     stroke(0);
     strokeWeight(1);
@@ -66,11 +67,9 @@ public class Player {
     fill(0);
     ellipse(Xcor + maze.scaleX()/5.5, Ycor + maze.scaleY()/3.6, maze.scaleX()/20, maze.scaleY()/20);
     ellipse(Xcor + maze.scaleX()/2.0, Ycor + maze.scaleY()/3.6, maze.scaleX()/20, maze.scaleY()/20);
-    
+
     //mouth
     arc(Xcor + maze.scaleX()/2.7, Ycor + maze.scaleY()/2.4, maze.scaleX()/4, maze.scaleY()/4, 0, PI/1.1, CHORD);
-  
-
   }
 
   void move() {
@@ -100,7 +99,7 @@ public class Player {
     }
   }
   void shoot() {
-    
+
     //moving bullet --> t = making movement display slower;
     if (t == 5) {
       if (shootDirection == 'n') {
@@ -127,11 +126,11 @@ public class Player {
       n++;
     } else t++;
   }
-  
-  void die(int r, int c){
+
+  void die(int r, int c) {
     if (r==playerR && c==playerC) lives--;
   }
-  
+
   //get methods
   int getR() {
     return playerR;
@@ -140,7 +139,7 @@ public class Player {
   int getC() {
     return playerC;
   }
-  
+
   int getShootR() {
     return shootR;
   }
