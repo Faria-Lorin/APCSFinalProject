@@ -39,6 +39,7 @@ void draw() {
       for (Enemy e : enemyList) {
         e.move();
         e.display();
+        player.die(e.getR(), e.getC());
         e.die(player.getShootR(), player.getShootC());
       }
       //display lives

@@ -124,6 +124,10 @@ public class Player {
     } else t++;
   }
   
+  void die(int r, int c){
+    if (r==playerR && c==playerC) lives--;
+  }
+  
   //get methods
   int getR() {
     return playerR;
