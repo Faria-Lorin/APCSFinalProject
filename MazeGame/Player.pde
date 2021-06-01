@@ -8,7 +8,7 @@ public class Player {
   color c;
   Maze maze;
   
-  Player(Maze m, ArrayList<Enemy> e, int n) {
+  Player(Maze m, int n) {
     maze = m;
     playerR = maze.getStart(0);
     playerC = maze.getStart(1);

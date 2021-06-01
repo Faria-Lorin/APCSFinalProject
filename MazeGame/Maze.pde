@@ -4,7 +4,6 @@ public class Maze {
   int currentR, currentC, startR, startC, steps, endR, endC, max;
   ArrayList<Character> directions = new ArrayList<Character>();
   int startX, startY, endX, endY;
-  float startXCor, startYCor, endXCor, endYCor;
 
   Maze(char[][] m) {
     maze=m;
@@ -110,6 +109,7 @@ public class Maze {
     }
   }
 
+  //testing method
   String toString() {
     String ans="";
     for (int i=0; i<maze.length; i++) {
@@ -137,16 +137,12 @@ public class Maze {
           rect(x, y, scaleX(), scaleY());
           fill(0);
           text('S', x+0.3*scaleX(), y+0.9*scaleY());
-          startXCor=x+0.3*scaleX();
-          startYCor=y+0.9*scaleY();
         } else if (maze[i][j]=='E') {
           stroke(color(#EB89FF));
           fill(color(#EB89FF));
           rect(x, y, scaleX(), scaleY());
           fill(0);
           text('E', x+0.3*scaleX(), y+0.9*scaleY());
-          endXCor=x+0.3*scaleX();
-          endYCor=y+0.9*scaleY();
         } else if (maze[i][j] == ' ') { 
           stroke(255);
           fill(255); 

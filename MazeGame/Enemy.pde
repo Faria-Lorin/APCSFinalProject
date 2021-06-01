@@ -70,14 +70,6 @@ public class Enemy {
     if (!dead){
       if ( c == enemyC && r == enemyR){
         moved = true;
-        stroke(255,0,0);
-        strokeWeight(4);
-        fill(255, 0, 0);
-        float Xcor = maze.scaleX() * enemyC + maze.scaleX()/6;
-        float Ycor = maze.scaleY() * enemyR + maze.scaleY()/4.75;
-        rect(Xcor, Ycor, maze.scaleX()/1.5, maze.scaleY()/1.5);
-        enemyR = 0;
-        enemyC = 0;
         dead = true;
       }
     }
@@ -88,5 +80,9 @@ public class Enemy {
 
   int getC() {
     return enemyC;
+  }
+  
+  boolean isDead(){
+    return dead;
   }
 }

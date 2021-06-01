@@ -23,7 +23,7 @@ void setup() {
     enemyList.add(new Enemy(maze, n));
   } 
 
-  player = new Player(maze, enemyList, n);
+  player = new Player(maze, n);
 }
 
 void draw() {
@@ -41,6 +41,13 @@ void draw() {
         e.display();
         player.die(e.getR(), e.getC());
         e.die(player.getShootR(), player.getShootC());
+      }
+      //removes an enemy from the list if it's dead;
+      for (int i=0; i<enemyList.size(); i++){
+        if (enemyList.get(i).isDead()) {
+          enemyList.remove(i);
+          i--;
+        }
       }
       //display lives
       textSize(maze.scaleY()/2);
