@@ -38,6 +38,10 @@ public class Player {
         fill(c);
         ellipse(maze.scaleX() * shootC + maze.scaleX()/2, maze.scaleY() * shootR + maze.scaleY()/2, maze.scaleX()/6, maze.scaleY()/6);
       }
+      else{
+        shootR = playerR;
+        shootC = playerC;
+      }
     } else {
       n = 0;
       shootR = playerR;
@@ -48,7 +52,7 @@ public class Player {
     //lives display
     stroke(255,0,0);
     strokeWeight(100/size);
-      for (int i = 2; i < lives+2; i++){
+    for (int i = 2; i < lives+2; i++){
       line(maze.scaleX() * (i) + maze.scaleX()/3, maze.scaleY() * (size-1) + maze.scaleY()/3, maze.scaleX() * (i) + maze.scaleX()/2 , maze.scaleY() * (size-1) + maze.scaleY()/1.5);
       line(maze.scaleX() * (i) + maze.scaleX()/2, maze.scaleY() * (size-1) + maze.scaleY()/1.5,  maze.scaleX() * (i) + maze.scaleX()/1.5, maze.scaleY() * (size-1) + maze.scaleY()/3);
     }
@@ -96,7 +100,7 @@ public class Player {
     }
   }
   void shoot() {
-    
+
     //moving bullet --> t = making movement display slower;
     if (t == 5) {
       if (shootDirection == 'n') {
