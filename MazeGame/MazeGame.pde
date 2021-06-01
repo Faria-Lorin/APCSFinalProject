@@ -22,7 +22,6 @@ void setup() {
   for (int i = 0; i < monsterLim; i++) {
     enemyList.add(new Enemy(maze, n));
   } 
-
   player = new Player(maze, n);
 }
 
