@@ -8,6 +8,14 @@ Group Members: Faria Lorin, Ella Krechmer
 
 Project Description: Players go through a randomly constructed maze while avoiding and defeating various enemies.
 
+Compile/Run instructions:
+
+  1. Copy the repo into a directory on your computer
+  2. Open the files with Processing and click run
+  3. Click start game to start the game
+  4. Use arrow keys to move the player and navigate through the maze while avoiding or destroying enemies. Hold the spacebar to shoot the enemy and kill them. Try to reach the end of the maze without losing all your lives.
+  5. After reaching the end of the maze or losing all your lives, click play again if you want to play again.
+
 __Development Log__
 
 _Ella_
