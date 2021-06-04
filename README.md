@@ -37,3 +37,6 @@ _Faria_
 
 
 05/30 - I created a shoot method for player that allows the user to shoot at an enemy in the direction that the player previous moved by holding the spacebar and I added a die method in the Enemy class (called in draw), so that enemies are killed by the bullets. I added to the display method to display the bullets and also display the number of lives the player has left using hearts.
+
+
+06/01 - Fixed a bug in the shoot method so that the bullet location is reset to the player location after the bullet hits the wall even if the spacebar is still held.
