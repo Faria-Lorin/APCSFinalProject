@@ -45,10 +45,11 @@ void draw() {
         if (!dead) {
           e.die(player.getShootR(), player.getShootC());
         }
-        if (time < 450 && dead){
+        if (time < 500 && dead){
           time ++;
+          player.setStroke(color(254, 254, 0), 5);
         }
-        else {dead = false; time = 0;}
+        else {dead = false; time = 0; player.setStroke( color(0), 1);}
       }
       //removes an enemy from the list if it's dead;
       for (int i=0; i<enemyList.size(); i++){
