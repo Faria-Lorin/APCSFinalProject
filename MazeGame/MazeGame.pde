@@ -3,13 +3,14 @@ Maze maze;
 Player player;
 ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
 boolean end, livesgone, win, started, dead, levelSet;
-int time, level;
+int time, level, size;
 
 void setup() {
   size(600, 600);
   background(255);
-  int n = 11;
-  char[][] m=new char[n][n];
+  displayStart();
+  if (!levelSet) size = 10;
+  char[][] m=new char[size][size];
   for (int i=0; i<m.length; i++) {
     for (int j=0; j<m[0].length; j++) {
       m[i][j]='#';
@@ -18,13 +19,13 @@ void setup() {
 
   maze = new Maze(m);
 
-  int monsterLim = n/2;
+  int monsterLim = size/2;
   if (monsterLim == 0) monsterLim++;
   for (int i = 0; i < monsterLim; i++) {
-    enemyList.add(new Enemy(maze, n));
+    enemyList.add(new Enemy(maze, size));
   } 
 
-  player = new Player(maze, n);
+  player = new Player(maze, size);
 }
 
 void draw() {
@@ -61,7 +62,7 @@ void draw() {
       //display lives
       textSize(maze.scaleY()/2);
       fill(255);
-      text("LIVES: ", maze.scaleX()/2, height - maze.scaleY()/3);
+      text("LIVES: ", maze.scaleX()/2, size * maze.scaleY() - maze.scaleY()/4 );
     }
     //if the game hasn't started yet, display the start page
     else if (started && !levelSet){
@@ -130,17 +131,30 @@ void startGame() {
 void chooseLevel(){
   if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/4.5-height/12 && mouseY<=height/4.5+height/12)) {
     levelSet = true;
+    level = 1;
+    size = (int)random(5) + 10;
   }
   else if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>= 2*height/4.5-height/12 && mouseY<=2*height/4.5+height/12)) {
     levelSet = true;
+    level = 2;
+    size = (int)random(5) + 15;
   }
   else if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=3*height/4.5-height/12 && mouseY<=3*height/4.5+height/12)) {
     levelSet = true;
+    level = 3;
+    size = (int)random(5) + 25;
   }
   else if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=4*height/4.5-height/12 && mouseY<=4*height/4.5+height/12)) {
     levelSet = true;
+    level = 4;
+    size = 10;
+  }
+  if (levelSet) {
+    enemyList.clear();
+    setup();
   }
 }
+
 void displayStart(){
       background(#E5F0FF);
       //name
