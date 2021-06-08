@@ -8,7 +8,7 @@ int time, level, size;
 void setup() {
   size(600, 600);
   background(255);
-  displayStart();
+  //displayStart();
   if (!levelSet) size = 10;
   char[][] m=new char[size][size];
   for (int i=0; i<m.length; i++) {
@@ -19,13 +19,14 @@ void setup() {
 
   maze = new Maze(m);
 
-  int monsterLim = size/2;
+  int monsterLim = size/3;
   if (monsterLim == 0) monsterLim++;
   for (int i = 0; i < monsterLim; i++) {
     enemyList.add(new Enemy(maze, size));
   } 
 
   player = new Player(maze, size);
+  if (level == 4) maze.display();
 }
 
 void draw() {
@@ -68,31 +69,41 @@ void draw() {
     else if (started && !levelSet){
       displayLevels();
     }
-    else {
-      displayStart();
+    else if (!started){
+        displayStart();
     }
   }
   //if the game has ended, display the end screen
   else {
-    background(#E5FFFD);
-    //if game ended because player ran out of lives
-    if (livesgone) {
-      text("No More Lives--Game Over", width/5, height/3);
-    } 
-    //if game ended because player completed the maze
-    else if (win) {
-      text("You Win! Great Job!", width/3.5, height/3);
+    if (livesgone || level != 4){
+      background(#E5FFFD);
+      //if game ended because player ran out of lives
+      if (livesgone) {
+        text("No More Lives--Game Over", width/5, height/3);
+      } 
+      //if game ended because player completed the maze
+      else if (win) {
+        text("You Win! Great Job!", width/3.5, height/3);
+      }
+      //play again button
+      //actual button
+      rectMode(CENTER);
+      fill(#FFC271);
+      rect(width/2, height/2, width/3, height/12, 20);
+      rectMode(CORNER);
+      //text
+      textSize(height/20);
+      fill(0);
+      text("Play Again", width/2-width/8.5, height/2+height/48);
     }
-    //play again button
-    //actual button
-    rectMode(CENTER);
-    fill(#FFC271);
-    rect(width/2, height/2, width/3, height/12, 20);
-    rectMode(CORNER);
-    //text
-    textSize(height/20);
-    fill(0);
-    text("Play Again", width/2-width/8.5, height/2+height/48);
+    else if (!livesgone && level == 4){
+      enemyList.clear();
+      size++;
+      setup();
+      end = false;
+      started = true;
+      levelSet = true;
+    }
   }
 }
 
@@ -105,6 +116,7 @@ void end() {
   } else if (player.getR()==maze.getEnd(0) && player.getC()==maze.getEnd(1)) {
     win=true;
     end=true;
+    livesgone = false;
     started=false;
   }
 }
@@ -114,7 +126,6 @@ void playAgain() {
   if ((mouseX>=width/2-width/3 && mouseX<=width/2+width/3) && (mouseY>=height/2-height/12 && mouseY<=height/2+height/12)) {
     end=false;
     started=false;
-    levelSet = false;
     enemyList.clear();
     setup();
   }
@@ -132,17 +143,17 @@ void chooseLevel(){
   if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/4.5-height/12 && mouseY<=height/4.5+height/12)) {
     levelSet = true;
     level = 1;
-    size = (int)random(5) + 10;
+    size = (int)random(3) + 10;
   }
   else if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>= 2*height/4.5-height/12 && mouseY<=2*height/4.5+height/12)) {
     levelSet = true;
     level = 2;
-    size = (int)random(5) + 15;
+    size = (int)random(3) + 15;
   }
   else if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=3*height/4.5-height/12 && mouseY<=3*height/4.5+height/12)) {
     levelSet = true;
     level = 3;
-    size = (int)random(5) + 25;
+    size = (int)random(3) + 25;
   }
   else if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=4*height/4.5-height/12 && mouseY<=4*height/4.5+height/12)) {
     levelSet = true;
