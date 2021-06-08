@@ -278,6 +278,7 @@ void mousePressed() {
   if (!end && started && !levelSet) chooseLevel();
   if (!end && !started) {
     startGame();
-    //chooseTheme();
+    chooseTheme();
+    println(maze.getTheme());
   }
 }
