@@ -37,9 +37,12 @@ void setup() {
 }
 
 void draw() {
-  points -= 1;
+
   //check to see if the game has ended
-  end();
+  if (!end) {
+    end();
+    points -= 1;
+  }
   //if the game isn't over
   if (end==false) {
     //if the game has already started, then display the maze, enemies, and player
@@ -55,16 +58,19 @@ void draw() {
         if (!dead) {
           e.die(player.getShootR(), player.getShootC());
         }
-        if (time < 500 && dead){
+        if (time < 500 && dead) {
           time ++;
           player.setStroke(color(254, 254, 0), 5);
+        } else {
+          dead = false; 
+          time = 0; 
+          player.setStroke( color(0), 1);
         }
-        else {dead = false; time = 0; player.setStroke( color(0), 1);}
       }
       //removes an enemy from the list if it's dead;
-      for (int i=0; i<enemyList.size(); i++){
+      for (int i=0; i<enemyList.size(); i++) {
         if (enemyList.get(i).isDead()) {
-          points += 200;
+          points += 300;
           enemyList.remove(i);
           i--;
         }
@@ -73,64 +79,21 @@ void draw() {
       textSize(maze.scaleY()/2);
       fill(255);
       text("LIVES: ", maze.scaleX()/2, size * maze.scaleY() - maze.scaleY()/4 );
-      if (level == 4){
-        text("POINTS: " + points, maze.scaleX()/2, maze.scaleY() - maze.scaleY()/4 );
-        text("LEVEL: " + passedLevels, size* maze.scaleX()/1.2 - maze.scaleX(),size* maze.scaleY() - maze.scaleY()/4 );
+      if (level == 4) {
+        text("SCORE: " + points, maze.scaleX()/2, maze.scaleY() - maze.scaleY()/4 );
+        text("LEVEL: " + passedLevels, size* maze.scaleX()/1.2 - maze.scaleX(), size* maze.scaleY() - maze.scaleY()/4 );
       }
     }
     //if the game hasn't started yet, display the start page
-    else if (started && !levelSet){
+    else if (started && !levelSet) {
       displayLevels();
-    }
-    else if (!started){
-        displayStart();
+    } else if (!started) {
+      displayStart();
     }
   }
   //if the game has ended, display the end screen
   else {
-    if (livesgone || level != 4){
-      background(#E5FFFD);
-      //if game ended because player ran out of lives
-      if (livesgone) {
-        fill(0);
-        text("No More Lives--Game Over", width/5, height/3);
-      } 
-      //if game ended because player completed the maze
-      else if (win) {
-        fill(0);
-        text("You Win! Great Job!", width/3.5, height/3);
-      }
-      //play again button
-      //actual button
-      rectMode(CENTER);
-      if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/2-height/24 && mouseY<=height/2+height/24)){
-        stroke(0);
-        strokeWeight(1.5);
-        fill(110, 33, 176, 100);
-      }
-      else{
-        stroke(0);
-        strokeWeight(1);
-        fill(#FFC271);
-      }
-      rect(width/2, height/2, width/3, height/12, 20);
-      rectMode(CORNER);
-      //text
-      textSize(height/20);
-      if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/2-height/24 && mouseY<=height/2+height/24)){
-        fill(#FFC271);
-      }
-      else fill(0);
-      text("Play Again", width/2-width/8.5, height/2+height/48);
-    }
-    else if (!livesgone && level == 4){
-      enemyList.clear();
-      size++;
-      setup();
-      end = false;
-      started = true;
-      levelSet = true;
-    }
+    displayEnd();
   }
 }
 
@@ -166,23 +129,20 @@ void startGame() {
   }
 }
 
-void chooseLevel(){
+void chooseLevel() {
   if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/4.5-height/24 && mouseY<=height/4.5+height/24)) {
     levelSet = true;
     level = 1;
     size = (int)random(3) + 10;
-  }
-  else if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>= 2*height/4.5-height/24 && mouseY<=2*height/4.5+height/24)) {
+  } else if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>= 2*height/4.5-height/24 && mouseY<=2*height/4.5+height/24)) {
     levelSet = true;
     level = 2;
     size = (int)random(3) + 15;
-  }
-  else if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=3*height/4.5-height/24 && mouseY<=3*height/4.5+height/24)) {
+  } else if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=3*height/4.5-height/24 && mouseY<=3*height/4.5+height/24)) {
     levelSet = true;
     level = 3;
     size = (int)random(3) + 25;
-  }
-  else if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=4*height/4.5-height/24 && mouseY<=4*height/4.5+height/24)) {
+  } else if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=4*height/4.5-height/24 && mouseY<=4*height/4.5+height/24)) {
     levelSet = true;
     level = 4;
     size = 10;
@@ -193,152 +153,187 @@ void chooseLevel(){
   }
 }
 
-void chooseTheme(){
+void chooseTheme() {
   //black and white button
-  if ((mouseX>=width/3-width/4 && mouseX<=width/3+width/4) && (mouseY>=height/1.8-height/16 && mouseY<=height/1.8+height/16)){
+  if ((mouseX>=width/3-width/4 && mouseX<=width/3+width/4) && (mouseY>=height/1.8-height/16 && mouseY<=height/1.8+height/16)) {
     maze.setTheme(0);
     theme = 0;
   }
   //tomb button
-  else if ((mouseX>=2*width/3-width/4 && mouseX<=2*width/3+width/4) && (mouseY>=height/1.8-height/16 && mouseY<=height/1.8+height/16)){
+  else if ((mouseX>=2*width/3-width/4 && mouseX<=2*width/3+width/4) && (mouseY>=height/1.8-height/16 && mouseY<=height/1.8+height/16)) {
     maze.setTheme(1);
     theme = 1;
   }
 }
 
-void displayStart(){
-      background(#E5F0FF);
-      //name
-      textSize(height/7);
-      fill(110, 33, 176);
-      textAlign(CENTER);
-      text("Monster", width/2, height/4);
-      text("Maze", width/2, height/2.5);
-      textAlign(LEFT);
-
-      //start button
-      //actual button
-      if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/1.5-height/24 && mouseY<=height/1.5+height/24)){
-        stroke(0);
-        strokeWeight(1.5);
-        fill(110, 33, 176, 100);
-      }
-      else{
-        stroke(0);
-        strokeWeight(1);
-        fill(#FFC271);
-      }
-      
-      rectMode(CENTER);
-      rect(width/2, height/1.5, width/3, height/12, 20);
-      rectMode(CORNER);
-      //text
-      textSize(height/20);
-      if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/1.5-height/24 && mouseY<=height/1.5+height/24)){
-        fill(#FFC271);
-      }
-      else fill(0);
-      text("Start", width/2-width/17, height/1.5+height/48);
-      
-      //level selected
-      //Choose Theme text
-      textSize(height/24);
+void displayEnd() {
+  if (livesgone || level != 4) {
+    background(#E5FFFD);
+    //if game ended because player ran out of lives
+    if (livesgone) {
       fill(0);
-      textAlign(CENTER);
-      text("Choose Theme", width/2, height/2-height/80);
-      textAlign(LEFT);
-      
-      //Black and White Button
-      rectMode(CENTER);
-      //theme=0 means black and white, theme=1 means tomb
-      if (maze.getTheme()==0) {
-        stroke(#05FA03);
-        strokeWeight(1.5);
-      }
-      else {
-        stroke(0);
-        strokeWeight(1);
-      }
-      fill(255);
-      rect(width/3, height/1.8, width/4, height/16, 20);
-      rectMode(CORNER);
-      //text
-      textSize(height/40);
+      text("No More Lives--Game Over", width/5, height/3);
+    } 
+    //if game ended because player completed the maze
+    else if (win) {
       fill(0);
-      text("Black and White", width/3-width/10.5, height/1.8+height/76);
-      
-      //Tomb Button
-      rectMode(CENTER);
-      //theme=0 means black and white, theme=1 means tomb
-      if (maze.getTheme()==1) {
-        stroke(#05FA03);
-        strokeWeight(1.5);
-      }
-      else {
-        stroke(125, 91, 2);
-        strokeWeight(1);
-      }
-      fill(215, 181, 113);
-      rect(2*width/3, height/1.8, width/4, height/16, 20);
-      rectMode(CORNER);
-      //text
-      textSize(height/40);
-      fill(0);
-      text("Tomb", 2*width/3-width/27, height/1.8+height/76);
+      text("You Win! Great Job!", width/3.5, height/3);
+    }
+    if (level == 4) text("SCORE: " + points, width/2-width/6, 2.15*height/3);
+    //play again button
+    //actual button
+    rectMode(CENTER);
+    if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/2-height/24 && mouseY<=height/2+height/24)) {
+      stroke(0);
+      strokeWeight(1.5);
+      fill(110, 33, 176, 100);
+    } else {
+      stroke(0);
+      strokeWeight(1);
+      fill(#FFC271);
+    }
+    rect(width/2, height/2, width/3, height/12, 20);
+    rectMode(CORNER);
+    //text
+    textSize(height/20);
+    if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/2-height/24 && mouseY<=height/2+height/24)) {
+      fill(#FFC271);
+    } else fill(0);
+    text("Play Again", width/2-width/8.5, height/2+height/48);
+  } else if (!livesgone && level == 4) {
+    enemyList.clear();
+    size++;
+    setup();
+    end = false;
+    started = true;
+    levelSet = true;
+  }
 }
 
-void displayLevels(){
-      background(#CCCCFF);
-      textSize(height/10);
-      fill(110, 33, 176);
-      stroke(0);
-      textAlign(CENTER);
-      text("LEVEL", width/2, height/8);
-      textAlign(LEFT);
+void displayStart() {
+  background(#E5F0FF);
+  //name
+  textSize(height/7);
+  fill(110, 33, 176);
+  textAlign(CENTER);
+  text("Monster", width/2, height/4);
+  text("Maze", width/2, height/2.5);
+  textAlign(LEFT);
 
-      //level buttons
-      //actual button
-      rectMode(CENTER);
-      for (int i = 1; i <= 4; i++){
-        if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=i*height/4.5-height/24 && mouseY<=i*height/4.5+height/24)){
-          stroke(0);
-          strokeWeight(1.5);
-          fill(110, 33, 176, 100);
-        }
-        else{
-          stroke(0);
-          strokeWeight(1);
-          fill(#FFC271);
-        }
-        rect(width/2, i*height/4.5, width/3, height/12, 20);
-      }
-      rectMode(CORNER);
-      //text
-      textSize(height/20);
-      //Easy
-      if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/4.5-height/24 && mouseY<=height/4.5+height/24)){
-        fill(#FFC271);
-      }
-      else fill(0);
-      text("Easy", width/2-width/19, height/4.5+height/48);
-      //Medium
-      if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=2*height/4.5-height/24 && mouseY<=2*height/4.5+height/24)){
-        fill(#FFC271);
-      }
-      else fill(0);
-      text("Medium", width/2-width/11, 2*height/4.5+height/48);
-      //Difficult
-      if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=3*height/4.5-height/24 && mouseY<=3*height/4.5+height/24)){
-        fill(#FFC271);
-      }
-      else fill(0);
-      text("Difficult", width/2-width/11, 3*height/4.5+height/48);
-      //Endless
-      if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=4*height/4.5-height/24 && mouseY<=4*height/4.5+height/24)){
-        fill(#FFC271);
-      }
-      else fill(0);
-      text("Endless", width/2-width/11, 4*height/4.5+height/48);
+  //start button
+  //actual button
+  if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/1.5-height/24 && mouseY<=height/1.5+height/24)) {
+    stroke(0);
+    strokeWeight(1.5);
+    fill(110, 33, 176, 100);
+  } else {
+    stroke(0);
+    strokeWeight(1);
+    fill(#FFC271);
+  }
+
+  rectMode(CENTER);
+  rect(width/2, height/1.5, width/3, height/12, 20);
+  rectMode(CORNER);
+  //text
+  textSize(height/20);
+  if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/1.5-height/24 && mouseY<=height/1.5+height/24)) {
+    fill(#FFC271);
+  } else fill(0);
+  text("Start", width/2-width/17, height/1.5+height/48);
+
+  //level selected
+  //Choose Theme text
+  textSize(height/24);
+  fill(0);
+  textAlign(CENTER);
+  text("Choose Theme", width/2, height/2-height/80);
+  textAlign(LEFT);
+
+  //Black and White Button
+  rectMode(CENTER);
+  //theme=0 means black and white, theme=1 means tomb
+  if (maze.getTheme()==0) {
+    stroke(#05FA03);
+    strokeWeight(1.5);
+  } else {
+    stroke(0);
+    strokeWeight(1);
+  }
+  fill(255);
+  rect(width/3, height/1.8, width/4, height/16, 20);
+  rectMode(CORNER);
+  //text
+  textSize(height/40);
+  fill(0);
+  text("Black and White", width/3-width/10.5, height/1.8+height/76);
+
+  //Tomb Button
+  rectMode(CENTER);
+  //theme=0 means black and white, theme=1 means tomb
+  if (maze.getTheme()==1) {
+    stroke(#05FA03);
+    strokeWeight(1.5);
+  } else {
+    stroke(125, 91, 2);
+    strokeWeight(1);
+  }
+  fill(215, 181, 113);
+  rect(2*width/3, height/1.8, width/4, height/16, 20);
+  rectMode(CORNER);
+  //text
+  textSize(height/40);
+  fill(0);
+  text("Tomb", 2*width/3-width/27, height/1.8+height/76);
+}
+
+void displayLevels() {
+  background(#CCCCFF);
+  textSize(height/10);
+  fill(110, 33, 176);
+  stroke(0);
+  textAlign(CENTER);
+  text("LEVEL", width/2, height/8);
+  textAlign(LEFT);
+
+  //level buttons
+  //actual button
+  rectMode(CENTER);
+  for (int i = 1; i <= 4; i++) {
+    if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=i*height/4.5-height/24 && mouseY<=i*height/4.5+height/24)) {
+      stroke(0);
+      strokeWeight(1.5);
+      fill(110, 33, 176, 100);
+    } else {
+      stroke(0);
+      strokeWeight(1);
+      fill(#FFC271);
+    }
+    rect(width/2, i*height/4.5, width/3, height/12, 20);
+  }
+  rectMode(CORNER);
+  //text
+  textSize(height/20);
+  //Easy
+  if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/4.5-height/24 && mouseY<=height/4.5+height/24)) {
+    fill(#FFC271);
+  } else fill(0);
+  text("Easy", width/2-width/19, height/4.5+height/48);
+  //Medium
+  if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=2*height/4.5-height/24 && mouseY<=2*height/4.5+height/24)) {
+    fill(#FFC271);
+  } else fill(0);
+  text("Medium", width/2-width/11, 2*height/4.5+height/48);
+  //Difficult
+  if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=3*height/4.5-height/24 && mouseY<=3*height/4.5+height/24)) {
+    fill(#FFC271);
+  } else fill(0);
+  text("Difficult", width/2-width/11, 3*height/4.5+height/48);
+  //Endless
+  if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=4*height/4.5-height/24 && mouseY<=4*height/4.5+height/24)) {
+    fill(#FFC271);
+  } else fill(0);
+  text("Endless", width/2-width/11, 4*height/4.5+height/48);
 }
 
 void mousePressed() {
