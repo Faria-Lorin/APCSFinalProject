@@ -2,8 +2,8 @@ import java.util.*;
 Maze maze;
 Player player;
 ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
-boolean end, livesgone, win, started, dead;
-int time;
+boolean end, livesgone, win, started, dead, levelSet;
+int time, level;
 
 void setup() {
   size(600, 600);
@@ -33,7 +33,7 @@ void draw() {
   //if the game isn't over
   if (end==false) {
     //if the game has already started, then display the maze, enemies, and player
-    if (started) {
+    if (started && levelSet) {
       maze.display();
       player.move();
       player.display();
@@ -64,26 +64,11 @@ void draw() {
       text("LIVES: ", maze.scaleX()/2, height - maze.scaleY()/3);
     }
     //if the game hasn't started yet, display the start page
+    else if (started && !levelSet){
+      displayLevels();
+    }
     else {
-      background(#E5F0FF);
-      //name
-      textSize(height/7);
-      fill(110, 33, 176);
-      textAlign(CENTER);
-      text("Monster", width/2, height/2.75);
-      text("Maze", width/2, height/2);
-      textAlign(LEFT);
-
-      //start button
-      //actual button
-      rectMode(CENTER);
-      fill(#FFC271);
-      rect(width/2, height/1.5, width/3, height/12, 20);
-      rectMode(CORNER);
-      //text
-      textSize(height/20);
-      fill(0);
-      text("Start", width/2-width/17, height/1.5+height/48);
+      displayStart();
     }
   }
   //if the game has ended, display the end screen
@@ -128,6 +113,7 @@ void playAgain() {
   if ((mouseX>=width/2-width/3 && mouseX<=width/2+width/3) && (mouseY>=height/2-height/12 && mouseY<=height/2+height/12)) {
     end=false;
     started=false;
+    levelSet = false;
     enemyList.clear();
     setup();
   }
@@ -135,12 +121,75 @@ void playAgain() {
 
 //when the Start button is pressed, started is set to true, which causes the maze to be drawn
 void startGame() {
-  if ((mouseX>=width/2-width/3 && mouseX<=width/2+width/3) && (mouseY>=height/1.5-height/12 && mouseY<=height/1.5+height/12)) {
+  if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/1.5-height/12 && mouseY<=height/1.5+height/12)) {
     started=true;
+    levelSet = false;
   }
+}
+
+void chooseLevel(){
+  if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/4.5-height/12 && mouseY<=height/4.5+height/12)) {
+    levelSet = true;
+  }
+  else if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>= 2*height/4.5-height/12 && mouseY<=2*height/4.5+height/12)) {
+    levelSet = true;
+  }
+  else if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=3*height/4.5-height/12 && mouseY<=3*height/4.5+height/12)) {
+    levelSet = true;
+  }
+  else if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=4*height/4.5-height/12 && mouseY<=4*height/4.5+height/12)) {
+    levelSet = true;
+  }
+}
+void displayStart(){
+      background(#E5F0FF);
+      //name
+      textSize(height/7);
+      fill(110, 33, 176);
+      textAlign(CENTER);
+      text("Monster", width/2, height/2.75);
+      text("Maze", width/2, height/2);
+      textAlign(LEFT);
+
+      //start button
+      //actual button
+      rectMode(CENTER);
+      fill(#FFC271);
+      rect(width/2, height/1.5, width/3, height/12, 20);
+      rectMode(CORNER);
+      //text
+      textSize(height/20);
+      fill(0);
+      text("Start", width/2-width/17, height/1.5+height/48);
+}
+
+void displayLevels(){
+      background(#CCCCFF);
+      textSize(height/10);
+      fill(110, 33, 176);
+      textAlign(CENTER);
+      text("LEVEL", width/2, height/8);
+      textAlign(LEFT);
+
+      //start button
+      //actual button
+      rectMode(CENTER);
+      fill(#FFC271);
+      for (int i = 1; i <= 4; i++){
+        rect(width/2, i*height/4.5, width/3, height/12, 20);
+      }
+      rectMode(CORNER);
+      //text
+      textSize(height/20);
+      fill(0);
+      text("Easy", width/2-width/19, height/4.5+height/48);
+      text("Medium", width/2-width/11, 2*height/4.5+height/48);
+      text("Difficult", width/2-width/11, 3*height/4.5+height/48);
+      text("Endless", width/2-width/11, 4*height/4.5+height/48);
 }
 
 void mousePressed() {
   if (end) playAgain();
-  startGame();
+  if (!end && started && !levelSet) chooseLevel();
+  if (!end && !started) startGame();
 }
