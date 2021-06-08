@@ -17,7 +17,7 @@ void setup() {
 
   maze = new Maze(m);
 
-  int monsterLim = n/3;
+  int monsterLim = n/2;
   if (monsterLim == 0) monsterLim++;
   for (int i = 0; i < monsterLim; i++) {
     enemyList.add(new Enemy(maze, n));
