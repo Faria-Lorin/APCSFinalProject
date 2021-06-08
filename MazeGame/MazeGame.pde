@@ -2,12 +2,13 @@ import java.util.*;
 Maze maze;
 Player player;
 ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
-boolean end, livesgone, win, started;
+boolean end, livesgone, win, started, dead;
+int time;
 
 void setup() {
   size(600, 600);
   background(255);
-  int n = 10;
+  int n = 11;
   char[][] m=new char[n][n];
   for (int i=0; i<m.length; i++) {
     for (int j=0; j<m[0].length; j++) {
@@ -39,8 +40,15 @@ void draw() {
       for (Enemy e : enemyList) {
         e.move();
         e.display();
-        player.die(e.getR(), e.getC());
-        e.die(player.getShootR(), player.getShootC());
+        if (!dead)
+          dead = player.die(e.getR(), e.getC());
+        if (!dead) {
+          e.die(player.getShootR(), player.getShootC());
+        }
+        if (time < 450 && dead){
+          time ++;
+        }
+        else {dead = false; time = 0;}
       }
       //removes an enemy from the list if it's dead;
       for (int i=0; i<enemyList.size(); i++){
