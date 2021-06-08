@@ -4,6 +4,7 @@ public class Maze {
   int currentR, currentC, startR, startC, steps, endR, endC, max;
   ArrayList<Character> directions = new ArrayList<Character>();
   int startX, startY, endX, endY;
+  int theme=1;
 
   Maze(char[][] m) {
     maze=m;
@@ -128,9 +129,15 @@ public class Maze {
       for (int j=0; j<maze[i].length; j++) {
         textSize((scaleX()+scaleY())/2);
         if (maze[i][j]=='#') {
-          strokeWeight(3);
-          stroke(125, 91, 24);
-          fill(158, 125, 63);
+          if (theme==0){
+            stroke(0);
+            fill(0);
+          }
+          if (theme==1){
+            strokeWeight(3);
+            stroke(125, 91, 24);
+            fill(158, 125, 63);
+          }
           rect(x, y, scaleX(), scaleY());
         } else if (maze[i][j]=='S') {
           stroke(color(#89FF89));
@@ -145,8 +152,14 @@ public class Maze {
           fill(0);
           text('E', x+0.3*scaleX(), y+0.9*scaleY());
         } else if (maze[i][j] == ' ') { 
-          stroke(215, 181, 113);
-          fill(215, 181, 113);
+          if (theme==0){
+            stroke(255);
+            fill(255); 
+          }
+          if (theme==1){
+            stroke(215, 181, 113);
+            fill(215, 181, 113);
+          }
           rect(x, y, scaleX(), scaleY());
         }
         x+=scaleX();
@@ -177,5 +190,12 @@ public class Maze {
 
   float scaleY() {
     return height/maze[0].length;
+  }
+  
+  int getTheme(){
+    return theme;
+  }
+  void setTheme(int n){
+    theme=n;
   }
 }

@@ -166,18 +166,31 @@ void chooseLevel(){
   }
 }
 
+void chooseTheme(){
+  //black and white button
+  if ((mouseX>=width/3-width/4 && mouseX<=width/3+width/4) && (mouseY>=height/1.8-height/16 && mouseY<=height/1.8+height/16)){
+    maze.setTheme(0);
+  }
+  //tomb button
+  else if ((mouseX>=2*width/3-width/4 && mouseX<=2*width/3+width/4) && (mouseY>=height/1.8-height/16 && mouseY<=height/1.8+height/16)){
+    maze.setTheme(1);
+  }
+}
+
 void displayStart(){
       background(#E5F0FF);
       //name
       textSize(height/7);
       fill(110, 33, 176);
       textAlign(CENTER);
-      text("Monster", width/2, height/2.75);
-      text("Maze", width/2, height/2);
+      text("Monster", width/2, height/4);
+      text("Maze", width/2, height/2.5);
       textAlign(LEFT);
 
       //start button
       //actual button
+      stroke(0);
+      strokeWeight(1);
       rectMode(CENTER);
       fill(#FFC271);
       rect(width/2, height/1.5, width/3, height/12, 20);
@@ -186,12 +199,59 @@ void displayStart(){
       textSize(height/20);
       fill(0);
       text("Start", width/2-width/17, height/1.5+height/48);
+      
+      //level selected
+      //Choose Theme text
+      textSize(height/24);
+      fill(0);
+      textAlign(CENTER);
+      text("Choose Theme", width/2, height/2-height/80);
+      textAlign(LEFT);
+      
+      //Black and White Button
+      rectMode(CENTER);
+      //theme=0 means black and white, theme=1 means tomb
+      if (maze.getTheme()==0) {
+        stroke(#05FA03);
+        strokeWeight(1.5);
+      }
+      else {
+        stroke(0);
+        strokeWeight(1);
+      }
+      fill(255);
+      rect(width/3, height/1.8, width/4, height/16, 20);
+      rectMode(CORNER);
+      //text
+      textSize(height/40);
+      fill(0);
+      text("Black and White", width/3-width/10.5, height/1.8+height/76);
+      
+      //Tomb Button
+      rectMode(CENTER);
+      //theme=0 means black and white, theme=1 means tomb
+      if (maze.getTheme()==1) {
+        stroke(#05FA03);
+        strokeWeight(1.5);
+      }
+      else {
+        stroke(125, 91, 2);
+        strokeWeight(1);
+      }
+      fill(215, 181, 113);
+      rect(2*width/3, height/1.8, width/4, height/16, 20);
+      rectMode(CORNER);
+      //text
+      textSize(height/40);
+      fill(0);
+      text("Tomb", 2*width/3-width/27, height/1.8+height/76);
 }
 
 void displayLevels(){
       background(#CCCCFF);
       textSize(height/10);
       fill(110, 33, 176);
+      stroke(0);
       textAlign(CENTER);
       text("LEVEL", width/2, height/8);
       textAlign(LEFT);
@@ -216,5 +276,8 @@ void displayLevels(){
 void mousePressed() {
   if (end) playAgain();
   if (!end && started && !levelSet) chooseLevel();
-  if (!end && !started) startGame();
+  if (!end && !started) {
+    startGame();
+    //chooseTheme();
+  }
 }
