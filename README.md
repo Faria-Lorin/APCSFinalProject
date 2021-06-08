@@ -49,4 +49,8 @@ _Faria_
 
 06/01 - Fixed a bug in the shoot method so that the bullet location is reset to the player location after the bullet hits the wall even if the spacebar is still held.
 
+
+06/04 - Added instructions to the log to explain how to compile the game and play it.
+
+
 06/07 - I changed the colors of the maze and made it so that when the player is in the same spot as the enemy, the player loses a life, but the enemy no longer dies (the player is instead given invincibility for a few seconds to move away from the enemy). I also added levels (easy, medium, difficult, endless) where the size of the maze changes depending on the difficulty.
