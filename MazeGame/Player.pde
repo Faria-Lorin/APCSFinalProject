@@ -1,11 +1,11 @@
 import java.util.*;
 public class Player {
   int playerR, playerC;
-  int shootR, shootC, n, t;
+  int shootR, shootC, n, t, w;
   int lives, size;
   char lastDirection, shootDirection;
   boolean shoot;
-  color c;
+  color c, s;
   Maze maze;
 
   Player(Maze m, int n) {
@@ -15,14 +15,16 @@ public class Player {
     size = n;
     lives = 3;
     c = color(random(255), random(255), random(255));
-    while (c == color(0) || c == color(255) || c == color(110, 33, 176)) {
+    while (c == color(0) || c == color(255) || c == color(110, 33, 176) || c == color(254, 254, 0) || c == color(158, 125, 63)  || c == color(215, 181, 113)){
       c = color(random(255), random(255), random(255));
     }
+    s = c;
+    w = 1;
   }
 
   void display() {
-    stroke(0);
-    strokeWeight(1);
+    stroke(s);
+    strokeWeight(w);
     fill(c);
     float Xcor = maze.scaleX() * playerC + maze.scaleX()/6;
     float Ycor = maze.scaleY() * playerR + maze.scaleY()/4.75;
@@ -35,7 +37,6 @@ public class Player {
         shoot();
         //bulllet display
         stroke(c);
-        fill(c);
         ellipse(maze.scaleX() * shootC + maze.scaleX()/2, maze.scaleY() * shootR + maze.scaleY()/2, maze.scaleX()/6, maze.scaleY()/6);
       } else {
         shootR = playerR;
@@ -101,7 +102,7 @@ public class Player {
   void shoot() {
 
     //moving bullet --> t = making movement display slower;
-    if (t == 5) {
+    if (t == 4) {
       if (shootDirection == 'n') {
         if (maze.getChar(shootR - 1, shootC) != '#')
           shootR--;
@@ -127,8 +128,12 @@ public class Player {
     } else t++;
   }
 
-  void die(int r, int c) {
-    if (r==playerR && c==playerC) lives--;
+  boolean die(int r, int c) {
+    if (r==playerR && c==playerC) {
+      lives--; 
+      return true;
+    }
+    else return false;
   }
 
   //get methods
@@ -150,5 +155,9 @@ public class Player {
 
   int getLives() {
     return lives;
+  }
+  void setStroke(int a, int b){
+    s = a;
+    w = b;
   }
 }
