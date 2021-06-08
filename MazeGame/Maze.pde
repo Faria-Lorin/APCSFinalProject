@@ -128,8 +128,9 @@ public class Maze {
       for (int j=0; j<maze[i].length; j++) {
         textSize((scaleX()+scaleY())/2);
         if (maze[i][j]=='#') {
-          stroke(0);
-          fill(0);
+          strokeWeight(3);
+          stroke(125, 91, 24);
+          fill(158, 125, 63);
           rect(x, y, scaleX(), scaleY());
         } else if (maze[i][j]=='S') {
           stroke(color(#89FF89));
@@ -144,8 +145,8 @@ public class Maze {
           fill(0);
           text('E', x+0.3*scaleX(), y+0.9*scaleY());
         } else if (maze[i][j] == ' ') { 
-          stroke(255);
-          fill(255); 
+          stroke(215, 181, 113);
+          fill(215, 181, 113);
           rect(x, y, scaleX(), scaleY());
         }
         x+=scaleX();
