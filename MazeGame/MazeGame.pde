@@ -3,15 +3,16 @@ Maze maze;
 Player player;
 ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
 boolean end, livesgone, win, started, dead, levelSet;
-int time, level, size, theme;
+int time, level, size, theme, points, passedLevels;
 
 void setup() {
   size(600, 600);
   background(255);
   //displayStart();
-    if (!levelSet) {
+  if (!levelSet) {
     size = 10; 
     theme = 0;
+    points = 100000;
   }
   char[][] m=new char[size][size];
   for (int i=0; i<m.length; i++) {
@@ -29,10 +30,14 @@ void setup() {
   } 
 
   player = new Player(maze, size);
-  if (level == 4) maze.display();
+  if (level == 4) {
+    maze.display();
+    passedLevels++;
+  }
 }
 
 void draw() {
+  points -= 1;
   //check to see if the game has ended
   end();
   //if the game isn't over
@@ -59,6 +64,7 @@ void draw() {
       //removes an enemy from the list if it's dead;
       for (int i=0; i<enemyList.size(); i++){
         if (enemyList.get(i).isDead()) {
+          points += 200;
           enemyList.remove(i);
           i--;
         }
@@ -67,6 +73,10 @@ void draw() {
       textSize(maze.scaleY()/2);
       fill(255);
       text("LIVES: ", maze.scaleX()/2, size * maze.scaleY() - maze.scaleY()/4 );
+      if (level == 4){
+        text("POINTS: " + points, maze.scaleX()/2, maze.scaleY() - maze.scaleY()/4 );
+        text("LEVEL: " + passedLevels, size* maze.scaleX()/1.2 - maze.scaleX(),size* maze.scaleY() - maze.scaleY()/4 );
+      }
     }
     //if the game hasn't started yet, display the start page
     else if (started && !levelSet){
