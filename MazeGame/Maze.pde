@@ -6,8 +6,9 @@ public class Maze {
   int startX, startY, endX, endY;
   int theme=1;
 
-  Maze(char[][] m) {
+  Maze(char[][] m, int n) {
     maze=m;
+    theme = n;
     int startrow=(int)(Math.random()*(maze.length-2))+1;
     int startcol=(int)(Math.random()*(maze[0].length-2))+1;
     startR = startrow;
