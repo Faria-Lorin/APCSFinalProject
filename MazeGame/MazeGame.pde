@@ -82,21 +82,35 @@ void draw() {
       background(#E5FFFD);
       //if game ended because player ran out of lives
       if (livesgone) {
+        fill(0);
         text("No More Lives--Game Over", width/5, height/3);
       } 
       //if game ended because player completed the maze
       else if (win) {
+        fill(0);
         text("You Win! Great Job!", width/3.5, height/3);
       }
       //play again button
       //actual button
       rectMode(CENTER);
-      fill(#FFC271);
+      if ((mouseX>=width/2-width/3 && mouseX<=width/2+width/3) && (mouseY>=height/2-height/12 && mouseY<=height/2+height/12)){
+        stroke(0);
+        strokeWeight(1.5);
+        fill(110, 33, 176, 100);
+      }
+      else{
+        stroke(0);
+        strokeWeight(1);
+        fill(#FFC271);
+      }
       rect(width/2, height/2, width/3, height/12, 20);
       rectMode(CORNER);
       //text
       textSize(height/20);
-      fill(0);
+      if ((mouseX>=width/2-width/3 && mouseX<=width/2+width/3) && (mouseY>=height/2-height/12 && mouseY<=height/2+height/12)){
+        fill(#FFC271);
+      }
+      else fill(0);
       text("Play Again", width/2-width/8.5, height/2+height/48);
     }
     else if (!livesgone && level == 4){
@@ -194,7 +208,7 @@ void displayStart(){
 
       //start button
       //actual button
-      if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/1.5-height/12 && mouseY<=height/1.5+height/12)){
+      if ( (mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/1.5-height/12 && mouseY<=height/1.5+height/12)){
         stroke(0);
         strokeWeight(1.5);
         fill(110, 33, 176, 100);
@@ -210,7 +224,7 @@ void displayStart(){
       rectMode(CORNER);
       //text
       textSize(height/20);
-      if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/1.5-height/12 && mouseY<=height/1.5+height/12)){
+      if ( (mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/1.5-height/12 && mouseY<=height/1.5+height/12)){
         fill(#FFC271);
       }
       else fill(0);
