@@ -4,7 +4,7 @@ public class Maze {
   int currentR, currentC, startR, startC, steps, endR, endC, max;
   ArrayList<Character> directions = new ArrayList<Character>();
   int startX, startY, endX, endY;
-  int theme=1;
+  int theme;
 
   Maze(char[][] m, int n) {
     maze=m;

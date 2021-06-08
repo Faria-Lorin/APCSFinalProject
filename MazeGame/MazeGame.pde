@@ -194,15 +194,26 @@ void displayStart(){
 
       //start button
       //actual button
-      stroke(0);
-      strokeWeight(1);
+      if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/1.5-height/12 && mouseY<=height/1.5+height/12)){
+        stroke(0);
+        strokeWeight(1.5);
+        fill(110, 33, 176, 100);
+      }
+      else{
+        stroke(0);
+        strokeWeight(1);
+        fill(#FFC271);
+      }
+      
       rectMode(CENTER);
-      fill(#FFC271);
       rect(width/2, height/1.5, width/3, height/12, 20);
       rectMode(CORNER);
       //text
       textSize(height/20);
-      fill(0);
+      if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/1.5-height/12 && mouseY<=height/1.5+height/12)){
+        fill(#FFC271);
+      }
+      else fill(0);
       text("Start", width/2-width/17, height/1.5+height/48);
       
       //level selected
@@ -284,6 +295,5 @@ void mousePressed() {
   if (!end && !started) {
     startGame();
     chooseTheme();
-    println(maze.getTheme());
   }
 }
