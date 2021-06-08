@@ -224,7 +224,7 @@ void displayStart(){
       rectMode(CORNER);
       //text
       textSize(height/20);
-      if ( (mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/1.5-height/12 && mouseY<=height/1.5+height/12)){
+      if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/1.5-height/12 && mouseY<=height/1.5+height/12)){
         fill(#FFC271);
       }
       else fill(0);
@@ -289,17 +289,45 @@ void displayLevels(){
       //start button
       //actual button
       rectMode(CENTER);
-      fill(#FFC271);
       for (int i = 1; i <= 4; i++){
+        if ((mouseX>=width/2-width/3 && mouseX<=width/2+width/3) && (mouseY>=i*height/4.5-height/12 && mouseY<=i*height/4.5+height/12)){
+          stroke(0);
+          strokeWeight(1.5);
+          fill(110, 33, 176, 100);
+        }
+        else{
+          stroke(0);
+          strokeWeight(1);
+          fill(#FFC271);
+        }
         rect(width/2, i*height/4.5, width/3, height/12, 20);
       }
       rectMode(CORNER);
       //text
       textSize(height/20);
-      fill(0);
+      //Easy
+      if ((mouseX>=width/2-width/3 && mouseX<=width/2+width/3) && (mouseY>=height/4.5-height/12 && mouseY<=height/4.5+height/12)){
+        fill(#FFC271);
+      }
+      else fill(0);
       text("Easy", width/2-width/19, height/4.5+height/48);
+      //Medium
+      if ((mouseX>=width/2-width/3 && mouseX<=width/2+width/3) && (mouseY>=2*height/4.5-height/12 && mouseY<=2*height/4.5+height/12)){
+        fill(#FFC271);
+      }
+      else fill(0);
       text("Medium", width/2-width/11, 2*height/4.5+height/48);
+      //Difficult
+      if ((mouseX>=width/2-width/3 && mouseX<=width/2+width/3) && (mouseY>=3*height/4.5-height/12 && mouseY<=3*height/4.5+height/12)){
+        fill(#FFC271);
+      }
+      else fill(0);
       text("Difficult", width/2-width/11, 3*height/4.5+height/48);
+      //Endless
+      if ((mouseX>=width/2-width/3 && mouseX<=width/2+width/3) && (mouseY>=4*height/4.5-height/12 && mouseY<=4*height/4.5+height/12)){
+        fill(#FFC271);
+      }
+      else fill(0);
       text("Endless", width/2-width/11, 4*height/4.5+height/48);
 }
 
