@@ -93,7 +93,7 @@ void draw() {
       //play again button
       //actual button
       rectMode(CENTER);
-      if ((mouseX>=width/2-width/3 && mouseX<=width/2+width/3) && (mouseY>=height/2-height/12 && mouseY<=height/2+height/12)){
+      if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/2-height/24 && mouseY<=height/2+height/24)){
         stroke(0);
         strokeWeight(1.5);
         fill(110, 33, 176, 100);
@@ -107,7 +107,7 @@ void draw() {
       rectMode(CORNER);
       //text
       textSize(height/20);
-      if ((mouseX>=width/2-width/3 && mouseX<=width/2+width/3) && (mouseY>=height/2-height/12 && mouseY<=height/2+height/12)){
+      if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/2-height/24 && mouseY<=height/2+height/24)){
         fill(#FFC271);
       }
       else fill(0);
@@ -140,7 +140,7 @@ void end() {
 
 //when the Play Again button is pressed, we reset everything
 void playAgain() {
-  if ((mouseX>=width/2-width/3 && mouseX<=width/2+width/3) && (mouseY>=height/2-height/12 && mouseY<=height/2+height/12)) {
+  if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/2-height/24 && mouseY<=height/2+height/24)) {
     end=false;
     started=false;
     enemyList.clear();
@@ -150,29 +150,29 @@ void playAgain() {
 
 //when the Start button is pressed, started is set to true, which causes the maze to be drawn
 void startGame() {
-  if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/1.5-height/12 && mouseY<=height/1.5+height/12)) {
+  if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/1.5-height/24 && mouseY<=height/1.5+height/24)) {
     started=true;
     levelSet = false;
   }
 }
 
 void chooseLevel(){
-  if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/4.5-height/12 && mouseY<=height/4.5+height/12)) {
+  if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/4.5-height/24 && mouseY<=height/4.5+height/24)) {
     levelSet = true;
     level = 1;
     size = (int)random(3) + 10;
   }
-  else if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>= 2*height/4.5-height/12 && mouseY<=2*height/4.5+height/12)) {
+  else if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>= 2*height/4.5-height/24 && mouseY<=2*height/4.5+height/24)) {
     levelSet = true;
     level = 2;
     size = (int)random(3) + 15;
   }
-  else if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=3*height/4.5-height/12 && mouseY<=3*height/4.5+height/12)) {
+  else if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=3*height/4.5-height/24 && mouseY<=3*height/4.5+height/24)) {
     levelSet = true;
     level = 3;
     size = (int)random(3) + 25;
   }
-  else if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=4*height/4.5-height/12 && mouseY<=4*height/4.5+height/12)) {
+  else if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=4*height/4.5-height/24 && mouseY<=4*height/4.5+height/24)) {
     levelSet = true;
     level = 4;
     size = 10;
@@ -208,7 +208,7 @@ void displayStart(){
 
       //start button
       //actual button
-      if ( (mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/1.5-height/12 && mouseY<=height/1.5+height/12)){
+      if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/1.5-height/24 && mouseY<=height/1.5+height/24)){
         stroke(0);
         strokeWeight(1.5);
         fill(110, 33, 176, 100);
@@ -224,7 +224,7 @@ void displayStart(){
       rectMode(CORNER);
       //text
       textSize(height/20);
-      if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/1.5-height/12 && mouseY<=height/1.5+height/12)){
+      if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/1.5-height/24 && mouseY<=height/1.5+height/24)){
         fill(#FFC271);
       }
       else fill(0);
@@ -286,11 +286,11 @@ void displayLevels(){
       text("LEVEL", width/2, height/8);
       textAlign(LEFT);
 
-      //start button
+      //level buttons
       //actual button
       rectMode(CENTER);
       for (int i = 1; i <= 4; i++){
-        if ((mouseX>=width/2-width/3 && mouseX<=width/2+width/3) && (mouseY>=i*height/4.5-height/12 && mouseY<=i*height/4.5+height/12)){
+        if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=i*height/4.5-height/24 && mouseY<=i*height/4.5+height/24)){
           stroke(0);
           strokeWeight(1.5);
           fill(110, 33, 176, 100);
@@ -306,25 +306,25 @@ void displayLevels(){
       //text
       textSize(height/20);
       //Easy
-      if ((mouseX>=width/2-width/3 && mouseX<=width/2+width/3) && (mouseY>=height/4.5-height/12 && mouseY<=height/4.5+height/12)){
+      if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/4.5-height/24 && mouseY<=height/4.5+height/24)){
         fill(#FFC271);
       }
       else fill(0);
       text("Easy", width/2-width/19, height/4.5+height/48);
       //Medium
-      if ((mouseX>=width/2-width/3 && mouseX<=width/2+width/3) && (mouseY>=2*height/4.5-height/12 && mouseY<=2*height/4.5+height/12)){
+      if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=2*height/4.5-height/24 && mouseY<=2*height/4.5+height/24)){
         fill(#FFC271);
       }
       else fill(0);
       text("Medium", width/2-width/11, 2*height/4.5+height/48);
       //Difficult
-      if ((mouseX>=width/2-width/3 && mouseX<=width/2+width/3) && (mouseY>=3*height/4.5-height/12 && mouseY<=3*height/4.5+height/12)){
+      if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=3*height/4.5-height/24 && mouseY<=3*height/4.5+height/24)){
         fill(#FFC271);
       }
       else fill(0);
       text("Difficult", width/2-width/11, 3*height/4.5+height/48);
       //Endless
-      if ((mouseX>=width/2-width/3 && mouseX<=width/2+width/3) && (mouseY>=4*height/4.5-height/12 && mouseY<=4*height/4.5+height/12)){
+      if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=4*height/4.5-height/24 && mouseY<=4*height/4.5+height/24)){
         fill(#FFC271);
       }
       else fill(0);
