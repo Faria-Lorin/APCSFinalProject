@@ -3,13 +3,16 @@ Maze maze;
 Player player;
 ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
 boolean end, livesgone, win, started, dead, levelSet;
-int time, level, size;
+int time, level, size, theme;
 
 void setup() {
   size(600, 600);
   background(255);
   //displayStart();
-  if (!levelSet) size = 10;
+    if (!levelSet) {
+    size = 10; 
+    theme = 0;
+  }
   char[][] m=new char[size][size];
   for (int i=0; i<m.length; i++) {
     for (int j=0; j<m[0].length; j++) {
@@ -17,7 +20,7 @@ void setup() {
     }
   }
 
-  maze = new Maze(m);
+  maze = new Maze(m, theme);
 
   int monsterLim = size/3;
   if (monsterLim == 0) monsterLim++;
@@ -170,10 +173,12 @@ void chooseTheme(){
   //black and white button
   if ((mouseX>=width/3-width/4 && mouseX<=width/3+width/4) && (mouseY>=height/1.8-height/16 && mouseY<=height/1.8+height/16)){
     maze.setTheme(0);
+    theme = 0;
   }
   //tomb button
   else if ((mouseX>=2*width/3-width/4 && mouseX<=2*width/3+width/4) && (mouseY>=height/1.8-height/16 && mouseY<=height/1.8+height/16)){
     maze.setTheme(1);
+    theme = 1;
   }
 }
 
