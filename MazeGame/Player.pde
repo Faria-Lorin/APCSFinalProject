@@ -1,9 +1,9 @@
 import java.util.*;
 public class Player {
   int playerR, playerC;
-  int shootR, shootC, n, t, w;
+  int shootR, shootC, shootDist, shootSpeed, weight;
   int lives, size;
-  char lastDirection, shootDirection;
+  char shootDirection;
   boolean shoot;
   color c, s;
   Maze maze;
@@ -14,26 +14,28 @@ public class Player {
     playerC = maze.getStart(1);
     size = n;
     lives = 3;
+    shootDirection = 'n';
     c = color(random(255), random(255), random(255));
     while (c == color(0) || c == color(255) || c == color(110, 33, 176) || c == color(254, 254, 0) || c == color(158, 125, 63)  || c == color(215, 181, 113)){
       c = color(random(255), random(255), random(255));
     }
     s = c;
-    w = 1;
+    weight = 1;
   }
 
   void display() {
     stroke(s);
-    strokeWeight(w);
+    strokeWeight(weight);
     fill(c);
     float Xcor = maze.scaleX() * playerC + maze.scaleX()/6;
     float Ycor = maze.scaleY() * playerR + maze.scaleY()/4.75;
     rect(Xcor, Ycor, maze.scaleX()/1.5, maze.scaleY()/1.5);
 
     //bullet
+    shootDirect();
     if (keyPressed == true && key == 32) {
       shoot = true;
-      if (n < size && shoot == true) {
+      if (shootDist < size && shoot == true) {
         shoot();
         //bulllet display
         stroke(c);
@@ -43,10 +45,9 @@ public class Player {
         shootC = playerC;
       }
     } else {
-      n = 0;
+      shootDist = 0;
       shootR = playerR;
       shootC = playerC;
-      shootDirection = lastDirection;
     }
 
     //lives display
@@ -77,32 +78,42 @@ public class Player {
     if (keyPressed == true && keyCode == UP) {
       if (maze.getChar(playerR - 1, playerC) != '#')
         playerR--;
-      lastDirection = 'n';
       keyPressed = false;
     }
     if (keyPressed == true && keyCode == DOWN) {
       if (maze.getChar(playerR + 1, playerC) != '#')
         playerR++;
-      lastDirection = 's';
       keyPressed = false;
     }
     if (keyPressed == true && keyCode == LEFT) {
       if (maze.getChar(playerR, playerC - 1) != '#')
         playerC--;
-      lastDirection = 'w';
       keyPressed = false;
     }
     if (keyPressed == true && keyCode == RIGHT) {
       if (maze.getChar(playerR, playerC + 1) != '#')
         playerC++;
-      lastDirection = 'e';
       keyPressed = false;
     }
   }
+  
+  void shootDirect(){
+    if (keyPressed && (key == 'W' || key == 'w')){
+      shootDirection = 'n';
+    }
+    else if (keyPressed && (key == 'S' || key == 's')){
+      shootDirection = 's';
+    }
+    else if (keyPressed && (key == 'A' || key == 'a')){
+      shootDirection = 'w';
+    }
+    else if (keyPressed && (key == 'D' || key == 'd')){
+      shootDirection = 'e';
+    }
+  }
   void shoot() {
-
     //moving bullet --> t = making movement display slower;
-    if (t == 4) {
+    if (shootSpeed == 4) {
       if (shootDirection == 'n') {
         if (maze.getChar(shootR - 1, shootC) != '#')
           shootR--;
@@ -123,9 +134,9 @@ public class Player {
           shootC++;   
         else shoot = false;
       }
-      t = 0;
-      n++;
-    } else t++;
+      shootSpeed = 0;
+      shootDist++;
+    } else shootSpeed++;
   }
 
   boolean die(int r, int c) {
@@ -158,6 +169,6 @@ public class Player {
   }
   void setStroke(int a, int b){
     s = a;
-    w = b;
+    weight = b;
   }
 }
