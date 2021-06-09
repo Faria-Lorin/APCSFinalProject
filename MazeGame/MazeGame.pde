@@ -370,6 +370,7 @@ void mousePressed() {
   if (!end && !started) {
     startGame();
     chooseTheme();
+    level=0;
   }
   if (started && levelSet && !end) exit();
 }
