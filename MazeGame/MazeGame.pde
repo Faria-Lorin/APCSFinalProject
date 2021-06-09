@@ -346,6 +346,14 @@ void displayExit(){
   text("Exit", width-1.75*maze.scaleX()+0.3*maze.scaleX(), maze.scaleY()/6+maze.scaleY()/2.4);
 }
 
+void exit(){
+  if ((mouseX>=width-1.75*maze.scaleX()-0.75*maze.scaleX() && mouseX<=width-1.75*maze.scaleX()+0.75*maze.scaleX())
+        &&
+      (mouseY>=maze.scaleY()/6-maze.scaleY()/4 && mouseY<=maze.scaleY()/6+maze.scaleY()/4)){
+      started=false;
+  }
+}
+
 void mousePressed() {
   if (end) playAgain();
   if (!end && started && !levelSet) chooseLevel();
@@ -353,4 +361,5 @@ void mousePressed() {
     startGame();
     chooseTheme();
   }
+  if (started && levelSet && !end) exit();
 }
