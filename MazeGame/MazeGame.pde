@@ -338,18 +338,27 @@ void displayLevels() {
 }
 
 void displayExit(){
-  fill(255, 0, 0);
-  strokeWeight(0.5);
+  if ((mouseX>=width-1.75*maze.scaleX() && mouseX<=width-1.75*maze.scaleX()+1.5*maze.scaleX()) &&(mouseY>=maze.scaleY()/6 && mouseY<=maze.scaleY()/6+maze.scaleY()/2)){
+      fill(255);
+      strokeWeight(1.5);
+      stroke(255,0,0);
+  }
+  else{
+    fill(255, 0, 0);
+    strokeWeight(0.5);
+    stroke(0);
+  }
   rect(width-1.75*maze.scaleX(), maze.scaleY()/6, 1.5*maze.scaleX(), maze.scaleY()/2, 5);
-  fill(0);
-  textSize(maze.scaleX()/2);
-  text("Exit", width-1.75*maze.scaleX()+0.3*maze.scaleX(), maze.scaleY()/6+maze.scaleY()/2.4);
+  if ((mouseX>=width-1.75*maze.scaleX() && mouseX<=width-1.75*maze.scaleX()+1.5*maze.scaleX()) &&(mouseY>=maze.scaleY()/6 && mouseY<=maze.scaleY()/6+maze.scaleY()/2)){
+      fill(255,0,0);
+  }
+  else fill(0);
+  textSize(maze.scaleX()/2.25);
+  text("Exit", width-1.75*maze.scaleX()+0.35*maze.scaleX(), maze.scaleY()/6+maze.scaleY()/2.4);
 }
 
 void exit(){
-  if ((mouseX>=width-1.75*maze.scaleX() && mouseX<=width-1.75*maze.scaleX()+1.5*maze.scaleX())
-        &&
-      (mouseY>=maze.scaleY()/6 && mouseY<=maze.scaleY()/6+maze.scaleY()/2)){
+  if ((mouseX>=width-1.75*maze.scaleX() && mouseX<=width-1.75*maze.scaleX()+1.5*maze.scaleX()) &&(mouseY>=maze.scaleY()/6 && mouseY<=maze.scaleY()/6+maze.scaleY()/2)){
       started=false;
   }
 }
