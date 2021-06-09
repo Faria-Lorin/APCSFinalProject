@@ -1,6 +1,6 @@
 import java.util.*;
 public class Enemy {
-  int enemyR, enemyC, t;
+  int enemyR, enemyC, enemySpeed;
   boolean created, moved, dead;
   int[] directions = new int[]{0, 1, 2, 3};
   Maze maze;
@@ -39,7 +39,7 @@ public class Enemy {
     }
   }
   void move() {
-    if (t == 20) {
+    if (enemySpeed == 20) {
       while (moved == false) {
         int n = (int)random(4);
         n = directions[n];
@@ -62,8 +62,8 @@ public class Enemy {
         }
         moved = true;
       }
-      t = 0;
-    } else t++;
+      enemySpeed = 0;
+    } else enemySpeed++;
   }
   
   void die(int r, int c){
