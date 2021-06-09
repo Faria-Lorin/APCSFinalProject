@@ -347,9 +347,9 @@ void displayExit(){
 }
 
 void exit(){
-  if ((mouseX>=width-1.75*maze.scaleX()-0.75*maze.scaleX() && mouseX<=width-1.75*maze.scaleX()+0.75*maze.scaleX())
+  if ((mouseX>=width-1.75*maze.scaleX() && mouseX<=width-1.75*maze.scaleX()+1.5*maze.scaleX())
         &&
-      (mouseY>=maze.scaleY()/6-maze.scaleY()/4 && mouseY<=maze.scaleY()/6+maze.scaleY()/4)){
+      (mouseY>=maze.scaleY()/6 && mouseY<=maze.scaleY()/6+maze.scaleY()/2)){
       started=false;
   }
 }
