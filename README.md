@@ -54,3 +54,5 @@ _Faria_
 
 
 06/07 - I changed the colors of the maze and made it so that when the player is in the same spot as the enemy, the player loses a life, but the enemy no longer dies (the player is instead given invincibility for a few seconds to move away from the enemy). I also added levels (easy, medium, difficult, endless) where the size of the maze changes depending on the difficulty.
+
+06/08 - I helped Ella create the option to choose the Maze Theme. I created a point system and level counter for the endless mode and added a displaying of final score to the end screen.
