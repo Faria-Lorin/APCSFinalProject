@@ -4,11 +4,14 @@ public class Maze {
   int currentR, currentC, startR, startC, steps, endR, endC, max;
   ArrayList<Character> directions = new ArrayList<Character>();
   int startX, startY, endX, endY;
-  int theme;
+  int theme, times, threshold;
+  char last;
 
   Maze(char[][] m, int n) {
     maze=m;
     theme = n;
+    times = 0;
+    threshold =  (int)random(2) + 1;
     int startrow=(int)(Math.random()*(maze.length-2))+1;
     int startcol=(int)(Math.random()*(maze[0].length-2))+1;
     startR = startrow;
@@ -16,7 +19,7 @@ public class Maze {
     generate(maze, maze.length, maze[0].length, startrow, startcol);
   }
 
-  boolean openDirection() {
+  boolean carvable() {
     ArrayList<Character> list = new ArrayList<Character>();
     if (maze[currentR][currentC] == '#') {
       if (check(currentR, currentC) <= 1) {
@@ -41,21 +44,33 @@ public class Maze {
     if (list.size() > 0) {
       int random = (int)(Math.random() * list.size());
       char a = list.get(random); 
+      if (directions.size() > 0 && times < threshold){
+        if (list.contains(last)) {
+          a = last;
+          times ++;
+        }
+        
+      }
+      else times = 0;
       if (a == 's') {
         currentR = currentR+1;
         directions.add('s');
+        last = 's';
         return true;
       } else if (a == 'n') {
         currentR = currentR-1;
         directions.add('n');
+        last = 'n';
         return true;
       } else if (a == 'w') {
         currentC = currentC-1;
         directions.add('w');
+        last = 'w';
         return true;
       } else if (a == 'e') {
         currentC = currentC+1;
         directions.add('e');
+        last = 'e';
         return true;
       }
     }
@@ -94,7 +109,7 @@ public class Maze {
   void generate(char[][] maze, int rows, int cols, int startrow, int startcol) {
     currentR = startrow;
     currentC = startcol;
-    if (openDirection()) {
+    if (carvable()) {
       steps++;
       generate(maze, rows, cols, currentR, currentC);
     } else if (back()) {
