@@ -83,6 +83,7 @@ void draw() {
         text("SCORE: " + points, maze.scaleX()/2, maze.scaleY() - maze.scaleY()/4 );
         text("LEVEL: " + passedLevels, size* maze.scaleX()/1.2 - maze.scaleX(), size* maze.scaleY() - maze.scaleY()/4 );
       }
+      displayExit();
     }
     //if the game hasn't started yet, display the start page
     else if (started && !levelSet) {
@@ -334,6 +335,15 @@ void displayLevels() {
     fill(#FFC271);
   } else fill(0);
   text("Endless", width/2-width/11, 4*height/4.5+height/48);
+}
+
+void displayExit(){
+  fill(255, 0, 0);
+  strokeWeight(0.5);
+  rect(width-1.75*maze.scaleX(), maze.scaleY()/6, 1.5*maze.scaleX(), maze.scaleY()/2, 5);
+  fill(0);
+  textSize(maze.scaleX()/2);
+  text("Exit", width-1.75*maze.scaleX()+0.3*maze.scaleX(), maze.scaleY()/6+maze.scaleY()/2.4);
 }
 
 void mousePressed() {
