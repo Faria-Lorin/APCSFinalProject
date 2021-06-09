@@ -29,6 +29,8 @@ _Ella_
 
 06/01 - I created the die method for Player, simplified the die method for Enemy, completely updated the UML diagram and the prototype document to account for all the changes we made and goals we achieved, imported and scaled an image of a heart to represent the lives (make it look better than just the lines), and removed extra variables that we weren't using. I also merged the player branch with main, deleted the ella and player branches, and created the demo branch. Faria and I also discussed what we would say during our presentation.
 
+06/08 - I made a small directory in the start page that would let you choose between the two different themes we have (black and white vs a tomb), and adjusted the display method of Maze to change based on the selected theme (outlined in green on the screen). I also modified all six of the buttons we were using to change color when a player hovers over them with their mouse, and fixed a bug with the buttons that allowed you to click them even when you weren't within them. Finally, I created an exit button for all of the levels, which ends the game and takes you back to the home screen, and also has the same hover feature as all of the other buttons.
+
 
 _Faria_
 
