@@ -12,7 +12,9 @@ Compile/Run instructions:
 
   1. Copy the repo into a directory on your computer
   2. Open the files with Processing and click run
-  3. Click start game to start the game
+  3. Choose a theme you want for the maze (either black and white or tomb)
+  4. Click the start button
+  5. Choose a level/mode of difficulty (endless mode is not really endless, but after you complete one maze you move on to a bigger maze)
   4. Use arrow keys to move the player and navigate through the maze while avoiding or destroying enemies. Hold the spacebar to shoot the enemy and kill them. Try to reach the end of the maze without losing all your lives.
   5. After reaching the end of the maze or losing all your lives, click play again if you want to play again.
 
@@ -54,5 +56,6 @@ _Faria_
 
 
 06/07 - I changed the colors of the maze and made it so that when the player is in the same spot as the enemy, the player loses a life, but the enemy no longer dies (the player is instead given invincibility for a few seconds to move away from the enemy). I also added levels (easy, medium, difficult, endless) where the size of the maze changes depending on the difficulty.
+
 
 06/08 - I helped Ella create the option to choose the Maze Theme. I created a point system and level counter for the endless mode and added a displaying of final score to the end screen.
