@@ -1,13 +1,14 @@
 import java.util.*;
 public class Player {
   int playerR, playerC;
-  int shootR, shootC, shootDist, shootSpeed, weight;
-  int lives, size;
+  int shootR, shootC, shootDist, shootSpeed;
+  int lives, size, weight;
   char shootDirection;
   boolean shoot;
   color c, s;
   Maze maze;
 
+  //constuctor - sets player coordinates to start coordinates of maze, sets instance variable values.
   Player(Maze m, int n) {
     maze = m;
     playerR = maze.getStart(0);
@@ -23,6 +24,7 @@ public class Player {
     weight = 1;
   }
 
+  //display - displays player and bullet in the maze
   void display() {
     stroke(s);
     strokeWeight(weight);
@@ -74,6 +76,7 @@ public class Player {
     arc(Xcor + maze.scaleX()/2.7, Ycor + maze.scaleY()/2.4, maze.scaleX()/4, maze.scaleY()/4, 0, PI/1.1, CHORD);
   }
 
+  // move - player moves using arrow keys
   void move() {
     if (keyPressed == true && keyCode == UP) {
       if (maze.getChar(playerR - 1, playerC) != '#')
@@ -97,6 +100,7 @@ public class Player {
     }
   }
   
+  //shootDirection - changes direction of bullet using WASD keys;
   void shootDirect(){
     if (keyPressed && (key == 'W' || key == 'w')){
       shootDirection = 'n';
@@ -111,6 +115,8 @@ public class Player {
       shootDirection = 'e';
     }
   }
+  
+  //shoot -shoot sbullet depending on shootDirection;
   void shoot() {
     //moving bullet --> t = making movement display slower;
     if (shootSpeed == 4) {
@@ -138,7 +144,8 @@ public class Player {
       shootDist++;
     } else shootSpeed++;
   }
-
+  
+  //die - subtracts a life and returns true if player dies
   boolean die(int r, int c) {
     if (r==playerR && c==playerC) {
       lives--; 
@@ -147,7 +154,7 @@ public class Player {
     else return false;
   }
 
-  //get methods
+  //get/set methods
   int getR() {
     return playerR;
   }
@@ -167,6 +174,7 @@ public class Player {
   int getLives() {
     return lives;
   }
+  
   void setStroke(int a, int b){
     s = a;
     weight = b;
