@@ -11,8 +11,6 @@ void setup() {
   background(255);
   //displayStart();
   if (!levelSet) {
-    currentLevel = 64;
-    ;
     size = 10; 
     theme = 0;
     endlesspoints = 200000;
@@ -44,7 +42,7 @@ void setup() {
     maze.display();
     currentLevel++;
     if (currentLevel!=1)endlesspoints+=1000;
-    if (currentLevel > 59) {
+    if (currentLevel > 49) {
       end = true;
       lastLevel = true;
     }
