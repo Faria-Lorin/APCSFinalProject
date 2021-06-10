@@ -27,16 +27,16 @@ public class Maze {
       } else return false;
     }
     if (maze[currentR][currentC] == ' ') {
-      if (currentR+1 < maze.length-1 && maze[currentR+1][currentC] == '#' && check(currentR+1, currentC) <= 1) {//checks if south is open
+      if (currentR+1 < maze.length-1 && maze[currentR+1][currentC] == '#' && check(currentR+1, currentC)) {//checks if south is open
         list.add('s');
       }
-      if (currentR-1 > 0 && maze[currentR-1][currentC] == '#' && check(currentR-1, currentC) <= 1) {//checks if north is open
+      if (currentR-1 > 0 && maze[currentR-1][currentC] == '#' && check(currentR-1, currentC)) {//checks if north is open
         list.add('n');
       }
-      if (currentC-1 > 0 && maze[currentR][currentC-1] == '#' && check(currentR, currentC-1) <= 1) {//checks if west is open
+      if (currentC-1 > 0 && maze[currentR][currentC-1] == '#' && check(currentR, currentC-1)) {//checks if west is open
         list.add('w');
       }
-      if (currentC+1 < maze[0].length-1 && maze[currentR][currentC+1] == '#' && check(currentR, currentC+1) <= 1) {//checks if east is open
+      if (currentC+1 < maze[0].length-1 && maze[currentR][currentC+1] == '#' && check(currentR, currentC+1)) {//checks if east is open
         list.add('e');
       }
     }
@@ -77,6 +77,7 @@ public class Maze {
     return false;
   }
 
+  // back - backtracks if maze is no longer carvable from the current coordinates
   boolean back() {
     if (directions.size() > 0 ) {
       char last = directions.remove(directions.size()-1);
@@ -96,16 +97,18 @@ public class Maze {
     }
     return false;
   }
-
-  int check(int r, int c) {
+  
+  // check - checks that there is less than 2 spaces near a wall/block so that no loops can be created
+  boolean check(int r, int c) {
     int count = 0;
     if (r+1 < maze.length-1 && maze[r+1][c] == ' ') count++;
     if (r-1 > 0 && maze[r-1][c] == ' ') count++;
     if (c-1 > 0 && maze[r][c-1] == ' ') count++;
     if (c+1 < maze[0].length-1 && maze[r][c+1] == ' ') count++;
-    return count;
+    return count <= 1;
   }
 
+  //generate - uses helper methods to generate maze
   void generate(char[][] maze, int rows, int cols, int startrow, int startcol) {
     currentR = startrow;
     currentC = startcol;
@@ -138,6 +141,7 @@ public class Maze {
     return ans;
   }
 
+  //display - scales blocks/maze to fit the screen and display walls, open spaces, start, and end.
   void display() {
     int y=0;
     for (int i=0; i<maze.length; i++) {
@@ -184,6 +188,7 @@ public class Maze {
     }
   }
 
+  //get/set methods
   int getStart(int xy) {
     if (xy == 0) return startR;
     if (xy == 1) return startC;
