@@ -22,7 +22,7 @@ public class Maze {
   boolean carvable() {
     ArrayList<Character> list = new ArrayList<Character>();
     if (maze[currentR][currentC] == '#') {
-      if (check(currentR, currentC) <= 1) {
+      if (check(currentR, currentC)) {
         maze[currentR][currentC] = ' ';
       } else return false;
     }
@@ -44,14 +44,12 @@ public class Maze {
     if (list.size() > 0) {
       int random = (int)(Math.random() * list.size());
       char a = list.get(random); 
-      if (directions.size() > 0 && times < threshold){
+      if (directions.size() > 0 && times < threshold) {
         if (list.contains(last)) {
           a = last;
           times ++;
         }
-        
-      }
-      else times = 0;
+      } else times = 0;
       if (a == 's') {
         currentR = currentR+1;
         directions.add('s');
@@ -97,7 +95,7 @@ public class Maze {
     }
     return false;
   }
-  
+
   // check - checks that there is less than 2 spaces near a wall/block so that no loops can be created
   boolean check(int r, int c) {
     int count = 0;
@@ -149,11 +147,11 @@ public class Maze {
       for (int j=0; j<maze[i].length; j++) {
         textSize((scaleX()+scaleY())/2);
         if (maze[i][j]=='#') {
-          if (theme==0){
+          if (theme==0) {
             stroke(0);
             fill(0);
           }
-          if (theme==1){
+          if (theme==1) {
             strokeWeight(3);
             stroke(125, 91, 24);
             fill(158, 125, 63);
@@ -172,11 +170,11 @@ public class Maze {
           fill(0);
           text('E', x+0.3*scaleX(), y+0.9*scaleY());
         } else if (maze[i][j] == ' ') { 
-          if (theme==0){
+          if (theme==0) {
             stroke(255);
-            fill(255); 
+            fill(255);
           }
-          if (theme==1){
+          if (theme==1) {
             stroke(215, 181, 113);
             fill(215, 181, 113);
           }
@@ -212,11 +210,11 @@ public class Maze {
   float scaleY() {
     return height/maze[0].length;
   }
-  
-  int getTheme(){
+
+  int getTheme() {
     return theme;
   }
-  void setTheme(int n){
+  void setTheme(int n) {
     theme=n;
   }
 }
