@@ -121,6 +121,7 @@ void playAgain() {
   if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/2-height/24 && mouseY<=height/2+height/24)) {
     end=false;
     started=false;
+    level=0;
     enemyList.clear();
     setup();
   }
@@ -191,7 +192,7 @@ void displayEnd() {
         highscore=points;
       }
       else{
-        text("High Score: "+highscore,width/2-width/6, 2.3*height/3);
+        text("High Score: "+highscore,width/2-width/4, 2.3*height/3);
       }
     }
     //play again button
@@ -438,7 +439,7 @@ void mousePressed() {
   if (!end && !started) {
     startGame();
     chooseTheme();
-    level=0;
+    currentLevel=0;
   }
   if (started && levelSet && !end) exit();
   if (pause) promptAnswer();
