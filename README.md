@@ -24,10 +24,10 @@ Compile/Run instructions:
   3. Solve the maze by controlling the player:
 
       -Use arrow keys to move the player and navigate through the maze while avoiding or destroying enemies (players cannot move through the walls of the maze)
-      -Use the WASD keys to set the direction of the bullet the player shoots. Hold the spacebar to shoot the enemy and kill them.
+      -Use the WASD keys shoot the bullet in different directions towards the enemies to kill them.
       -Avoid colliding with the enemy because you will lose a life
       -Try to reach the end of the maze without losing all your lives.
-      -If in endless mode -- Try to solve the mazes as quickly as possible to earn the highest score
+      -If in endless mode -- Try to solve the mazes as quickly as possible to earn the highest score or get to the highest level.
 
   4. Pausing Game + End of Game:
 
