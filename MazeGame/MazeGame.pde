@@ -249,6 +249,7 @@ void displayEnd() {
       textAlign(CENTER);
       text("Score: " + medpoints, width/2, 2*height/3);
       if (medpoints>medhigh) {
+        fill(#B266FF);
         text("New High Score!", width, 2.25*height/3);
       } else {
         fill(0);
@@ -260,6 +261,7 @@ void displayEnd() {
       textAlign(CENTER);
       text("Score: " + diffpoints, width/2, 2*height/3);
       if (diffpoints>diffhigh) {
+        fill(#B266FF);
         text("New High Score!", width/2, 2.25*height/3);
       } else {
         fill(0);
@@ -272,6 +274,7 @@ void displayEnd() {
       text("SCORE: " + endlesspoints, width/2, 2*height/3);
 
       if (endlesspoints>endlesshigh) {
+        fill(#B266FF);
         text("New High Score!", width/2, 2.25*height/3);
       } else {
         fill(0);
