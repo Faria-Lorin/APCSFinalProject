@@ -3,7 +3,8 @@ Maze maze;
 Player player;
 ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
 boolean end, livesgone, win, started, dead, levelSet, pause;
-int time, level, size, theme, points, currentLevel, highscore;
+int time, level, size, theme, currentLevel;
+int endlesspoints, endlesshigh,easypoints, easyhigh, medpoints, medhigh, diffpoints, diffhigh;
 
 void setup() {
   size(600, 600);
@@ -12,8 +13,14 @@ void setup() {
   if (!levelSet) {
     size = 10; 
     theme = 0;
-    points = 200000;
-    highscore=0;
+    endlesspoints = 200000;
+    easypoints=200000;
+    medpoints=200000;
+    diffpoints=200000;
+    endlesshigh=0;
+    easyhigh=0;
+    medhigh=0;
+    diffhigh=0;
   }
   char[][] m=new char[size][size];
   for (int i=0; i<m.length; i++) {
@@ -34,7 +41,7 @@ void setup() {
   if (level == 4) {
     maze.display();
     currentLevel++;
-    if (currentLevel!=1)points+=1000;
+    if (currentLevel!=1)endlesspoints+=1000;
   }
 }
 
@@ -43,7 +50,10 @@ void draw() {
     //check to see if the game has ended
     if (!end) {
       end();
-      points -= 1;
+      if (level==1) easypoints--;
+      else if (level==2) medpoints--;
+      else if (level==3) diffpoints--;
+      else if (level==4) endlesspoints--;
     }
     //if the game isn't over
     if (end==false) {
@@ -72,7 +82,10 @@ void draw() {
         //removes an enemy from the list if it's dead;
         for (int i=0; i<enemyList.size(); i++) {
           if (enemyList.get(i).isDead()) {
-            points += 300;
+            if (level==1) easypoints+=300;
+            else if (level==2) medpoints+=300;
+            else if (level==3) diffpoints+=300;
+            else if (level==4) endlesspoints += 300;
             enemyList.remove(i);
             i--;
           }
@@ -81,8 +94,17 @@ void draw() {
         textSize(maze.scaleY()/2);
         fill(255);
         text("LIVES: ", maze.scaleX()/2, size * maze.scaleY() - maze.scaleY()/4 );
-        if (level == 4) {
-          text("SCORE: " + points, maze.scaleX()/2, maze.scaleY() - maze.scaleY()/4 );
+        if (level == 1) {
+          text("SCORE: " + easypoints, maze.scaleX()/2, maze.scaleY() - maze.scaleY()/4 );
+        }
+        else if (level == 2) {
+          text("SCORE: " + medpoints, maze.scaleX()/2, maze.scaleY() - maze.scaleY()/4 );
+        }
+        else if (level == 3) {
+          text("SCORE: " + diffpoints, maze.scaleX()/2, maze.scaleY() - maze.scaleY()/4 );
+        }
+        else if (level == 4) {
+          text("SCORE: " + endlesspoints, maze.scaleX()/2, maze.scaleY() - maze.scaleY()/4 );
           text("LEVEL: " + currentLevel, size* maze.scaleX()/1.2 - maze.scaleX(), size* maze.scaleY() - maze.scaleY()/4 );
         }
         displayExit();
@@ -134,7 +156,10 @@ void startGame() {
     started=true;
     levelSet = false;
     currentLevel=0;
-    points=200000;
+    endlesspoints = 200000;
+    easypoints=200000;
+    medpoints=200000;
+    diffpoints=200000;
   }
 }
 
@@ -188,15 +213,51 @@ void displayEnd() {
       fill(0);
       text("You Win! Great Job!", width/3.5, height/3);
     }
-    if (level == 4) {
+    if (level == 1) {
       textAlign(CENTER);
-      text("SCORE: " + points, width/2, 2*height/3);
-      if (points>highscore) {
+      text("SCORE: " + easypoints, width/2, 2*height/3);
+      if (easypoints>easyhigh) {
         text("New High Score!", width/2, 2.25*height/3);
-        highscore=points;
+        easyhigh=easypoints;
       }
       else{
-        text("High Score: "+highscore,width/2, 2.15*height/3);
+        text("High Score: "+easyhigh,width/2, 2.15*height/3);
+      }
+      textAlign(LEFT);
+    }
+    if (level == 2) {
+      textAlign(CENTER);
+      text("SCORE: " + medpoints, width/2, 2*height/3);
+      if (medpoints>medhigh) {
+        text("New High Score!", width/2, 2.25*height/3);
+        medhigh=medpoints;
+      }
+      else{
+        text("High Score: "+medhigh,width/2, 2.15*height/3);
+      }
+      textAlign(LEFT);
+    }
+    if (level == 3) {
+      textAlign(CENTER);
+      text("SCORE: " + diffpoints, width/2, 2*height/3);
+      if (diffpoints>diffhigh) {
+        text("New High Score!", width/2, 2.25*height/3);
+        diffhigh=diffpoints;
+      }
+      else{
+        text("High Score: "+diffhigh,width/2, 2.15*height/3);
+      }
+      textAlign(LEFT);
+    }
+    if (level == 4) {
+      textAlign(CENTER);
+      text("SCORE: " + endlesspoints, width/2, 2*height/3);
+      if (endlesspoints>endlesshigh) {
+        text("New High Score!", width/2, 2.25*height/3);
+        endlesshigh=endlesspoints;
+      }
+      else{
+        text("High Score: "+endlesshigh,width/2, 2.15*height/3);
       }
       textAlign(LEFT);
     }
@@ -339,25 +400,50 @@ void displayLevels() {
     fill(#FFC271);
   } else fill(0);
   text("Easy", width/2-width/19, height/4.5+height/48);
+  //Easy High Score
+  textAlign(CENTER);
+  textSize(height/40);
+  fill(0);
+  text("High Score: " +easyhigh, width/2, height/4.5+height/12);
+  textAlign(LEFT);
+  
+  textSize(height/20);
   //Medium
   if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=2*height/4.5-height/24 && mouseY<=2*height/4.5+height/24)) {
     fill(#FFC271);
   } else fill(0);
   text("Medium", width/2-width/11, 2*height/4.5+height/48);
+  //Medium High Score
+  textAlign(CENTER);
+  textSize(height/40);
+  fill(0);
+  text("High Score: " +medhigh, width/2, 2*height/4.5+height/12);
+  textAlign(LEFT);
+  
+  textSize(height/20);
   //Difficult
   if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=3*height/4.5-height/24 && mouseY<=3*height/4.5+height/24)) {
     fill(#FFC271);
   } else fill(0);
   text("Difficult", width/2-width/11, 3*height/4.5+height/48);
+  //Endless High Score
+  textAlign(CENTER);
+  textSize(height/40);
+  fill(0);
+  text("High Score: " +diffhigh, width/2, 3*height/4.5+height/12);
+  textAlign(LEFT);
+  
+  textSize(height/20);
   //Endless
   if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=4*height/4.5-height/24 && mouseY<=4*height/4.5+height/24)) {
     fill(#FFC271);
   } else fill(0);
   text("Endless", width/2-width/11, 4*height/4.5+height/48);
+  //Endless High Score
   textAlign(CENTER);
   textSize(height/40);
   fill(0);
-  text("High Score: " +highscore, width/2, 4*height/4.5+height/12);
+  text("High Score: " +endlesshigh, width/2, 4*height/4.5+height/12);
   textAlign(LEFT);
 }
 
