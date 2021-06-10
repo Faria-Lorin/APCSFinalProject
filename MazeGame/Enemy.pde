@@ -4,11 +4,13 @@ public class Enemy {
   boolean created, moved, dead;
   int[] directions = new int[]{0, 1, 2, 3};
   Maze maze;
-  Enemy(Maze m, int n) {
+  
+  //constructor - creates enemy at random coordinates in maze after checking if coordinates are valid (isn't a wall)
+  Enemy(Maze m, int size) {
     maze = m;
     while (created == false) {
-      int R = (int)random(n-2) + 1;
-      int C = (int)random(n-2) + 1;
+      int R = (int)random(size-2) + 1;
+      int C = (int)random(size-2) + 1;
       if (maze.getChar(R, C) == ' '  && Math.abs(R - maze.getStart(0)) > 2 && Math.abs(C - maze.getStart(1)) > 2 ) {
         enemyR = R;
         enemyC = C;
@@ -17,6 +19,7 @@ public class Enemy {
     }
   }
   
+  //display - displays enemy if it's alive;
   void display() {
     if (!dead){
       stroke(128, 0, 255);
@@ -38,6 +41,8 @@ public class Enemy {
       if (moved == true) moved = false;
     }
   }
+  
+  //move - enemy moves in random directions through the maze;
   void move() {
     if (enemySpeed == 20) {
       while (moved == false) {
@@ -66,6 +71,7 @@ public class Enemy {
     } else enemySpeed++;
   }
   
+  //die - sets boolean dead to true if enemy is killed.
   void die(int r, int c){
     if (!dead){
       if ( c == enemyC && r == enemyR){
@@ -75,6 +81,10 @@ public class Enemy {
     }
   }
   
+  boolean isDead(){
+    return dead;
+  }
+  
   //get methods
   int getR() {
     return enemyR;
@@ -82,9 +92,5 @@ public class Enemy {
 
   int getC() {
     return enemyC;
-  }
-  
-  boolean isDead(){
-    return dead;
   }
 }
