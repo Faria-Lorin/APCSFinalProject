@@ -386,12 +386,12 @@ void displayPrompt() {
   //displays YES button
   if ((mouseX>=width/7 && mouseX<=width/7 + width/3) && (mouseY>=height/2.3 && mouseY<=height/2.3 + height/12)) {
     stroke(0);
-    strokeWeight(3);
-    fill(#FF007F);
+    strokeWeight(1.5);
+    fill(#8FD830);
   } else {
     stroke(0);
-    strokeWeight(1.5);
-    fill(#F3B9D4);
+    strokeWeight(1);
+    fill(#D4FF9D);
   }
   //rectMode(CENTER);
   rect(width/7, height/2.3, width/3, height/12, 20);
@@ -399,8 +399,8 @@ void displayPrompt() {
   //text
   textSize(height/20);
   if ((mouseX>=width/7 && mouseX<=width/7+width/3) && (mouseY>=height/2.3 && mouseY<=height/2.3+height/12)) {
-    fill(#FFCCE5);
-  } else fill(#CD5E92);
+    fill(#D4FF9D);
+  } else fill(#63A010);
   text("YES", width/7 + width/8, height/2 - 0.3);
 
   //displays NO button
