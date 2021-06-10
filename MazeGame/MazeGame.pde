@@ -144,15 +144,15 @@ void playAgain() {
   if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/2-height/24 && mouseY<=height/2+height/24)) {
     end=false;
     started=false;
-    level=0;
-    if (easyhigh < easypoints)
+    if (easyhigh < easypoints && level == 1)
       easyhigh=easypoints;
-    if (medhigh < medpoints)
+    if (medhigh < medpoints && level == 2)
       medhigh=medpoints;
-    if (diffhigh < diffpoints)
+    if (diffhigh < diffpoints && level == 3)
       diffhigh=diffpoints;
-    if (endlesshigh < endlesspoints)
+    if (endlesshigh < endlesspoints && level == 4)
       endlesshigh=endlesspoints;
+    level=0;
     enemyList.clear();
     setup();
   }
