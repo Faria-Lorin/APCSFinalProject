@@ -3,7 +3,7 @@ Maze maze;
 Player player;
 ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
 boolean end, livesgone, win, started, dead, levelSet, pause;
-int time, level, size, theme, points, currentLevel;
+int time, level, size, theme, points, currentLevel, highscore;
 
 void setup() {
   size(600, 600);
@@ -13,6 +13,7 @@ void setup() {
     size = 10; 
     theme = 0;
     points = 200000;
+    highscore=0;
   }
   char[][] m=new char[size][size];
   for (int i=0; i<m.length; i++) {
@@ -183,7 +184,16 @@ void displayEnd() {
       fill(0);
       text("You Win! Great Job!", width/3.5, height/3);
     }
-    if (level == 4) text("SCORE: " + points, width/2-width/6, 2.15*height/3);
+    if (level == 4) {
+      text("SCORE: " + points, width/2-width/6, 2.15*height/3);
+      if (points>highscore) {
+        text("New High Score!", width/2-width/6, 2.3*height/3);
+        highscore=points;
+      }
+      else{
+        text("High Score: "+highscore,width/2-width/6, 2.3*height/3);
+      }
+    }
     //play again button
     //actual button
     rectMode(CENTER);
