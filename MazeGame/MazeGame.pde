@@ -3,7 +3,7 @@ Maze maze;
 Player player;
 ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
 boolean end, livesgone, win, started, dead, levelSet, pause, lastLevel;
-int time, level, size, theme, currentLevel;
+int time, level, size, theme, currentLevel, highestLevel;
 int endlesspoints, endlesshigh, easypoints, easyhigh, medpoints, medhigh, diffpoints, diffhigh;
 
 void setup() {
@@ -145,7 +145,7 @@ void playAgain() {
   if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/2-height/24 && mouseY<=height/2+height/24)) {
     end=false;
     started=false;
-    if (!livesgone){
+    if (!livesgone) {
       if (easyhigh < easypoints && level == 1)
         easyhigh=easypoints;
       if (medhigh < medpoints && level == 2)
@@ -153,8 +153,10 @@ void playAgain() {
       if (diffhigh < diffpoints && level == 3)
         diffhigh=diffpoints;
     }
-    if (endlesshigh < endlesspoints && level == 4)
+    if (endlesshigh < endlesspoints && level == 4 && currentLevel >= highestLevel) {
       endlesshigh=endlesspoints;
+      highestLevel = currentLevel;
+    }
     level=0;
     enemyList.clear();
     setup();
@@ -220,8 +222,7 @@ void displayEnd() {
     if (livesgone && !lastLevel) {
       fill(0);
       text("No More Lives--Game Over", width/5, height/3);
-    } 
-    else if (lastLevel){
+    } else if (lastLevel) {
       fill(0);
       textAlign(CENTER);
       text("You beat all the levels!", width/2, height/4);
@@ -277,14 +278,22 @@ void displayEnd() {
     }
     if (level == 4) {
       textAlign(CENTER);
-      text("SCORE: " + endlesspoints, width/2, 2*height/3);
-
-      if (endlesspoints>endlesshigh) {
+      fill(0);
+      text("SCORE: " + endlesspoints + "    Lvl: "+currentLevel, width/2, 2*height/3);
+      if (currentLevel >= highestLevel) {
         fill(#B266FF);
-        text("New High Score!", width/2, 2.25*height/3);
+        if (currentLevel > highestLevel) {
+          text("New High Level!", width/2, 2.25*height/3);
+        } else if (endlesshigh < endlesspoints) {
+          text("New High Score!", width/2, 2.25*height/3);
+        }
+        else {
+          fill(0);
+          text("High Score: "+endlesshigh + "    High Lvl: "+highestLevel, width/2, 2.2*height/3);
+        }
       } else {
         fill(0);
-        text("High Score: "+endlesshigh, width/2, 2.2*height/3);
+        text("High Score: "+endlesshigh + "    High Lvl: "+highestLevel, width/2, 2.2*height/3);
       }
       textAlign(LEFT);
     }
@@ -317,27 +326,104 @@ void displayEnd() {
       end = false;
       started = true;
       levelSet = true;
-    }
-    else {
+    } else {
       livesgone = true;
       displayEnd();
     }
   }
 }
 
-  void displayStart() {
-    background(#E5F0FF);
-    //name
-    textSize(height/7);
-    fill(110, 33, 176);
-    textAlign(CENTER);
-    text("Monster", width/2, height/4);
-    text("Maze", width/2, height/2.5);
-    textAlign(LEFT);
+void displayStart() {
+  background(#E5F0FF);
+  //name
+  textSize(height/7);
+  fill(110, 33, 176);
+  textAlign(CENTER);
+  text("Monster", width/2, height/4);
+  text("Maze", width/2, height/2.5);
+  textAlign(LEFT);
 
-    //start button
-    //actual button
-    if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/1.5-height/24 && mouseY<=height/1.5+height/24)) {
+  //start button
+  //actual button
+  if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/1.5-height/24 && mouseY<=height/1.5+height/24)) {
+    stroke(0);
+    strokeWeight(1.5);
+    fill(110, 33, 176, 100);
+  } else {
+    stroke(0);
+    strokeWeight(1);
+    fill(#FFC271);
+  }
+
+  rectMode(CENTER);
+  rect(width/2, height/1.5, width/3, height/12, 20);
+  rectMode(CORNER);
+  //text
+  textSize(height/20);
+  if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/1.5-height/24 && mouseY<=height/1.5+height/24)) {
+    fill(#FFC271);
+  } else fill(0);
+  text("Start", width/2-width/17, height/1.5+height/48);
+
+  //level selected
+  //Choose Theme text
+  textSize(height/24);
+  fill(0);
+  textAlign(CENTER);
+  text("Choose Theme", width/2, height/2-height/80);
+  textAlign(LEFT);
+
+  //Black and White Button
+  rectMode(CENTER);
+  //theme=0 means black and white, theme=1 means tomb
+  if (maze.getTheme()==0) {
+    stroke(#05FA03);
+    strokeWeight(1.5);
+  } else {
+    stroke(0);
+    strokeWeight(1);
+  }
+  fill(255);
+  rect(width/3, height/1.8, width/4, height/16, 20);
+  rectMode(CORNER);
+  //text
+  textSize(height/40);
+  fill(0);
+  text("Black and White", width/3-width/10.5, height/1.8+height/76);
+
+  //Tomb Button
+  rectMode(CENTER);
+  //theme=0 means black and white, theme=1 means tomb
+  if (maze.getTheme()==1) {
+    stroke(#05FA03);
+    strokeWeight(1.5);
+  } else {
+    stroke(125, 91, 2);
+    strokeWeight(1);
+  }
+  fill(215, 181, 113);
+  rect(2*width/3, height/1.8, width/4, height/16, 20);
+  rectMode(CORNER);
+  //text
+  textSize(height/40);
+  fill(0);
+  text("Tomb", 2*width/3-width/27, height/1.8+height/76);
+}
+
+void displayLevels() {
+  background(#CCCCFF);
+  textSize(height/10);
+  fill(110, 33, 176);
+  stroke(0);
+  textAlign(CENTER);
+  text("LEVEL", width/2, height/8);
+  textAlign(LEFT);
+
+  //level buttons
+  //actual button
+  rectMode(CENTER);
+  for (int i = 1; i <= 4; i++) {
+    if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=i*height/4.5-height/24 && mouseY<=i*height/4.5+height/24)) {
       stroke(0);
       strokeWeight(1.5);
       fill(110, 33, 176, 100);
@@ -346,230 +432,152 @@ void displayEnd() {
       strokeWeight(1);
       fill(#FFC271);
     }
+    rect(width/2, i*height/4.5, width/3, height/12, 20);
+  }
+  rectMode(CORNER);
+  //text
+  textSize(height/20);
+  //Easy
+  if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/4.5-height/24 && mouseY<=height/4.5+height/24)) {
+    fill(#FFC271);
+  } else fill(0);
+  text("Easy", width/2-width/19, height/4.5+height/48);
+  //Easy High Score
+  textAlign(CENTER);
+  textSize(height/40);
+  fill(0);
+  text("High Score: " +easyhigh, width/2, height/4.5+height/12);
+  textAlign(LEFT);
 
-    rectMode(CENTER);
-    rect(width/2, height/1.5, width/3, height/12, 20);
-    rectMode(CORNER);
-    //text
-    textSize(height/20);
-    if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/1.5-height/24 && mouseY<=height/1.5+height/24)) {
-      fill(#FFC271);
-    } else fill(0);
-    text("Start", width/2-width/17, height/1.5+height/48);
+  textSize(height/20);
+  //Medium
+  if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=2*height/4.5-height/24 && mouseY<=2*height/4.5+height/24)) {
+    fill(#FFC271);
+  } else fill(0);
+  text("Medium", width/2-width/11, 2*height/4.5+height/48);
+  //Medium High Score
+  textAlign(CENTER);
+  textSize(height/40);
+  fill(0);
+  text("High Score: " +medhigh, width/2, 2*height/4.5+height/12);
+  textAlign(LEFT);
 
-    //level selected
-    //Choose Theme text
-    textSize(height/24);
-    fill(0);
-    textAlign(CENTER);
-    text("Choose Theme", width/2, height/2-height/80);
-    textAlign(LEFT);
+  textSize(height/20);
+  //Difficult
+  if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=3*height/4.5-height/24 && mouseY<=3*height/4.5+height/24)) {
+    fill(#FFC271);
+  } else fill(0);
+  text("Difficult", width/2-width/11, 3*height/4.5+height/48);
+  //Endless High Score
+  textAlign(CENTER);
+  textSize(height/40);
+  fill(0);
+  text("High Score: " +diffhigh, width/2, 3*height/4.5+height/12);
+  textAlign(LEFT);
 
-    //Black and White Button
-    rectMode(CENTER);
-    //theme=0 means black and white, theme=1 means tomb
-    if (maze.getTheme()==0) {
-      stroke(#05FA03);
-      strokeWeight(1.5);
-    } else {
-      stroke(0);
-      strokeWeight(1);
-    }
+  textSize(height/20);
+  //Endless
+  if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=4*height/4.5-height/24 && mouseY<=4*height/4.5+height/24)) {
+    fill(#FFC271);
+  } else fill(0);
+  text("Endless", width/2-width/11, 4*height/4.5+height/48);
+  //Endless High Score
+  textAlign(CENTER);
+  textSize(height/40);
+  fill(0);
+  text("High Score: " +endlesshigh + "  High Lvl: " + highestLevel, width/2, 4*height/4.5+height/12);
+  textAlign(LEFT);
+}
+
+void displayExit() {
+  if ((mouseX>=width-1.75*maze.scaleX() && mouseX<=width-1.75*maze.scaleX()+1.5*maze.scaleX()) &&(mouseY>=maze.scaleY()/6 && mouseY<=maze.scaleY()/6+maze.scaleY()/2)) {
     fill(255);
-    rect(width/3, height/1.8, width/4, height/16, 20);
-    rectMode(CORNER);
-    //text
-    textSize(height/40);
-    fill(0);
-    text("Black and White", width/3-width/10.5, height/1.8+height/76);
-
-    //Tomb Button
-    rectMode(CENTER);
-    //theme=0 means black and white, theme=1 means tomb
-    if (maze.getTheme()==1) {
-      stroke(#05FA03);
-      strokeWeight(1.5);
-    } else {
-      stroke(125, 91, 2);
-      strokeWeight(1);
-    }
-    fill(215, 181, 113);
-    rect(2*width/3, height/1.8, width/4, height/16, 20);
-    rectMode(CORNER);
-    //text
-    textSize(height/40);
-    fill(0);
-    text("Tomb", 2*width/3-width/27, height/1.8+height/76);
-  }
-
-  void displayLevels() {
-    background(#CCCCFF);
-    textSize(height/10);
-    fill(110, 33, 176);
+    strokeWeight(1.5);
+    stroke(255, 0, 0);
+  } else {
+    fill(255, 0, 0);
+    strokeWeight(0.5);
     stroke(0);
-    textAlign(CENTER);
-    text("LEVEL", width/2, height/8);
-    textAlign(LEFT);
+  }
+  rect(width-1.75*maze.scaleX(), maze.scaleY()/6, 1.5*maze.scaleX(), maze.scaleY()/2, 5);
+  if ((mouseX>=width-1.75*maze.scaleX() && mouseX<=width-1.75*maze.scaleX()+1.5*maze.scaleX()) &&(mouseY>=maze.scaleY()/6 && mouseY<=maze.scaleY()/6+maze.scaleY()/2)) {
+    fill(255, 0, 0);
+  } else fill(0);
+  textSize(maze.scaleX()/2.25);
+  text("Exit", width-1.75*maze.scaleX()+0.35*maze.scaleX(), maze.scaleY()/6+maze.scaleY()/2.4);
+}
 
-    //level buttons
-    //actual button
-    rectMode(CENTER);
-    for (int i = 1; i <= 4; i++) {
-      if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=i*height/4.5-height/24 && mouseY<=i*height/4.5+height/24)) {
-        stroke(0);
-        strokeWeight(1.5);
-        fill(110, 33, 176, 100);
-      } else {
-        stroke(0);
-        strokeWeight(1);
-        fill(#FFC271);
-      }
-      rect(width/2, i*height/4.5, width/3, height/12, 20);
-    }
-    rectMode(CORNER);
-    //text
-    textSize(height/20);
-    //Easy
-    if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/4.5-height/24 && mouseY<=height/4.5+height/24)) {
-      fill(#FFC271);
-    } else fill(0);
-    text("Easy", width/2-width/19, height/4.5+height/48);
-    //Easy High Score
-    textAlign(CENTER);
-    textSize(height/40);
-    fill(0);
-    text("High Score: " +easyhigh, width/2, height/4.5+height/12);
-    textAlign(LEFT);
+//exit - lets you pause the game, while the game asks you if you are sure you want to exit
+void exit() {
+  if ((mouseX>=width-1.75*maze.scaleX() && mouseX<=width-1.75*maze.scaleX()+1.5*maze.scaleX()) &&(mouseY>=maze.scaleY()/6 && mouseY<=maze.scaleY()/6+maze.scaleY()/2)) {
+    pause = true;
+  }
+}
 
-    textSize(height/20);
-    //Medium
-    if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=2*height/4.5-height/24 && mouseY<=2*height/4.5+height/24)) {
-      fill(#FFC271);
-    } else fill(0);
-    text("Medium", width/2-width/11, 2*height/4.5+height/48);
-    //Medium High Score
-    textAlign(CENTER);
-    textSize(height/40);
-    fill(0);
-    text("High Score: " +medhigh, width/2, 2*height/4.5+height/12);
-    textAlign(LEFT);
+//displayPrompt - aks you if you really want to exit or not (just to make sure);
+void displayPrompt() {
 
-    textSize(height/20);
-    //Difficult
-    if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=3*height/4.5-height/24 && mouseY<=3*height/4.5+height/24)) {
-      fill(#FFC271);
-    } else fill(0);
-    text("Difficult", width/2-width/11, 3*height/4.5+height/48);
-    //Endless High Score
-    textAlign(CENTER);
-    textSize(height/40);
-    fill(0);
-    text("High Score: " +diffhigh, width/2, 3*height/4.5+height/12);
-    textAlign(LEFT);
+  //displays YES button
+  if ((mouseX>=width/7 && mouseX<=width/7 + width/3) && (mouseY>=height/2.3 && mouseY<=height/2.3 + height/12)) {
+    stroke(0);
+    strokeWeight(1.5);
+    fill(#8FD830);
+  } else {
+    stroke(0);
+    strokeWeight(1);
+    fill(#D4FF9D);
+  }
+  //rectMode(CENTER);
+  rect(width/7, height/2.3, width/3, height/12, 20);
+  //rectMode(CORNER);
+  //text
+  textSize(height/20);
+  if ((mouseX>=width/7 && mouseX<=width/7+width/3) && (mouseY>=height/2.3 && mouseY<=height/2.3+height/12)) {
+    fill(#D4FF9D);
+  } else fill(#63A010);
+  text("YES", width/7 + width/8, height/2 - 0.3);
 
-    textSize(height/20);
-    //Endless
-    if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=4*height/4.5-height/24 && mouseY<=4*height/4.5+height/24)) {
-      fill(#FFC271);
-    } else fill(0);
-    text("Endless", width/2-width/11, 4*height/4.5+height/48);
-    //Endless High Score
-    textAlign(CENTER);
-    textSize(height/40);
-    fill(0);
-    text("High Score: " +endlesshigh, width/2, 4*height/4.5+height/12);
-    textAlign(LEFT);
+  //displays NO button
+  if ((mouseX>=width/1.9 && mouseX<=width/1.9+width/3) && (mouseY>=height/2.3 && mouseY<=height/2.3+height/12)) {
+    stroke(0);
+    strokeWeight(3);
+    fill(#0659FF);
+  } else {
+    stroke(0);
+    strokeWeight(1.5);
+    fill(#8FC5FC);
   }
 
-  void displayExit() {
-    if ((mouseX>=width-1.75*maze.scaleX() && mouseX<=width-1.75*maze.scaleX()+1.5*maze.scaleX()) &&(mouseY>=maze.scaleY()/6 && mouseY<=maze.scaleY()/6+maze.scaleY()/2)) {
-      fill(255);
-      strokeWeight(1.5);
-      stroke(255, 0, 0);
-    } else {
-      fill(255, 0, 0);
-      strokeWeight(0.5);
-      stroke(0);
-    }
-    rect(width-1.75*maze.scaleX(), maze.scaleY()/6, 1.5*maze.scaleX(), maze.scaleY()/2, 5);
-    if ((mouseX>=width-1.75*maze.scaleX() && mouseX<=width-1.75*maze.scaleX()+1.5*maze.scaleX()) &&(mouseY>=maze.scaleY()/6 && mouseY<=maze.scaleY()/6+maze.scaleY()/2)) {
-      fill(255, 0, 0);
-    } else fill(0);
-    textSize(maze.scaleX()/2.25);
-    text("Exit", width-1.75*maze.scaleX()+0.35*maze.scaleX(), maze.scaleY()/6+maze.scaleY()/2.4);
+  //rectMode(CENTER);
+  rect(width/1.9, height/2.3, width/3, height/12, 20);
+  //rectMode(CORNER);
+  //text
+  textSize(height/20);
+
+  if ((mouseX>=width/1.9 && mouseX<=width/1.9+width/3) && (mouseY>=height/2.3 && mouseY<=height/2.3+height/12)) {
+    fill(#99CCFF);
+  } else fill(#1370CD);
+  text("NO", width/1.9 + width/8, height/2 - 0.3);
+}
+
+// promptAnswer - modifies screen/game according to your answer for the Yes/No prompt after exit
+void promptAnswer() {
+  if ((mouseX>=width/7 && mouseX<=width/7 + width/3) && (mouseY>=height/2.3 && mouseY<=height/2.3 + height/12)) {
+    started=false;
+    currentLevel=0;
+    pause = false;
+  } else if ((mouseX>=width/1.9 && mouseX<=width/1.9+width/3) && (mouseY>=height/2.3 && mouseY<=height/2.3+height/12)) {
+    pause = false;
   }
+}
 
-  //exit - lets you pause the game, while the game asks you if you are sure you want to exit
-  void exit() {
-    if ((mouseX>=width-1.75*maze.scaleX() && mouseX<=width-1.75*maze.scaleX()+1.5*maze.scaleX()) &&(mouseY>=maze.scaleY()/6 && mouseY<=maze.scaleY()/6+maze.scaleY()/2)) {
-      pause = true;
-    }
+void mousePressed() {
+  if (end) playAgain();
+  if (!end && started && !levelSet) chooseLevel();
+  if (!end && !started) {
+    startGame();
+    chooseTheme();
   }
-
-  //displayPrompt - aks you if you really want to exit or not (just to make sure);
-  void displayPrompt() {
-
-    //displays YES button
-    if ((mouseX>=width/7 && mouseX<=width/7 + width/3) && (mouseY>=height/2.3 && mouseY<=height/2.3 + height/12)) {
-      stroke(0);
-      strokeWeight(1.5);
-      fill(#8FD830);
-    } else {
-      stroke(0);
-      strokeWeight(1);
-      fill(#D4FF9D);
-    }
-    //rectMode(CENTER);
-    rect(width/7, height/2.3, width/3, height/12, 20);
-    //rectMode(CORNER);
-    //text
-    textSize(height/20);
-    if ((mouseX>=width/7 && mouseX<=width/7+width/3) && (mouseY>=height/2.3 && mouseY<=height/2.3+height/12)) {
-      fill(#D4FF9D);
-    } else fill(#63A010);
-    text("YES", width/7 + width/8, height/2 - 0.3);
-
-    //displays NO button
-    if ((mouseX>=width/1.9 && mouseX<=width/1.9+width/3) && (mouseY>=height/2.3 && mouseY<=height/2.3+height/12)) {
-      stroke(0);
-      strokeWeight(3);
-      fill(#0659FF);
-    } else {
-      stroke(0);
-      strokeWeight(1.5);
-      fill(#8FC5FC);
-    }
-
-    //rectMode(CENTER);
-    rect(width/1.9, height/2.3, width/3, height/12, 20);
-    //rectMode(CORNER);
-    //text
-    textSize(height/20);
-
-    if ((mouseX>=width/1.9 && mouseX<=width/1.9+width/3) && (mouseY>=height/2.3 && mouseY<=height/2.3+height/12)) {
-      fill(#99CCFF);
-    } else fill(#1370CD);
-    text("NO", width/1.9 + width/8, height/2 - 0.3);
-  }
-
-  // promptAnswer - modifies screen/game according to your answer for the Yes/No prompt after exit
-  void promptAnswer() {
-    if ((mouseX>=width/7 && mouseX<=width/7 + width/3) && (mouseY>=height/2.3 && mouseY<=height/2.3 + height/12)) {
-      started=false;
-      currentLevel=0;
-      pause = false;
-    } else if ((mouseX>=width/1.9 && mouseX<=width/1.9+width/3) && (mouseY>=height/2.3 && mouseY<=height/2.3+height/12)) {
-      pause = false;
-    }
-  }
-
-  void mousePressed() {
-    if (end) playAgain();
-    if (!end && started && !levelSet) chooseLevel();
-    if (!end && !started) {
-      startGame();
-      chooseTheme();
-    }
-    if (started && levelSet && !end) exit();
-    if (pause) promptAnswer();
-  }
+  if (started && levelSet && !end) exit();
+  if (pause) promptAnswer();
+}
