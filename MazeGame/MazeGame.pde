@@ -2,8 +2,8 @@ import java.util.*;
 Maze maze;
 Player player;
 ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
-boolean end, livesgone, win, started, dead, levelSet;
-int time, level, size, theme, points, passedLevels;
+boolean end, livesgone, win, started, dead, levelSet, pause;
+int time, level, size, theme, points, currentLevel;
 
 void setup() {
   size(600, 600);
@@ -12,7 +12,7 @@ void setup() {
   if (!levelSet) {
     size = 10; 
     theme = 0;
-    points = 100000;
+    points = 200000;
   }
   char[][] m=new char[size][size];
   for (int i=0; i<m.length; i++) {
@@ -32,69 +32,72 @@ void setup() {
   player = new Player(maze, size);
   if (level == 4) {
     maze.display();
-    passedLevels++;
+    currentLevel++;
   }
 }
 
 void draw() {
-
-  //check to see if the game has ended
-  if (!end) {
-    end();
-    points -= 1;
-  }
-  //if the game isn't over
-  if (end==false) {
-    //if the game has already started, then display the maze, enemies, and player
-    if (started && levelSet) {
-      maze.display();
-      player.move();
-      player.display();
-      for (Enemy e : enemyList) {
-        e.move();
-        e.display();
-        if (!dead)
-          dead = player.die(e.getR(), e.getC());
-        if (!dead) {
-          e.die(player.getShootR(), player.getShootC());
-        }
-        if (time < 500 && dead) {
-          time ++;
-          player.setStroke(color(254, 254, 0), 5);
-        } else {
-          dead = false; 
-          time = 0; 
-          player.setStroke( color(0), 1);
-        }
-      }
-      //removes an enemy from the list if it's dead;
-      for (int i=0; i<enemyList.size(); i++) {
-        if (enemyList.get(i).isDead()) {
-          points += 300;
-          enemyList.remove(i);
-          i--;
-        }
-      }
-      //display lives
-      textSize(maze.scaleY()/2);
-      fill(255);
-      text("LIVES: ", maze.scaleX()/2, size * maze.scaleY() - maze.scaleY()/4 );
-      if (level == 4) {
-        text("SCORE: " + points, maze.scaleX()/2, maze.scaleY() - maze.scaleY()/4 );
-        text("LEVEL: " + passedLevels, size* maze.scaleX()/1.2 - maze.scaleX(), size* maze.scaleY() - maze.scaleY()/4 );
-      }
-      displayExit();
+  if (!pause) {
+    //check to see if the game has ended
+    if (!end) {
+      end();
+      points -= 1;
     }
-    //if the game hasn't started yet, display the start page
-    else if (started && !levelSet) {
-      displayLevels();
-    } else if (!started) {
-      displayStart();
+    //if the game isn't over
+    if (end==false) {
+      //if the game has already started, then display the maze, enemies, and player
+      if (started && levelSet) {
+        maze.display();
+        player.move();
+        player.display();
+        for (Enemy e : enemyList) {
+          e.move();
+          e.display();
+          if (!dead)
+            dead = player.die(e.getR(), e.getC());
+          if (!dead) {
+            e.die(player.getShootR(), player.getShootC());
+          }
+          if (time < 500 && dead) {
+            time ++;
+            player.setStroke(color(254, 254, 0), 5);
+          } else {
+            dead = false; 
+            time = 0; 
+            player.setStroke( color(0), 1);
+          }
+        }
+        //removes an enemy from the list if it's dead;
+        for (int i=0; i<enemyList.size(); i++) {
+          if (enemyList.get(i).isDead()) {
+            points += 300;
+            enemyList.remove(i);
+            i--;
+          }
+        }
+        //display lives
+        textSize(maze.scaleY()/2);
+        fill(255);
+        text("LIVES: ", maze.scaleX()/2, size * maze.scaleY() - maze.scaleY()/4 );
+        if (level == 4) {
+          text("SCORE: " + points, maze.scaleX()/2, maze.scaleY() - maze.scaleY()/4 );
+          text("LEVEL: " + currentLevel, size* maze.scaleX()/1.2 - maze.scaleX(), size* maze.scaleY() - maze.scaleY()/4 );
+        }
+        displayExit();
+      }
+      //if the game hasn't started yet, display the start page
+      else if (started && !levelSet) {
+        displayLevels();
+      } else if (!started) {
+        displayStart();
+      }
     }
-  }
-  //if the game has ended, display the end screen
-  else {
-    displayEnd();
+    //if the game has ended, display the end screen
+    else {
+      displayEnd();
+    }
+  } else {
+    displayPrompt();
   }
 }
 
@@ -337,30 +340,85 @@ void displayLevels() {
   text("Endless", width/2-width/11, 4*height/4.5+height/48);
 }
 
-void displayExit(){
-  if ((mouseX>=width-1.75*maze.scaleX() && mouseX<=width-1.75*maze.scaleX()+1.5*maze.scaleX()) &&(mouseY>=maze.scaleY()/6 && mouseY<=maze.scaleY()/6+maze.scaleY()/2)){
-      fill(255);
-      strokeWeight(1.5);
-      stroke(255,0,0);
-  }
-  else{
+void displayExit() {
+  if ((mouseX>=width-1.75*maze.scaleX() && mouseX<=width-1.75*maze.scaleX()+1.5*maze.scaleX()) &&(mouseY>=maze.scaleY()/6 && mouseY<=maze.scaleY()/6+maze.scaleY()/2)) {
+    fill(255);
+    strokeWeight(1.5);
+    stroke(255, 0, 0);
+  } else {
     fill(255, 0, 0);
     strokeWeight(0.5);
     stroke(0);
   }
   rect(width-1.75*maze.scaleX(), maze.scaleY()/6, 1.5*maze.scaleX(), maze.scaleY()/2, 5);
-  if ((mouseX>=width-1.75*maze.scaleX() && mouseX<=width-1.75*maze.scaleX()+1.5*maze.scaleX()) &&(mouseY>=maze.scaleY()/6 && mouseY<=maze.scaleY()/6+maze.scaleY()/2)){
-      fill(255,0,0);
-  }
-  else fill(0);
+  if ((mouseX>=width-1.75*maze.scaleX() && mouseX<=width-1.75*maze.scaleX()+1.5*maze.scaleX()) &&(mouseY>=maze.scaleY()/6 && mouseY<=maze.scaleY()/6+maze.scaleY()/2)) {
+    fill(255, 0, 0);
+  } else fill(0);
   textSize(maze.scaleX()/2.25);
   text("Exit", width-1.75*maze.scaleX()+0.35*maze.scaleX(), maze.scaleY()/6+maze.scaleY()/2.4);
 }
 
-void exit(){
-  if ((mouseX>=width-1.75*maze.scaleX() && mouseX<=width-1.75*maze.scaleX()+1.5*maze.scaleX()) &&(mouseY>=maze.scaleY()/6 && mouseY<=maze.scaleY()/6+maze.scaleY()/2)){
-      started=false;
-      passedLevels=0;
+//exit - lets you pause the game, while the game asks you if you are sure you want to exit
+void exit() {
+  if ((mouseX>=width-1.75*maze.scaleX() && mouseX<=width-1.75*maze.scaleX()+1.5*maze.scaleX()) &&(mouseY>=maze.scaleY()/6 && mouseY<=maze.scaleY()/6+maze.scaleY()/2)) {
+    pause = true;
+  }
+}
+
+//displayPrompt - aks you if you really want to exit or not (just to make sure);
+void displayPrompt() {
+
+  //displays YES button
+  if ((mouseX>=width/7 && mouseX<=width/7 + width/3) && (mouseY>=height/2.3 && mouseY<=height/2.3 + height/12)) {
+    stroke(0);
+    strokeWeight(3);
+    fill(#FF007F);
+  } else {
+    stroke(0);
+    strokeWeight(1.5);
+    fill(#F3B9D4);
+  }
+  //rectMode(CENTER);
+  rect(width/7, height/2.3, width/3, height/12, 20);
+  //rectMode(CORNER);
+  //text
+  textSize(height/20);
+  if ((mouseX>=width/7 && mouseX<=width/7+width/3) && (mouseY>=height/2.3 && mouseY<=height/2.3+height/12)) {
+    fill(#FFCCE5);
+  } else fill(#CD5E92);
+  text("YES", width/7 + width/8, height/2 - 0.3);
+
+  //displays NO button
+  if ((mouseX>=width/1.9 && mouseX<=width/1.9+width/3) && (mouseY>=height/2.3 && mouseY<=height/2.3+height/12)) {
+    stroke(0);
+    strokeWeight(3);
+    fill(#0659FF);
+  } else {
+    stroke(0);
+    strokeWeight(1.5);
+    fill(#8FC5FC);
+  }
+
+  //rectMode(CENTER);
+  rect(width/1.9, height/2.3, width/3, height/12, 20);
+  //rectMode(CORNER);
+  //text
+  textSize(height/20);
+
+  if ((mouseX>=width/1.9 && mouseX<=width/1.9+width/3) && (mouseY>=height/2.3 && mouseY<=height/2.3+height/12)) {
+    fill(#99CCFF);
+  } else fill(#1370CD);
+  text("NO", width/1.9 + width/8, height/2 - 0.3);
+}
+
+// promptAnswer - modifies screen/game according to your answer for the Yes/No prompt after exit
+void promptAnswer() {
+  if ((mouseX>=width/7 && mouseX<=width/7 + width/3) && (mouseY>=height/2.3 && mouseY<=height/2.3 + height/12)) {
+    started=false;
+    currentLevel=0;
+    pause = false;
+  } else if ((mouseX>=width/1.9 && mouseX<=width/1.9+width/3) && (mouseY>=height/2.3 && mouseY<=height/2.3+height/12)) {
+    pause = false;
   }
 }
 
@@ -373,4 +431,5 @@ void mousePressed() {
     level=0;
   }
   if (started && levelSet && !end) exit();
+  if (pause) promptAnswer();
 }
