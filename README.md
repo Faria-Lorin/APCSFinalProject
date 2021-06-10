@@ -10,13 +10,30 @@ Project Description: Players go through a randomly constructed maze while avoidi
 
 Compile/Run instructions:
 
-  1. Copy the repo into a directory on your computer
-  2. Open the files with Processing and click run
-  3. Choose a theme you want for the maze (either black and white or tomb)
-  4. Click the start button
-  5. Choose a level/mode of difficulty (endless mode is not really endless, but after you complete one maze you move on to a bigger maze)
-  4. Use arrow keys to move the player and navigate through the maze while avoiding or destroying enemies. Hold the spacebar to shoot the enemy and kill them. Try to reach the end of the maze without losing all your lives.
-  5. After reaching the end of the maze or losing all your lives, click play again if you want to play again.
+  1. To Run the game:
+
+      -First, copy the repo into a directory on your computer
+      -Then, open the files with Processing and click run
+
+  2. To Set up the game:
+
+      -Choose a theme you want for the maze (either black and white or tomb)
+      -Click the start button
+      -Choose a level/mode of difficulty (endless mode is not really endless, but after you complete one maze you move on to a bigger maze)
+
+  3. Solve the maze by controlling the player:
+
+      -Use arrow keys to move the player and navigate through the maze while avoiding or destroying enemies (players cannot move through the walls of the maze)
+      -Use the WASD keys to set the direction of the bullet the player shoots. Hold the spacebar to shoot the enemy and kill them.
+      -Avoid colliding with the enemy because you will lose a life
+      -Try to reach the end of the maze without losing all your lives.
+      -If in endless mode -- Try to solve the mazes as quickly as possible to earn the highest score
+
+  4. Pausing Game + End of Game:
+
+      -If you want to pause the game, press the exit button. Press the no button when you would like to unpause.
+      -If you want to end the game before you lose your lives or solve the maze, you can press the exit button, then the yes button to confirm your choice
+      -After reaching the end of the maze or losing all your lives, click play again if you want to play again.
 
 __Development Log__
 
@@ -63,4 +80,4 @@ _Faria_
 06/08 - I helped Ella create the option to choose the Maze Theme. I created a point system and level counter for the endless mode and added a displaying of final score to the end screen.
 
 
-06/09 - Edited maze so that there are longer hallways (maze is carved in the same direction more) and changed shooting ability so that the direction of the bullet is controlled by WASD keys. Added option to pause the game while confirming if you want to exit after you click the exit button. 
+06/09 - Edited maze so that there are longer hallways (maze is carved in the same direction more) and changed shooting ability so that the direction of the bullet is controlled by WASD keys. Added option to pause the game while confirming if you want to exit after you click the exit button.
