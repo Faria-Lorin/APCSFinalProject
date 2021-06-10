@@ -61,3 +61,6 @@ _Faria_
 
 
 06/08 - I helped Ella create the option to choose the Maze Theme. I created a point system and level counter for the endless mode and added a displaying of final score to the end screen.
+
+
+06/09 - Edited maze so that there are longer hallways (maze is carved in the same direction more) and changed shooting ability so that the direction of the bullet is controlled by WASD keys. Added option to pause the game while confirming if you want to exit after you click the exit button. 
