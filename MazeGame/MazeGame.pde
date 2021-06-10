@@ -132,6 +132,8 @@ void startGame() {
   if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/1.5-height/24 && mouseY<=height/1.5+height/24)) {
     started=true;
     levelSet = false;
+    currentLevel=0;
+    points=200000;
   }
 }
 
@@ -186,14 +188,16 @@ void displayEnd() {
       text("You Win! Great Job!", width/3.5, height/3);
     }
     if (level == 4) {
-      text("SCORE: " + points, width/2-width/6, 2.15*height/3);
+      textAlign(CENTER);
+      text("SCORE: " + points, width/2, 2*height/3);
       if (points>highscore) {
-        text("New High Score!", width/2-width/6, 2.3*height/3);
+        text("New High Score!", width/2, 2.25*height/3);
         highscore=points;
       }
       else{
-        text("High Score: "+highscore,width/2-width/4, 2.3*height/3);
+        text("High Score: "+highscore,width/2, 2.15*height/3);
       }
+      textAlign(LEFT);
     }
     //play again button
     //actual button
@@ -439,7 +443,6 @@ void mousePressed() {
   if (!end && !started) {
     startGame();
     chooseTheme();
-    currentLevel=0;
   }
   if (started && levelSet && !end) exit();
   if (pause) promptAnswer();
