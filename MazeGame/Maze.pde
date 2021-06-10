@@ -141,9 +141,9 @@ public class Maze {
 
   //display - scales blocks/maze to fit the screen and display walls, open spaces, start, and end.
   void display() {
-    int y=0;
+    float y=0;
     for (int i=0; i<maze.length; i++) {
-      int x=0;
+      float x=0;
       for (int j=0; j<maze[i].length; j++) {
         textSize((scaleX()+scaleY())/2);
         if (maze[i][j]=='#') {
@@ -204,11 +204,11 @@ public class Maze {
   }
 
   float scaleX() {
-    return width/maze.length;
+    return (float)width/maze.length;
   }
 
   float scaleY() {
-    return height/maze[0].length;
+    return (float)height/maze[0].length;
   }
 
   int getTheme() {
