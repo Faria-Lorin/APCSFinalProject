@@ -35,7 +35,7 @@ public class Player {
 
     //bullet
     shootDirect();
-    if (keyPressed == true && key == 32) {
+    if (keyPressed == true && (key == 'A' || key =='a' || key=='S' || key=='s' || key=='D' || key=='d' || key=='w' || key=='W')) {
       shoot = true;
       if (shootDist < size && shoot == true) {
         shoot();
