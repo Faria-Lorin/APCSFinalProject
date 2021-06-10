@@ -229,7 +229,7 @@ void displayEnd() {
         text("New High Score!", width/2, 2.25*height/3);
       }
       else{
-        text("High Score: "+easyhigh,width/2.5 + 33.5, 2.2*height/3);
+        text("High Score: "+easyhigh,width/2, 2.2*height/3);
       }
       textAlign(LEFT);
     }
@@ -240,7 +240,7 @@ void displayEnd() {
         text("New High Score!", width, 2.25*height/3);
       }
       else{
-        text("High Score: "+medhigh,,width/2.5 + 33.5, 2.2*height/3);
+        text("High Score: "+medhigh,width/2, 2.2*height/3);
       }
       textAlign(LEFT);
     }
@@ -251,7 +251,7 @@ void displayEnd() {
         text("New High Score!", width/2, 2.25*height/3);
       }
       else{
-        text("High Score: "+diffhigh,width/2.5 + 33.5, 2.2*height/3);
+        text("High Score: "+diffhigh,width/2, 2.2*height/3);
       }
       textAlign(LEFT);
     }
@@ -263,7 +263,7 @@ void displayEnd() {
         text("New High Score!", width/2, 2.25*height/3);
       }
       else{
-        text("High Score: "+endlesshigh,width/2.5 + 33.5, 2.2*height/3);
+        text("High Score: "+endlesshigh,width/2, 2.2*height/3);
       }
       textAlign(LEFT);
     }
