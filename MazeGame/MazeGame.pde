@@ -34,6 +34,7 @@ void setup() {
   if (level == 4) {
     maze.display();
     currentLevel++;
+    if (currentLevel!=1)points+=1000;
   }
 }
 
