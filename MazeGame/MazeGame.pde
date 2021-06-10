@@ -14,9 +14,9 @@ void setup() {
     size = 10; 
     theme = 0;
     endlesspoints = 200000;
-    easypoints=200000;
-    medpoints=200000;
-    diffpoints=200000;
+    easypoints=10000;
+    medpoints=20000;
+    diffpoints=30000;
     endlesshigh=0;
     easyhigh=0;
     medhigh=0;
@@ -157,9 +157,9 @@ void startGame() {
     levelSet = false;
     currentLevel=0;
     endlesspoints = 200000;
-    easypoints=200000;
-    medpoints=200000;
-    diffpoints=200000;
+    easypoints=10000;
+    medpoints=20000;
+    diffpoints=30000;
   }
 }
 
@@ -171,11 +171,13 @@ void chooseLevel() {
   } else if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>= 2*height/4.5-height/24 && mouseY<=2*height/4.5+height/24)) {
     levelSet = true;
     level = 2;
+    //if ((int)random(2)==0) size=15;
+    //else size=20;
     size = (int)random(3) + 15;
   } else if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=3*height/4.5-height/24 && mouseY<=3*height/4.5+height/24)) {
     levelSet = true;
     level = 3;
-    size = (int)random(3) + 25;
+    size = (int)random(4) + 23;
   } else if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=4*height/4.5-height/24 && mouseY<=4*height/4.5+height/24)) {
     levelSet = true;
     level = 4;
@@ -284,6 +286,7 @@ void displayEnd() {
   } else if (!livesgone && level == 4) {
     enemyList.clear();
     size++;
+    //while (600%size>300) size++;
     setup();
     end = false;
     started = true;
