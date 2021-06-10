@@ -354,6 +354,11 @@ void displayLevels() {
     fill(#FFC271);
   } else fill(0);
   text("Endless", width/2-width/11, 4*height/4.5+height/48);
+  textAlign(CENTER);
+  textSize(height/40);
+  fill(0);
+  text("High Score: " +highscore, width/2, 4*height/4.5+height/12);
+  textAlign(LEFT);
 }
 
 void displayExit() {
