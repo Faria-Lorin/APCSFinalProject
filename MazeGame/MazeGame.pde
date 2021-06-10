@@ -145,12 +145,14 @@ void playAgain() {
   if ((mouseX>=width/2-width/6 && mouseX<=width/2+width/6) && (mouseY>=height/2-height/24 && mouseY<=height/2+height/24)) {
     end=false;
     started=false;
-    if (easyhigh < easypoints && level == 1)
-      easyhigh=easypoints;
-    if (medhigh < medpoints && level == 2)
-      medhigh=medpoints;
-    if (diffhigh < diffpoints && level == 3)
-      diffhigh=diffpoints;
+    if (!livesgone){
+      if (easyhigh < easypoints && level == 1)
+        easyhigh=easypoints;
+      if (medhigh < medpoints && level == 2)
+        medhigh=medpoints;
+      if (diffhigh < diffpoints && level == 3)
+        diffhigh=diffpoints;
+    }
     if (endlesshigh < endlesspoints && level == 4)
       endlesshigh=endlesspoints;
     level=0;
@@ -234,28 +236,32 @@ void displayEnd() {
       textAlign(CENTER);
       text("Score: " + easypoints, width/2, 2*height/3);
       println(easypoints + "  " + easyhigh);
-      if (easypoints>easyhigh) {
+      if (easypoints>easyhigh && !livesgone) {
         fill(#B266FF);
         text("New High Score!", width/2, 2.25*height/3);
       } else {
         fill(0);
-        text("High Score: "+easyhigh, width/2, 2.2*height/3);
+        if (easyhigh > 0)
+          text("High Score: "+easyhigh, width/2, 2.2*height/3);
+        else text("High Score: --", width/2, 2.2*height/3);
       }
       textAlign(LEFT);
     }
     if (level == 2) {
       textAlign(CENTER);
       text("Score: " + medpoints, width/2, 2*height/3);
-      if (medpoints>medhigh) {
+      if (medpoints>medhigh && !livesgone) {
         fill(#B266FF);
         text("New High Score!", width, 2.25*height/3);
       } else {
         fill(0);
-        text("High Score: "+medhigh, width/2, 2.2*height/3);
+        if (medhigh > 0)
+          text("High Score: "+medhigh, width/2, 2.2*height/3);
+        else text("High Score: --", width/2, 2.2*height/3);
       }
       textAlign(LEFT);
     }
-    if (level == 3) {
+    if (level == 3  && !livesgone) {
       textAlign(CENTER);
       text("Score: " + diffpoints, width/2, 2*height/3);
       if (diffpoints>diffhigh) {
@@ -263,7 +269,9 @@ void displayEnd() {
         text("New High Score!", width/2, 2.25*height/3);
       } else {
         fill(0);
-        text("High Score: "+diffhigh, width/2, 2.2*height/3);
+        if (diffhigh > 0)
+          text("High Score: "+diffhigh, width/2, 2.2*height/3);
+        else text("High Score: --", width/2, 2.2*height/3);
       }
       textAlign(LEFT);
     }
