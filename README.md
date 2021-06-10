@@ -53,10 +53,10 @@ _Ella_
 
 _Faria_
 
-05/25 - Today I worked on adding an end location for the maze generated in the Maze class by using some of my own code from the MazeGenerator assignment. I made it so that the end location is at the end of the longest route that is carved from the start location.
+05/25 - I worked on adding an end location for the maze generated in the Maze class by using some of my own code from the MazeGenerator assignment. I made it so that the end location is at the end of the longest route that is carved from the start location.
 
 
-05/26 - I created the Player class and made a constructor, display method, and move method for the player so that the player can move through the maze and solve it, using the methods to update the MazeGame main sketch so that it has a draw method that displays the player and maze. I updated the get methods for the Maze class, editing the getStart and getEnd and adding methods that return the scaling values for the maze so that it can be used to scale the players and enemies so they correctly fit on maze displayed in the sketch.
+05/26 - I created the Player class and made a constructor, display method, and move method for the player so that the player can move through the maze, using the methods to update the MazeGame main sketch so that it has a draw method that displays the player and maze. I updated the get methods for the Maze class, editing the getStart and getEnd and adding methods that return the scaling values for the maze so that it can be used to scale the players and enemies so they correctly fit on maze displayed in the sketch.
 
 
 05/27 - I created the Enemy class and added the constructor which sets a location for the enemy away from the start, a display method, and a move method that allows the enemy to move in random directions through the maze. I also updated the main sketch file so that several enemies are created and stored in an ArrayList during setup and enemy move and enemy display are called in the draw method.
@@ -65,7 +65,7 @@ _Faria_
 05/29 - I added to the display methods in the Enemy class and Player class, giving the enemies and players different facial characteristics to help distinguish them from each other and also make them look better.
 
 
-05/30 - I created a shoot method for player that allows the user to shoot at an enemy in the direction that the player previous moved by holding the spacebar and I added a die method in the Enemy class (called in draw), so that enemies are killed by the bullets. I added to the display method to display the bullets and also display the number of lives the player has left using hearts.
+05/30 - I created a shoot method for player that allows the user to shoot at an enemy in the direction that the player previous moved and I added a die method in the Enemy class (called in draw), so that enemies are killed by the bullets. I added to the player display method to display the bullets and also display the number of lives the player has left using hearts.
 
 
 06/01 - Fixed a bug in the shoot method so that the bullet location is reset to the player location after the bullet hits the wall even if the spacebar is still held.
@@ -80,4 +80,7 @@ _Faria_
 06/08 - I helped Ella create the option to choose the Maze Theme. I created a point system and level counter for the endless mode and added a displaying of final score to the end screen.
 
 
-06/09 - Edited maze so that there are longer hallways (maze is carved in the same direction more) and changed shooting ability so that the direction of the bullet is controlled by WASD keys. Added option to pause the game while confirming if you want to exit after you click the exit button.
+06/09 - I edited maze so that there are longer hallways (maze is carved in the same direction more) and changed shooting ability so that the direction of the bullet is controlled by WASD keys. I added the option to pause the game while confirming if you want to exit after you click the exit button.
+
+
+06/10 - I fixed the scaling of the Maze. I helped Ella display the high score texts and I also added a high level display in the end/level screen for endless mode because a higher level in endless is better than a higher score.
