@@ -253,7 +253,7 @@ void displayEnd() {
       text("Score: " + medpoints, width/2, 2*height/3);
       if (medpoints>medhigh && !livesgone) {
         fill(#B266FF);
-        text("New High Score!", width, 2.25*height/3);
+        text("New High Score!", width/2, 2.25*height/3);
       } else {
         fill(0);
         if (medhigh > 0)
