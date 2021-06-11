@@ -19,20 +19,21 @@ Compile/Run instructions:
 
       -Choose a theme you want for the maze (either black and white or tomb)
       -Click the start button
-      -Choose a level/mode of difficulty (endless mode is not really endless, but after you complete one maze you move on to a bigger maze)
+      -Choose a level/mode of difficulty (endless mode is not really endless and has a maximum of 50 levels, but after you complete one maze you move on to a bigger maze)
 
   3. Solve the maze by controlling the player:
 
-      -Use arrow keys to move the player and navigate through the maze while avoiding or destroying enemies (players cannot move through the walls of the maze)
-      -Use the WASD keys shoot the bullet in different directions towards the enemies to kill them.
-      -Avoid colliding with the enemy because you will lose a life
+      -Use arrow keys to move the player and navigate through the maze while avoiding or destroying enemies (players cannot move through the walls of the maze).
+      -Use the WASD keys shoot the bullet in different directions towards the enemies to kill them (W=up, A=left, S=down, D=right).
+      -Avoid colliding with the enemy because you will lose a life.
+      -If you do collide with the enemy, you will gain immunity (yellow border) for a few seconds, but so will the enemies, so you won't be able to kill them.
       -Try to reach the end of the maze without losing all your lives.
-      -If in endless mode -- Try to solve the mazes as quickly as possible to earn the highest score or get to the highest level.
+      -Try to solve the mazes as quickly as possible to earn the highest score (or get to the highest level if in endless mode).
 
   4. Pausing Game + End of Game:
 
       -If you want to pause the game, press the exit button. Press the no button when you would like to unpause.
-      -If you want to end the game before you lose your lives or solve the maze, you can press the exit button, then the yes button to confirm your choice
+      -If you want to end the game before you lose your lives or solve the maze, you can press the exit button, then the yes button to confirm your choice.
       -After reaching the end of the maze or losing all your lives, click play again if you want to play again.
 
 __Development Log__
@@ -49,6 +50,8 @@ _Ella_
 06/01 - I created the die method for Player, simplified the die method for Enemy, completely updated the UML diagram and the prototype document to account for all the changes we made and goals we achieved, imported and scaled an image of a heart to represent the lives (make it look better than just the lines), and removed extra variables that we weren't using. I also merged the player branch with main, deleted the ella and player branches, and created the demo branch. Faria and I also discussed what we would say during our presentation.
 
 06/08 - I made a small directory in the start page that would let you choose between the two different themes we have (black and white vs a tomb), and adjusted the display method of Maze to change based on the selected theme (outlined in green on the screen). I also modified all six of the buttons we were using to change color when a player hovers over them with their mouse, and fixed a bug with the buttons that allowed you to click them even when you weren't within them. Finally, I created an exit button for all of the levels, which ends the game and takes you back to the home screen, and also has the same hover feature as all of the other buttons.
+
+06/10 - I changed the shoot method so that instead of picking the direction using a WASD key and then shooting with the space bar, you pick the direction and shoot with the WASD keys right away. I also implemented high score for the endless mode, displaying it both in the end page and the levels page, and then I implemented scoring and high score for the other levels. I also changed the colors for the YES and NO buttons in the pause screen. I fixed some minor bugs that I kept seeing, merged the project to main, cleaned up the code, and updated the game instructions and the UML.
 
 
 _Faria_
