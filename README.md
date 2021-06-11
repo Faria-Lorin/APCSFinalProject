@@ -13,27 +13,37 @@ Compile/Run instructions:
   1. To Run the game:
 
       -First, copy the repo into a directory on your computer
+      
       -Then, open the files with Processing and click run
 
   2. To Set up the game:
 
       -Choose a theme you want for the maze (either black and white or tomb)
+      
       -Click the start button
+      
       -Choose a level/mode of difficulty (endless mode is not really endless and has a maximum of 50 levels, but after you complete one maze you move on to a bigger maze)
 
   3. Solve the maze by controlling the player:
 
       -Use arrow keys to move the player and navigate through the maze while avoiding or destroying enemies (players cannot move through the walls of the maze).
+      
       -Use the WASD keys shoot the bullet in different directions towards the enemies to kill them (W=up, A=left, S=down, D=right).
+      
       -Avoid colliding with the enemy because you will lose a life.
+      
       -If you do collide with the enemy, you will gain immunity (yellow border) for a few seconds, but so will the enemies, so you won't be able to kill them.
+      
       -Try to reach the end of the maze without losing all your lives.
+      
       -Try to solve the mazes as quickly as possible to earn the highest score (or get to the highest level if in endless mode). For easy level, the beginning score is 10000, for medium it is 20000, for difficult it is 30000, and for endless it is 200000. As you spend more time in the maze, your score decreases, but if you shoot and enemy, you get another 300 points, and if you're in endless mode and advance to the next level, you get 1000 points.
 
   4. Pausing Game + End of Game:
 
       -If you want to pause the game, press the exit button. Press the no button when you would like to unpause.
+      
       -If you want to end the game before you lose your lives or solve the maze, you can press the exit button, then the yes button to confirm your choice.
+      
       -After reaching the end of the maze or losing all your lives, click play again if you want to play again.
 
 __Development Log__
