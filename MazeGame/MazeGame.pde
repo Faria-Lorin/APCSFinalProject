@@ -236,7 +236,6 @@ void displayEnd() {
     if (level == 1) {
       textAlign(CENTER);
       text("Score: " + easypoints, width/2, 2*height/3);
-      println(easypoints + "  " + easyhigh);
       if (easypoints>easyhigh && !livesgone) {
         fill(#B266FF);
         text("New High Score!", width/2, 2.25*height/3);
