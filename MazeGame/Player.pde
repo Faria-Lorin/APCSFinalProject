@@ -3,7 +3,6 @@ public class Player {
   int playerR, playerC;
   int shootR, shootC, shootDist, shootSpeed;
   int lives, size, weight;
-  char shootDirection;
   boolean shoot;
   color c, s;
   Maze maze;
@@ -15,9 +14,8 @@ public class Player {
     playerC = maze.getStart(1);
     size = n;
     lives = 3;
-    shootDirection = 'n';
     c = color(random(255), random(255), random(255));
-    while (c == color(0) || c == color(255) || c == color(110, 33, 176) || c == color(254, 254, 0) || c == color(158, 125, 63)  || c == color(215, 181, 113)){
+    while (c == color(0) || c == color(255) || c == color(110, 33, 176) || c == color(254, 254, 0) || c == color(158, 125, 63)  || c == color(215, 181, 113)) {
       c = color(random(255), random(255), random(255));
     }
     s = c;
@@ -34,14 +32,15 @@ public class Player {
     rect(Xcor, Ycor, maze.scaleX()/1.5, maze.scaleY()/1.5);
 
     //bullet
-    shootDirect();
     if (keyPressed == true && (key == 'A' || key =='a' || key=='S' || key=='s' || key=='D' || key=='d' || key=='w' || key=='W')) {
       shoot = true;
       if (shootDist < size && shoot == true) {
         shoot();
         //bulllet display
-        stroke(c);
+        stroke(0);
+        strokeWeight(0.5);
         ellipse(maze.scaleX() * shootC + maze.scaleX()/2, maze.scaleY() * shootR + maze.scaleY()/2, maze.scaleX()/6, maze.scaleY()/6);
+        strokeWeight(1);
       } else {
         shootR = playerR;
         shootC = playerC;
@@ -99,43 +98,27 @@ public class Player {
       keyPressed = false;
     }
   }
-  
-  //shootDirection - changes direction of bullet using WASD keys;
-  void shootDirect(){
-    if (keyPressed && (key == 'W' || key == 'w')){
-      shootDirection = 'n';
-    }
-    else if (keyPressed && (key == 'S' || key == 's')){
-      shootDirection = 's';
-    }
-    else if (keyPressed && (key == 'A' || key == 'a')){
-      shootDirection = 'w';
-    }
-    else if (keyPressed && (key == 'D' || key == 'd')){
-      shootDirection = 'e';
-    }
-  }
-  
+
   //shoot -shoot sbullet depending on shootDirection;
   void shoot() {
     //moving bullet --> t = making movement display slower;
     if (shootSpeed == 4) {
-      if (shootDirection == 'n') {
+      if (keyPressed && (key == 'W' || key == 'w')) {
         if (maze.getChar(shootR - 1, shootC) != '#')
           shootR--;
         else shoot = false;
       }
-      if (shootDirection == 's') {
+      if (keyPressed && (key == 'S' || key == 's')) {
         if (maze.getChar(shootR + 1, shootC) != '#')
           shootR++;
         else shoot = false;
       }
-      if (shootDirection == 'w') {
+      if (keyPressed && (key == 'A' || key == 'a')) {
         if (maze.getChar(shootR, shootC - 1) != '#')
           shootC--;
         else shoot = false;
       }
-      if (shootDirection == 'e') {
+      if (keyPressed && (key == 'D' || key == 'd')) {
         if (maze.getChar(shootR, shootC + 1) != '#')
           shootC++;   
         else shoot = false;
@@ -144,14 +127,13 @@ public class Player {
       shootDist++;
     } else shootSpeed++;
   }
-  
+
   //die - subtracts a life and returns true if player dies
   boolean die(int r, int c) {
     if (r==playerR && c==playerC) {
       lives--; 
       return true;
-    }
-    else return false;
+    } else return false;
   }
 
   //get/set methods
@@ -174,8 +156,8 @@ public class Player {
   int getLives() {
     return lives;
   }
-  
-  void setStroke(int a, int b){
+
+  void setStroke(int a, int b) {
     s = a;
     weight = b;
   }
